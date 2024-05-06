@@ -1,9 +1,8 @@
 {
   "images" : [
     {
-      "idiom" : "universal",
-      "platform" : "ios",
-      "size" : "1024x1024"
+      "filename" : "Spotify_Icon_RGB_Green.png",
+      "idiom" : "universal"
     }
   ],
   "info" : {

@@ -7,66 +7,78 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		84E8F1442BE8ED7D00A59879 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E8F1432BE8ED7D00A59879 /* AppDelegate.swift */; };
-		84E8F1462BE8ED7D00A59879 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E8F1452BE8ED7D00A59879 /* SceneDelegate.swift */; };
-		84E8F1482BE8ED7D00A59879 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E8F1472BE8ED7D00A59879 /* ViewController.swift */; };
-		84E8F14B2BE8ED7D00A59879 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 84E8F14A2BE8ED7D00A59879 /* Base */; };
-		84E8F14D2BE8ED7F00A59879 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84E8F14C2BE8ED7F00A59879 /* Assets.xcassets */; };
-		84E8F1502BE8ED7F00A59879 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 84E8F14F2BE8ED7F00A59879 /* Base */; };
-		84E8F15B2BE8ED7F00A59879 /* RikkeifyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E8F15A2BE8ED7F00A59879 /* RikkeifyTests.swift */; };
-		84E8F1652BE8ED7F00A59879 /* RikkeifyUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E8F1642BE8ED7F00A59879 /* RikkeifyUITests.swift */; };
-		84E8F1672BE8ED7F00A59879 /* RikkeifyUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E8F1662BE8ED7F00A59879 /* RikkeifyUITestsLaunchTests.swift */; };
+		841B43222BE87AC600D1B490 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841B43212BE87AC600D1B490 /* AppDelegate.swift */; };
+		841B432B2BE87AC800D1B490 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 841B432A2BE87AC800D1B490 /* Assets.xcassets */; };
+		841B432E2BE87AC800D1B490 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 841B432D2BE87AC800D1B490 /* Base */; };
+		841B43392BE87AC900D1B490 /* RikkeifyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841B43382BE87AC900D1B490 /* RikkeifyTests.swift */; };
+		841B43432BE87AC900D1B490 /* RikkeifyUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841B43422BE87AC900D1B490 /* RikkeifyUITests.swift */; };
+		841B43452BE87AC900D1B490 /* RikkeifyUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841B43442BE87AC900D1B490 /* RikkeifyUITestsLaunchTests.swift */; };
+		841B436C2BE8965B00D1B490 /* TrackViewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841B436A2BE8965B00D1B490 /* TrackViewVC.swift */; };
+		841B436D2BE8965B00D1B490 /* TrackViewVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 841B436B2BE8965B00D1B490 /* TrackViewVC.xib */; };
+		84E8F12E2BE8E02900A59879 /* TrackOptionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E8F12C2BE8E02900A59879 /* TrackOptionVC.swift */; };
+		84E8F12F2BE8E02900A59879 /* TrackOptionVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84E8F12D2BE8E02900A59879 /* TrackOptionVC.xib */; };
+		84E8F1332BE8E53E00A59879 /* TrackOptionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E8F1312BE8E53E00A59879 /* TrackOptionTableViewCell.swift */; };
+		84E8F1342BE8E53E00A59879 /* TrackOptionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84E8F1322BE8E53E00A59879 /* TrackOptionTableViewCell.xib */; };
+		84E8F1362BE8E96E00A59879 /* TrackOptionVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E8F1352BE8E96E00A59879 /* TrackOptionVM.swift */; };
+		FA75A8872BE9491700FEB35F /* Track.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA75A8862BE9491700FEB35F /* Track.swift */; };
+		FA75A8892BE94A5A00FEB35F /* TrackViewVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA75A8882BE94A5A00FEB35F /* TrackViewVM.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		84E8F1572BE8ED7F00A59879 /* PBXContainerItemProxy */ = {
+		841B43352BE87AC900D1B490 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 84E8F1382BE8ED7D00A59879 /* Project object */;
+			containerPortal = 841B43162BE87AC600D1B490 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 84E8F13F2BE8ED7D00A59879;
+			remoteGlobalIDString = 841B431D2BE87AC600D1B490;
 			remoteInfo = Rikkeify;
 		};
-		84E8F1612BE8ED7F00A59879 /* PBXContainerItemProxy */ = {
+		841B433F2BE87AC900D1B490 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 84E8F1382BE8ED7D00A59879 /* Project object */;
+			containerPortal = 841B43162BE87AC600D1B490 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 84E8F13F2BE8ED7D00A59879;
+			remoteGlobalIDString = 841B431D2BE87AC600D1B490;
 			remoteInfo = Rikkeify;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		84E8F1402BE8ED7D00A59879 /* Rikkeify.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Rikkeify.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		84E8F1432BE8ED7D00A59879 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		84E8F1452BE8ED7D00A59879 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		84E8F1472BE8ED7D00A59879 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		84E8F14A2BE8ED7D00A59879 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		84E8F14C2BE8ED7F00A59879 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		84E8F14F2BE8ED7F00A59879 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		84E8F1512BE8ED7F00A59879 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		84E8F1562BE8ED7F00A59879 /* RikkeifyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RikkeifyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		84E8F15A2BE8ED7F00A59879 /* RikkeifyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RikkeifyTests.swift; sourceTree = "<group>"; };
-		84E8F1602BE8ED7F00A59879 /* RikkeifyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RikkeifyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		84E8F1642BE8ED7F00A59879 /* RikkeifyUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RikkeifyUITests.swift; sourceTree = "<group>"; };
-		84E8F1662BE8ED7F00A59879 /* RikkeifyUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RikkeifyUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		841B431E2BE87AC600D1B490 /* Rikkeify.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Rikkeify.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		841B43212BE87AC600D1B490 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		841B432A2BE87AC800D1B490 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		841B432D2BE87AC800D1B490 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		841B432F2BE87AC800D1B490 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		841B43342BE87AC900D1B490 /* RikkeifyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RikkeifyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		841B43382BE87AC900D1B490 /* RikkeifyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RikkeifyTests.swift; sourceTree = "<group>"; };
+		841B433E2BE87AC900D1B490 /* RikkeifyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RikkeifyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		841B43422BE87AC900D1B490 /* RikkeifyUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RikkeifyUITests.swift; sourceTree = "<group>"; };
+		841B43442BE87AC900D1B490 /* RikkeifyUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RikkeifyUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		841B436A2BE8965B00D1B490 /* TrackViewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackViewVC.swift; sourceTree = "<group>"; };
+		841B436B2BE8965B00D1B490 /* TrackViewVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TrackViewVC.xib; sourceTree = "<group>"; };
+		84E8F12C2BE8E02900A59879 /* TrackOptionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackOptionVC.swift; sourceTree = "<group>"; };
+		84E8F12D2BE8E02900A59879 /* TrackOptionVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TrackOptionVC.xib; sourceTree = "<group>"; };
+		84E8F1312BE8E53E00A59879 /* TrackOptionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackOptionTableViewCell.swift; sourceTree = "<group>"; };
+		84E8F1322BE8E53E00A59879 /* TrackOptionTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TrackOptionTableViewCell.xib; sourceTree = "<group>"; };
+		84E8F1352BE8E96E00A59879 /* TrackOptionVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackOptionVM.swift; sourceTree = "<group>"; };
+		FA75A8862BE9491700FEB35F /* Track.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Track.swift; sourceTree = "<group>"; };
+		FA75A8882BE94A5A00FEB35F /* TrackViewVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackViewVM.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		84E8F13D2BE8ED7D00A59879 /* Frameworks */ = {
+		841B431B2BE87AC600D1B490 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		84E8F1532BE8ED7F00A59879 /* Frameworks */ = {
+		841B43312BE87AC900D1B490 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		84E8F15D2BE8ED7F00A59879 /* Frameworks */ = {
+		841B433B2BE87AC900D1B490 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -76,67 +88,153 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		84E8F1372BE8ED7D00A59879 = {
+		841B43152BE87AC600D1B490 = {
 			isa = PBXGroup;
 			children = (
-				84E8F1422BE8ED7D00A59879 /* Rikkeify */,
-				84E8F1592BE8ED7F00A59879 /* RikkeifyTests */,
-				84E8F1632BE8ED7F00A59879 /* RikkeifyUITests */,
-				84E8F1412BE8ED7D00A59879 /* Products */,
+				841B43202BE87AC600D1B490 /* Rikkeify */,
+				841B43372BE87AC900D1B490 /* RikkeifyTests */,
+				841B43412BE87AC900D1B490 /* RikkeifyUITests */,
+				841B431F2BE87AC600D1B490 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		84E8F1412BE8ED7D00A59879 /* Products */ = {
+		841B431F2BE87AC600D1B490 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				84E8F1402BE8ED7D00A59879 /* Rikkeify.app */,
-				84E8F1562BE8ED7F00A59879 /* RikkeifyTests.xctest */,
-				84E8F1602BE8ED7F00A59879 /* RikkeifyUITests.xctest */,
+				841B431E2BE87AC600D1B490 /* Rikkeify.app */,
+				841B43342BE87AC900D1B490 /* RikkeifyTests.xctest */,
+				841B433E2BE87AC900D1B490 /* RikkeifyUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		84E8F1422BE8ED7D00A59879 /* Rikkeify */ = {
+		841B43202BE87AC600D1B490 /* Rikkeify */ = {
 			isa = PBXGroup;
 			children = (
-				84E8F1432BE8ED7D00A59879 /* AppDelegate.swift */,
-				84E8F1452BE8ED7D00A59879 /* SceneDelegate.swift */,
-				84E8F1472BE8ED7D00A59879 /* ViewController.swift */,
-				84E8F1492BE8ED7D00A59879 /* Main.storyboard */,
-				84E8F14C2BE8ED7F00A59879 /* Assets.xcassets */,
-				84E8F14E2BE8ED7F00A59879 /* LaunchScreen.storyboard */,
-				84E8F1512BE8ED7F00A59879 /* Info.plist */,
+				841B43512BE87D1E00D1B490 /* GlobalDefine */,
+				841B43602BE884A800D1B490 /* Application */,
+				FA75A8812BE9487E00FEB35F /* Domain */,
+				841B43532BE87D4B00D1B490 /* Resources */,
 			);
 			path = Rikkeify;
 			sourceTree = "<group>";
 		};
-		84E8F1592BE8ED7F00A59879 /* RikkeifyTests */ = {
+		841B43372BE87AC900D1B490 /* RikkeifyTests */ = {
 			isa = PBXGroup;
 			children = (
-				84E8F15A2BE8ED7F00A59879 /* RikkeifyTests.swift */,
+				841B43382BE87AC900D1B490 /* RikkeifyTests.swift */,
 			);
 			path = RikkeifyTests;
 			sourceTree = "<group>";
 		};
-		84E8F1632BE8ED7F00A59879 /* RikkeifyUITests */ = {
+		841B43412BE87AC900D1B490 /* RikkeifyUITests */ = {
 			isa = PBXGroup;
 			children = (
-				84E8F1642BE8ED7F00A59879 /* RikkeifyUITests.swift */,
-				84E8F1662BE8ED7F00A59879 /* RikkeifyUITestsLaunchTests.swift */,
+				841B43422BE87AC900D1B490 /* RikkeifyUITests.swift */,
+				841B43442BE87AC900D1B490 /* RikkeifyUITestsLaunchTests.swift */,
 			);
 			path = RikkeifyUITests;
+			sourceTree = "<group>";
+		};
+		841B43512BE87D1E00D1B490 /* GlobalDefine */ = {
+			isa = PBXGroup;
+			children = (
+				841B432F2BE87AC800D1B490 /* Info.plist */,
+				841B43212BE87AC600D1B490 /* AppDelegate.swift */,
+			);
+			path = GlobalDefine;
+			sourceTree = "<group>";
+		};
+		841B43522BE87D3400D1B490 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				841B432C2BE87AC800D1B490 /* LaunchScreen.storyboard */,
+				841B43682BE88E5800D1B490 /* PlayBack */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		841B43532BE87D4B00D1B490 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				841B432A2BE87AC800D1B490 /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		841B43602BE884A800D1B490 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				841B43522BE87D3400D1B490 /* ViewControllers */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		841B43682BE88E5800D1B490 /* PlayBack */ = {
+			isa = PBXGroup;
+			children = (
+				841B43692BE88E6100D1B490 /* TrackViewVC */,
+				84E8F12B2BE8E01100A59879 /* TrackOptionVC */,
+			);
+			path = PlayBack;
+			sourceTree = "<group>";
+		};
+		841B43692BE88E6100D1B490 /* TrackViewVC */ = {
+			isa = PBXGroup;
+			children = (
+				FA75A8882BE94A5A00FEB35F /* TrackViewVM.swift */,
+				841B436A2BE8965B00D1B490 /* TrackViewVC.swift */,
+				841B436B2BE8965B00D1B490 /* TrackViewVC.xib */,
+			);
+			path = TrackViewVC;
+			sourceTree = "<group>";
+		};
+		84E8F12B2BE8E01100A59879 /* TrackOptionVC */ = {
+			isa = PBXGroup;
+			children = (
+				84E8F1302BE8E51F00A59879 /* Cell */,
+				84E8F1352BE8E96E00A59879 /* TrackOptionVM.swift */,
+				84E8F12C2BE8E02900A59879 /* TrackOptionVC.swift */,
+				84E8F12D2BE8E02900A59879 /* TrackOptionVC.xib */,
+			);
+			path = TrackOptionVC;
+			sourceTree = "<group>";
+		};
+		84E8F1302BE8E51F00A59879 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				84E8F1312BE8E53E00A59879 /* TrackOptionTableViewCell.swift */,
+				84E8F1322BE8E53E00A59879 /* TrackOptionTableViewCell.xib */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		FA75A8812BE9487E00FEB35F /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				FA75A8842BE948DD00FEB35F /* Models */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		FA75A8842BE948DD00FEB35F /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				FA75A8862BE9491700FEB35F /* Track.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		84E8F13F2BE8ED7D00A59879 /* Rikkeify */ = {
+		841B431D2BE87AC600D1B490 /* Rikkeify */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 84E8F16A2BE8ED7F00A59879 /* Build configuration list for PBXNativeTarget "Rikkeify" */;
+			buildConfigurationList = 841B43482BE87AC900D1B490 /* Build configuration list for PBXNativeTarget "Rikkeify" */;
 			buildPhases = (
-				84E8F13C2BE8ED7D00A59879 /* Sources */,
-				84E8F13D2BE8ED7D00A59879 /* Frameworks */,
-				84E8F13E2BE8ED7D00A59879 /* Resources */,
+				841B431A2BE87AC600D1B490 /* Sources */,
+				841B431B2BE87AC600D1B490 /* Frameworks */,
+				841B431C2BE87AC600D1B490 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -144,69 +242,69 @@
 			);
 			name = Rikkeify;
 			productName = Rikkeify;
-			productReference = 84E8F1402BE8ED7D00A59879 /* Rikkeify.app */;
+			productReference = 841B431E2BE87AC600D1B490 /* Rikkeify.app */;
 			productType = "com.apple.product-type.application";
 		};
-		84E8F1552BE8ED7F00A59879 /* RikkeifyTests */ = {
+		841B43332BE87AC900D1B490 /* RikkeifyTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 84E8F16D2BE8ED7F00A59879 /* Build configuration list for PBXNativeTarget "RikkeifyTests" */;
+			buildConfigurationList = 841B434B2BE87AC900D1B490 /* Build configuration list for PBXNativeTarget "RikkeifyTests" */;
 			buildPhases = (
-				84E8F1522BE8ED7F00A59879 /* Sources */,
-				84E8F1532BE8ED7F00A59879 /* Frameworks */,
-				84E8F1542BE8ED7F00A59879 /* Resources */,
+				841B43302BE87AC900D1B490 /* Sources */,
+				841B43312BE87AC900D1B490 /* Frameworks */,
+				841B43322BE87AC900D1B490 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				84E8F1582BE8ED7F00A59879 /* PBXTargetDependency */,
+				841B43362BE87AC900D1B490 /* PBXTargetDependency */,
 			);
 			name = RikkeifyTests;
 			productName = RikkeifyTests;
-			productReference = 84E8F1562BE8ED7F00A59879 /* RikkeifyTests.xctest */;
+			productReference = 841B43342BE87AC900D1B490 /* RikkeifyTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		84E8F15F2BE8ED7F00A59879 /* RikkeifyUITests */ = {
+		841B433D2BE87AC900D1B490 /* RikkeifyUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 84E8F1702BE8ED7F00A59879 /* Build configuration list for PBXNativeTarget "RikkeifyUITests" */;
+			buildConfigurationList = 841B434E2BE87AC900D1B490 /* Build configuration list for PBXNativeTarget "RikkeifyUITests" */;
 			buildPhases = (
-				84E8F15C2BE8ED7F00A59879 /* Sources */,
-				84E8F15D2BE8ED7F00A59879 /* Frameworks */,
-				84E8F15E2BE8ED7F00A59879 /* Resources */,
+				841B433A2BE87AC900D1B490 /* Sources */,
+				841B433B2BE87AC900D1B490 /* Frameworks */,
+				841B433C2BE87AC900D1B490 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				84E8F1622BE8ED7F00A59879 /* PBXTargetDependency */,
+				841B43402BE87AC900D1B490 /* PBXTargetDependency */,
 			);
 			name = RikkeifyUITests;
 			productName = RikkeifyUITests;
-			productReference = 84E8F1602BE8ED7F00A59879 /* RikkeifyUITests.xctest */;
+			productReference = 841B433E2BE87AC900D1B490 /* RikkeifyUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		84E8F1382BE8ED7D00A59879 /* Project object */ = {
+		841B43162BE87AC600D1B490 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1530;
 				LastUpgradeCheck = 1530;
 				TargetAttributes = {
-					84E8F13F2BE8ED7D00A59879 = {
+					841B431D2BE87AC600D1B490 = {
 						CreatedOnToolsVersion = 15.3;
 					};
-					84E8F1552BE8ED7F00A59879 = {
+					841B43332BE87AC900D1B490 = {
 						CreatedOnToolsVersion = 15.3;
-						TestTargetID = 84E8F13F2BE8ED7D00A59879;
+						TestTargetID = 841B431D2BE87AC600D1B490;
 					};
-					84E8F15F2BE8ED7F00A59879 = {
+					841B433D2BE87AC900D1B490 = {
 						CreatedOnToolsVersion = 15.3;
-						TestTargetID = 84E8F13F2BE8ED7D00A59879;
+						TestTargetID = 841B431D2BE87AC600D1B490;
 					};
 				};
 			};
-			buildConfigurationList = 84E8F13B2BE8ED7D00A59879 /* Build configuration list for PBXProject "Rikkeify" */;
+			buildConfigurationList = 841B43192BE87AC600D1B490 /* Build configuration list for PBXProject "Rikkeify" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -214,37 +312,39 @@
 				en,
 				Base,
 			);
-			mainGroup = 84E8F1372BE8ED7D00A59879;
-			productRefGroup = 84E8F1412BE8ED7D00A59879 /* Products */;
+			mainGroup = 841B43152BE87AC600D1B490;
+			productRefGroup = 841B431F2BE87AC600D1B490 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				84E8F13F2BE8ED7D00A59879 /* Rikkeify */,
-				84E8F1552BE8ED7F00A59879 /* RikkeifyTests */,
-				84E8F15F2BE8ED7F00A59879 /* RikkeifyUITests */,
+				841B431D2BE87AC600D1B490 /* Rikkeify */,
+				841B43332BE87AC900D1B490 /* RikkeifyTests */,
+				841B433D2BE87AC900D1B490 /* RikkeifyUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		84E8F13E2BE8ED7D00A59879 /* Resources */ = {
+		841B431C2BE87AC600D1B490 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				84E8F14D2BE8ED7F00A59879 /* Assets.xcassets in Resources */,
-				84E8F1502BE8ED7F00A59879 /* Base in Resources */,
-				84E8F14B2BE8ED7D00A59879 /* Base in Resources */,
+				84E8F1342BE8E53E00A59879 /* TrackOptionTableViewCell.xib in Resources */,
+				841B436D2BE8965B00D1B490 /* TrackViewVC.xib in Resources */,
+				84E8F12F2BE8E02900A59879 /* TrackOptionVC.xib in Resources */,
+				841B432B2BE87AC800D1B490 /* Assets.xcassets in Resources */,
+				841B432E2BE87AC800D1B490 /* Base in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		84E8F1542BE8ED7F00A59879 /* Resources */ = {
+		841B43322BE87AC900D1B490 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		84E8F15E2BE8ED7F00A59879 /* Resources */ = {
+		841B433C2BE87AC900D1B490 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -254,61 +354,57 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		84E8F13C2BE8ED7D00A59879 /* Sources */ = {
+		841B431A2BE87AC600D1B490 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				84E8F1482BE8ED7D00A59879 /* ViewController.swift in Sources */,
-				84E8F1442BE8ED7D00A59879 /* AppDelegate.swift in Sources */,
-				84E8F1462BE8ED7D00A59879 /* SceneDelegate.swift in Sources */,
+				84E8F1362BE8E96E00A59879 /* TrackOptionVM.swift in Sources */,
+				841B43222BE87AC600D1B490 /* AppDelegate.swift in Sources */,
+				84E8F12E2BE8E02900A59879 /* TrackOptionVC.swift in Sources */,
+				84E8F1332BE8E53E00A59879 /* TrackOptionTableViewCell.swift in Sources */,
+				FA75A8892BE94A5A00FEB35F /* TrackViewVM.swift in Sources */,
+				841B436C2BE8965B00D1B490 /* TrackViewVC.swift in Sources */,
+				FA75A8872BE9491700FEB35F /* Track.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		84E8F1522BE8ED7F00A59879 /* Sources */ = {
+		841B43302BE87AC900D1B490 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				84E8F15B2BE8ED7F00A59879 /* RikkeifyTests.swift in Sources */,
+				841B43392BE87AC900D1B490 /* RikkeifyTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		84E8F15C2BE8ED7F00A59879 /* Sources */ = {
+		841B433A2BE87AC900D1B490 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				84E8F1672BE8ED7F00A59879 /* RikkeifyUITestsLaunchTests.swift in Sources */,
-				84E8F1652BE8ED7F00A59879 /* RikkeifyUITests.swift in Sources */,
+				841B43452BE87AC900D1B490 /* RikkeifyUITestsLaunchTests.swift in Sources */,
+				841B43432BE87AC900D1B490 /* RikkeifyUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		84E8F1582BE8ED7F00A59879 /* PBXTargetDependency */ = {
+		841B43362BE87AC900D1B490 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 84E8F13F2BE8ED7D00A59879 /* Rikkeify */;
-			targetProxy = 84E8F1572BE8ED7F00A59879 /* PBXContainerItemProxy */;
+			target = 841B431D2BE87AC600D1B490 /* Rikkeify */;
+			targetProxy = 841B43352BE87AC900D1B490 /* PBXContainerItemProxy */;
 		};
-		84E8F1622BE8ED7F00A59879 /* PBXTargetDependency */ = {
+		841B43402BE87AC900D1B490 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 84E8F13F2BE8ED7D00A59879 /* Rikkeify */;
-			targetProxy = 84E8F1612BE8ED7F00A59879 /* PBXContainerItemProxy */;
+			target = 841B431D2BE87AC600D1B490 /* Rikkeify */;
+			targetProxy = 841B433F2BE87AC900D1B490 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		84E8F1492BE8ED7D00A59879 /* Main.storyboard */ = {
+		841B432C2BE87AC800D1B490 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				84E8F14A2BE8ED7D00A59879 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		84E8F14E2BE8ED7F00A59879 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				84E8F14F2BE8ED7F00A59879 /* Base */,
+				841B432D2BE87AC800D1B490 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -316,7 +412,7 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		84E8F1682BE8ED7F00A59879 /* Debug */ = {
+		841B43462BE87AC900D1B490 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -379,7 +475,7 @@
 			};
 			name = Debug;
 		};
-		84E8F1692BE8ED7F00A59879 /* Release */ = {
+		841B43472BE87AC900D1B490 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -435,7 +531,7 @@
 			};
 			name = Release;
 		};
-		84E8F16B2BE8ED7F00A59879 /* Debug */ = {
+		841B43492BE87AC900D1B490 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -443,12 +539,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Rikkeify/Info.plist;
+				INFOPLIST_FILE = Rikkeify/GlobalDefine/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIMainStoryboardFile = "";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -462,7 +557,7 @@
 			};
 			name = Debug;
 		};
-		84E8F16C2BE8ED7F00A59879 /* Release */ = {
+		841B434A2BE87AC900D1B490 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -470,12 +565,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Rikkeify/Info.plist;
+				INFOPLIST_FILE = Rikkeify/GlobalDefine/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIMainStoryboardFile = "";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -489,7 +583,7 @@
 			};
 			name = Release;
 		};
-		84E8F16E2BE8ED7F00A59879 /* Debug */ = {
+		841B434C2BE87AC900D1B490 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
@@ -508,7 +602,7 @@
 			};
 			name = Debug;
 		};
-		84E8F16F2BE8ED7F00A59879 /* Release */ = {
+		841B434D2BE87AC900D1B490 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
@@ -527,7 +621,7 @@
 			};
 			name = Release;
 		};
-		84E8F1712BE8ED7F00A59879 /* Debug */ = {
+		841B434F2BE87AC900D1B490 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
@@ -544,7 +638,7 @@
 			};
 			name = Debug;
 		};
-		84E8F1722BE8ED7F00A59879 /* Release */ = {
+		841B43502BE87AC900D1B490 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
@@ -564,43 +658,43 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		84E8F13B2BE8ED7D00A59879 /* Build configuration list for PBXProject "Rikkeify" */ = {
+		841B43192BE87AC600D1B490 /* Build configuration list for PBXProject "Rikkeify" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				84E8F1682BE8ED7F00A59879 /* Debug */,
-				84E8F1692BE8ED7F00A59879 /* Release */,
+				841B43462BE87AC900D1B490 /* Debug */,
+				841B43472BE87AC900D1B490 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		84E8F16A2BE8ED7F00A59879 /* Build configuration list for PBXNativeTarget "Rikkeify" */ = {
+		841B43482BE87AC900D1B490 /* Build configuration list for PBXNativeTarget "Rikkeify" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				84E8F16B2BE8ED7F00A59879 /* Debug */,
-				84E8F16C2BE8ED7F00A59879 /* Release */,
+				841B43492BE87AC900D1B490 /* Debug */,
+				841B434A2BE87AC900D1B490 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		84E8F16D2BE8ED7F00A59879 /* Build configuration list for PBXNativeTarget "RikkeifyTests" */ = {
+		841B434B2BE87AC900D1B490 /* Build configuration list for PBXNativeTarget "RikkeifyTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				84E8F16E2BE8ED7F00A59879 /* Debug */,
-				84E8F16F2BE8ED7F00A59879 /* Release */,
+				841B434C2BE87AC900D1B490 /* Debug */,
+				841B434D2BE87AC900D1B490 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		84E8F1702BE8ED7F00A59879 /* Build configuration list for PBXNativeTarget "RikkeifyUITests" */ = {
+		841B434E2BE87AC900D1B490 /* Build configuration list for PBXNativeTarget "RikkeifyUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				84E8F1712BE8ED7F00A59879 /* Debug */,
-				84E8F1722BE8ED7F00A59879 /* Release */,
+				841B434F2BE87AC900D1B490 /* Debug */,
+				841B43502BE87AC900D1B490 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 84E8F1382BE8ED7D00A59879 /* Project object */;
+	rootObject = 841B43162BE87AC600D1B490 /* Project object */;
 }

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="dark"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="81" id="KGk-i7-Jjw" customClass="TrackOptionTableViewCell" customModule="Rikkeify" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="394" height="81"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="394" height="81"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Us8-KT-nM4">
+                        <rect key="frame" x="32" y="16" width="49" height="49"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="Us8-KT-nM4" secondAttribute="height" multiplier="1:1" id="jTe-l0-94J"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nl2-GP-AWF">
+                        <rect key="frame" x="97" y="29.666666666666671" width="40.333333333333343" height="22"/>
+                        <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="16"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                <constraints>
+                    <constraint firstItem="Nl2-GP-AWF" firstAttribute="leading" secondItem="Us8-KT-nM4" secondAttribute="trailing" constant="16" id="ADd-Xf-eL1"/>
+                    <constraint firstItem="Us8-KT-nM4" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="Oz8-Wa-oaa"/>
+                    <constraint firstAttribute="bottom" secondItem="Us8-KT-nM4" secondAttribute="bottom" constant="16" id="SPL-FM-7mQ"/>
+                    <constraint firstItem="Nl2-GP-AWF" firstAttribute="centerY" secondItem="Us8-KT-nM4" secondAttribute="centerY" id="T9r-xH-GTe"/>
+                    <constraint firstItem="Us8-KT-nM4" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="32" id="Wl8-l7-DwS"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <connections>
+                <outlet property="iconOptionImageView" destination="Us8-KT-nM4" id="WNB-9a-T9z"/>
+                <outlet property="titleOptionLabel" destination="Nl2-GP-AWF" id="CBK-V7-w7j"/>
+            </connections>
+            <point key="canvasLocation" x="186.25954198473281" y="1.7605633802816902"/>
+        </tableViewCell>
+    </objects>
+</document>
