@@ -14,15 +14,15 @@ enum LoopState {
 class TrackViewVM {
     let track: Track
     
-    init(track: Track) {
-        self.track = track
-    }
-    
     var loopState: LoopState = .none
     
     var isLiked = false
     var isShuffled = false
     var isPlaying = false
+    
+    init(track: Track) {
+        self.track = track
+    }
     
     func toggleLoopState() {
         switch loopState {

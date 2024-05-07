@@ -8,17 +8,16 @@
 import UIKit
 
 class TrackOptionVC: UIViewController {
+    // MARK: - Outlets
     @IBOutlet private weak var optionTableView: UITableView!
     @IBOutlet private weak var trackAuthorLabel: UILabel!
     @IBOutlet private weak var trackNameLabel: UILabel!
     @IBOutlet private weak var thumbnailImageView: UIImageView!
     
+    // MARK: - Properties
     private let viewModel: TrackOptionVM
     
-    @IBAction func onCloseButtonTapped(_ sender: UIButton) {
-        dismiss(animated: true)
-    }
-    
+    // MARK: - Lifecycle
     init(viewModel: TrackOptionVM) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
@@ -30,13 +29,24 @@ class TrackOptionVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        setupViews()
+        
         setupListViews()
         bindViewModel()
     }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        setupViews()
+    }
+    
+    // MARK: - Actions
+    @IBAction func onCloseButtonTapped(_ sender: UIButton) {
+        dismiss(animated: true)
+    }
 }
 
+// MARK: - UITableViewDataSource
 extension TrackOptionVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.optionList.count
@@ -56,12 +66,14 @@ extension TrackOptionVC: UITableViewDataSource {
     }
 }
 
+// MARK: - UITableViewDelegate
 extension TrackOptionVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 60
     }
 }
 
+// MARK: - Private methods
 extension TrackOptionVC {
     private func setupViews() {
         blurredBackgroundView(self.view)
@@ -75,9 +87,9 @@ extension TrackOptionVC {
     }
     
     private func bindViewModel() {
-        thumbnailImageView.image = .init(named: viewModel.track.thumbnail)
+        thumbnailImageView.setImage(from: viewModel.track.album.cover[0].url)
         trackNameLabel.text = viewModel.track.name
-        trackAuthorLabel.text = viewModel.track.author
+        trackAuthorLabel.text = viewModel.track.artists[0].name
         
         viewModel.fetchOptions()
         optionTableView.reloadData()

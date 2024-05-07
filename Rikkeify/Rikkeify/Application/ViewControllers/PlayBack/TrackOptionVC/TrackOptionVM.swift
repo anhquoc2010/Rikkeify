@@ -9,6 +9,7 @@ import Foundation
 
 class TrackOptionVM {
     let track: Track
+    
     var optionList = [TrackOption]()
     
     init(track: Track) {
@@ -26,7 +27,7 @@ class TrackOptionVM {
             TrackOption(icon: "circle.circle", name: "View album"),
             TrackOption(icon: "person.wave.2", name: "View artist"),
             TrackOption(icon: "person.2", name: "Song credits"),
-            TrackOption(icon: "moon.fill", name: "Sleep timer"),
+            TrackOption(icon: "moon", name: "Sleep timer"),
         ]
     }
 }

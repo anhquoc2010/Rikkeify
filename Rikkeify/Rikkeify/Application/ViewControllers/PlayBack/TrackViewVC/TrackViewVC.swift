@@ -9,7 +9,7 @@ import UIKit
 
 class TrackViewVC: UIViewController {
     // MARK: Outlets
-    @IBOutlet private weak var trackLyricsLabel: UILabel!
+    @IBOutlet private weak var lyricsTableView: UITableView!
     @IBOutlet private weak var lyricsView: UIView!
     @IBOutlet private weak var speakerButtonLabel: UILabel!
     @IBOutlet private weak var speakerButtonImageView: UIButton!
@@ -23,7 +23,9 @@ class TrackViewVC: UIViewController {
     
     // MARK: Properties
     private let viewModel: TrackViewVM
+    private var timer: Timer?
     
+    // MARK: Lifecycle
     init(viewModel: TrackViewVM) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
@@ -35,8 +37,16 @@ class TrackViewVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupViews()
+        
+        setupListViews()
+        setupEvents()
         bindViewModel()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        setupViews()
     }
     
     // MARK: - Actions
@@ -95,20 +105,54 @@ class TrackViewVC: UIViewController {
     }
 }
 
+// MARK: - UITableViewDataSource
+extension TrackViewVC: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        viewModel.track.lyrics.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = lyricsTableView
+            .dequeueReusableCell(
+                withIdentifier: "TrackViewLyricTableViewCell",
+                for: indexPath
+            ) as? TrackViewLyricTableViewCell
+        else { return .init() }
+        
+        cell.configure(lyric: viewModel.track.lyrics[indexPath.row].text, color: .black)
+        
+        return cell
+    }
+}
+
+// MARK: - Private Methods
 extension TrackViewVC {
-    // MARK: - Private Methods
     private func setupViews() {
         let configuration = UIImage.SymbolConfiguration(pointSize: 14)
         let image = UIImage(systemName: "circle.fill", withConfiguration: configuration)
         trackProgressSlider.setThumbImage(image, for: .normal)
     }
     
+    private func setupListViews() {
+        let nib = UINib(nibName: "TrackViewLyricTableViewCell", bundle: nil)
+        lyricsTableView.register(nib, forCellReuseIdentifier: "TrackViewLyricTableViewCell")
+        lyricsTableView.dataSource = self
+    }
+    
+    private func setupEvents() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(lyricsViewTapped))
+        lyricsView.addGestureRecognizer(tapGesture)
+    }
+    
     private func bindViewModel() {
-        titleLabel.text = viewModel.track.playlist
-        thumbnailImageView.image = .init(named: viewModel.track.thumbnail)
+        titleLabel.text = viewModel.track.album.name
+        thumbnailImageView.setImage(from: viewModel.track.album.cover[0].url)
         trackNameLabel.text = viewModel.track.name
-        authorNameLabel.text = viewModel.track.author
-        trackLyricsLabel.text = viewModel.track.lyrics
+        authorNameLabel.text = viewModel.track.artists[0].name
+        trackProgressSlider.maximumValue = Float(viewModel.track.durationMs)
+        trackTimeSumOrRemainLabel.text = "-\(viewModel.track.durationText)"
+        
+        lyricsTableView.reloadData()
     }
     
     private func updateLoopButton(_ button: UIButton) {
@@ -131,6 +175,12 @@ extension TrackViewVC {
         let imageName = viewModel.isPlaying ? "pause.circle.fill" : "play.circle.fill"
         let image = UIImage(systemName: imageName)
         button.setBackgroundImage(image, for: .normal)
+        
+        if viewModel.isPlaying {
+            timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateSlider), userInfo: nil, repeats: true)
+        } else {
+            timer?.invalidate()
+        }
     }
     
     private func updateShuffleButton(_ button: UIButton) {
@@ -144,5 +194,31 @@ extension TrackViewVC {
         button.setImage(image, for: .normal)
         let color: UIColor = viewModel.isLiked ? .systemGreen : .white
         button.tintColor = color
+    }
+    
+    private func millisecondsToMinutesSeconds(_ milliseconds: Int) -> String {
+        let totalSeconds = milliseconds / 1000
+        let minutes = totalSeconds / 60
+        let seconds = totalSeconds % 60
+        return String(format: "%02d:%02d", minutes, seconds)
+    }
+}
+
+// MARK: - Private @objc Methods
+extension TrackViewVC {
+    @objc private func lyricsViewTapped() {
+        let vc = LyricViewVC(viewModel: LyricViewVM(track: viewModel.track))
+        vc.modalPresentationStyle = .overFullScreen
+        present(vc, animated: true)
+    }
+    
+    @objc func updateSlider() {
+        trackProgressSlider.setValue(trackProgressSlider.value + 1000, animated: true)
+        trackTimeNowLabel.text = millisecondsToMinutesSeconds(Int(trackProgressSlider.value))
+        trackTimeSumOrRemainLabel.text = "-\(millisecondsToMinutesSeconds(Int(trackProgressSlider.maximumValue - trackProgressSlider.value)))"
+        
+        if trackProgressSlider.value >= trackProgressSlider.maximumValue {
+            trackProgressSlider.setValue(0, animated: true)
+        }
     }
 }
