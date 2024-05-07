@@ -20,6 +20,8 @@
 		84E8F1332BE8E53E00A59879 /* TrackOptionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E8F1312BE8E53E00A59879 /* TrackOptionTableViewCell.swift */; };
 		84E8F1342BE8E53E00A59879 /* TrackOptionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84E8F1322BE8E53E00A59879 /* TrackOptionTableViewCell.xib */; };
 		84E8F1362BE8E96E00A59879 /* TrackOptionVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E8F1352BE8E96E00A59879 /* TrackOptionVM.swift */; };
+		84F771872BE9C27A006379BB /* TrackOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F771862BE9C27A006379BB /* TrackOption.swift */; };
+		84F7718A2BE9CBF4006379BB /* IntrinsicTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F771892BE9CBF4006379BB /* IntrinsicTableView.swift */; };
 		FA75A8872BE9491700FEB35F /* Track.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA75A8862BE9491700FEB35F /* Track.swift */; };
 		FA75A8892BE94A5A00FEB35F /* TrackViewVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA75A8882BE94A5A00FEB35F /* TrackViewVM.swift */; };
 /* End PBXBuildFile section */
@@ -59,6 +61,8 @@
 		84E8F1312BE8E53E00A59879 /* TrackOptionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackOptionTableViewCell.swift; sourceTree = "<group>"; };
 		84E8F1322BE8E53E00A59879 /* TrackOptionTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TrackOptionTableViewCell.xib; sourceTree = "<group>"; };
 		84E8F1352BE8E96E00A59879 /* TrackOptionVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackOptionVM.swift; sourceTree = "<group>"; };
+		84F771862BE9C27A006379BB /* TrackOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackOption.swift; sourceTree = "<group>"; };
+		84F771892BE9CBF4006379BB /* IntrinsicTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntrinsicTableView.swift; sourceTree = "<group>"; };
 		FA75A8862BE9491700FEB35F /* Track.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Track.swift; sourceTree = "<group>"; };
 		FA75A8882BE94A5A00FEB35F /* TrackViewVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackViewVM.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -165,6 +169,7 @@
 		841B43602BE884A800D1B490 /* Application */ = {
 			isa = PBXGroup;
 			children = (
+				84F771882BE9CB97006379BB /* Views */,
 				841B43522BE87D3400D1B490 /* ViewControllers */,
 			);
 			path = Application;
@@ -209,6 +214,14 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
+		84F771882BE9CB97006379BB /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				84F771892BE9CBF4006379BB /* IntrinsicTableView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		FA75A8812BE9487E00FEB35F /* Domain */ = {
 			isa = PBXGroup;
 			children = (
@@ -221,6 +234,7 @@
 			isa = PBXGroup;
 			children = (
 				FA75A8862BE9491700FEB35F /* Track.swift */,
+				84F771862BE9C27A006379BB /* TrackOption.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -358,8 +372,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84F7718A2BE9CBF4006379BB /* IntrinsicTableView.swift in Sources */,
 				84E8F1362BE8E96E00A59879 /* TrackOptionVM.swift in Sources */,
 				841B43222BE87AC600D1B490 /* AppDelegate.swift in Sources */,
+				84F771872BE9C27A006379BB /* TrackOption.swift in Sources */,
 				84E8F12E2BE8E02900A59879 /* TrackOptionVC.swift in Sources */,
 				84E8F1332BE8E53E00A59879 /* TrackOptionTableViewCell.swift in Sources */,
 				FA75A8892BE94A5A00FEB35F /* TrackViewVM.swift in Sources */,

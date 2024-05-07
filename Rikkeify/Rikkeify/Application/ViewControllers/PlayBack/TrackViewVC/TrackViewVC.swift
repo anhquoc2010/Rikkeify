@@ -36,6 +36,7 @@ class TrackViewVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
+        bindViewModel()
     }
     
     // MARK: - Actions
@@ -88,8 +89,9 @@ class TrackViewVC: UIViewController {
     }
     
     @IBAction private func onActionButtonTapped(_ sender: UIButton) {
-        // TODO: Implement
-        present(TrackOptionVC(viewModel: TrackOptionVM(track: viewModel.track)), animated: true)
+        let vc = TrackOptionVC(viewModel: TrackOptionVM(track: viewModel.track))
+        vc.modalPresentationStyle = .overFullScreen
+        present(vc, animated: true)
     }
 }
 
@@ -99,6 +101,14 @@ extension TrackViewVC {
         let configuration = UIImage.SymbolConfiguration(pointSize: 14)
         let image = UIImage(systemName: "circle.fill", withConfiguration: configuration)
         trackProgressSlider.setThumbImage(image, for: .normal)
+    }
+    
+    private func bindViewModel() {
+        titleLabel.text = viewModel.track.playlist
+        thumbnailImageView.image = .init(named: viewModel.track.thumbnail)
+        trackNameLabel.text = viewModel.track.name
+        authorNameLabel.text = viewModel.track.author
+        trackLyricsLabel.text = viewModel.track.lyrics
     }
     
     private func updateLoopButton(_ button: UIButton) {

@@ -4,12 +4,13 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TrackOptionVC" customModule="Rikkeify" customModuleProvider="target">
             <connections>
-                <outlet property="optionTableView" destination="e1y-wK-CCX" id="8KE-Qc-GET"/>
+                <outlet property="optionTableView" destination="e1y-wK-CCX" id="Mkx-e2-DwV"/>
                 <outlet property="thumbnailImageView" destination="dDO-Et-ba3" id="a2U-LA-ohp"/>
                 <outlet property="trackAuthorLabel" destination="QVI-fx-cUC" id="VTm-P1-93U"/>
                 <outlet property="trackNameLabel" destination="fMB-Eh-IDJ" id="EAt-Bn-e6y"/>
@@ -21,11 +22,11 @@
             <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k7g-ZT-Zty">
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k7g-ZT-Zty">
                     <rect key="frame" x="0.0" y="59" width="393" height="715"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vgb-Pm-Vat" userLabel="Content View">
-                            <rect key="frame" x="0.0" y="0.0" width="393" height="1500"/>
+                            <rect key="frame" x="0.0" y="0.0" width="393" height="610"/>
                             <subviews>
                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_app" translatesAutoresizingMaskIntoConstraints="NO" id="dDO-Et-ba3">
                                     <rect key="frame" x="118" y="20" width="157" height="157.33333333333334"/>
@@ -46,19 +47,19 @@
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="e1y-wK-CCX">
-                                    <rect key="frame" x="0.0" y="310" width="393" height="1190"/>
+                                <tableView clipsSubviews="YES" contentMode="scaleToFill" placeholderIntrinsicWidth="393" placeholderIntrinsicHeight="300" alwaysBounceVertical="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="e1y-wK-CCX" customClass="IntrinsicTableView" customModule="Rikkeify" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="310" width="393" height="300"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </tableView>
                             </subviews>
-                            <color key="backgroundColor" white="0.0" alpha="0.30178853218129137" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
+                                <constraint firstAttribute="bottom" secondItem="e1y-wK-CCX" secondAttribute="bottom" id="5rW-iV-ZFy"/>
                                 <constraint firstItem="QVI-fx-cUC" firstAttribute="centerX" secondItem="Vgb-Pm-Vat" secondAttribute="centerX" id="9E4-Es-3vq"/>
+                                <constraint firstItem="e1y-wK-CCX" firstAttribute="top" secondItem="QVI-fx-cUC" secondAttribute="bottom" constant="31.999999999999943" id="9pC-jb-o5n"/>
                                 <constraint firstItem="e1y-wK-CCX" firstAttribute="leading" secondItem="Vgb-Pm-Vat" secondAttribute="leading" id="ASg-0A-ebQ"/>
                                 <constraint firstItem="fMB-Eh-IDJ" firstAttribute="centerX" secondItem="Vgb-Pm-Vat" secondAttribute="centerX" id="B9B-8h-KQF"/>
-                                <constraint firstAttribute="bottom" secondItem="e1y-wK-CCX" secondAttribute="bottom" id="DnG-xT-EVT"/>
                                 <constraint firstItem="fMB-Eh-IDJ" firstAttribute="top" secondItem="dDO-Et-ba3" secondAttribute="bottom" constant="54" id="FPM-99-cGu"/>
-                                <constraint firstAttribute="height" constant="1500" id="XLY-Su-5B1"/>
                                 <constraint firstAttribute="trailing" secondItem="e1y-wK-CCX" secondAttribute="trailing" id="aac-vC-9Nv"/>
                                 <constraint firstItem="QVI-fx-cUC" firstAttribute="top" secondItem="fMB-Eh-IDJ" secondAttribute="bottom" id="czO-bp-0fT"/>
                                 <constraint firstItem="e1y-wK-CCX" firstAttribute="top" secondItem="QVI-fx-cUC" secondAttribute="bottom" constant="32" id="jdf-dX-qfg"/>
@@ -86,10 +87,13 @@
                     <state key="normal" title="Close">
                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </state>
+                    <connections>
+                        <action selector="onCloseButtonTapped:" destination="-1" eventType="touchUpInside" id="5wo-hH-sRt"/>
+                    </connections>
                 </button>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
-            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <color key="backgroundColor" systemColor="systemGreenColor"/>
             <constraints>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="TOO-WK-9G0" secondAttribute="bottom" id="0Ov-uo-Tys"/>
                 <constraint firstItem="TOO-WK-9G0" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="5Dc-4I-ygx"/>
@@ -103,5 +107,8 @@
     </objects>
     <resources>
         <image name="ic_app" width="709" height="709"/>
+        <systemColor name="systemGreenColor">
+            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
     </resources>
 </document>

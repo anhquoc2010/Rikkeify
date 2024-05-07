@@ -7,11 +7,6 @@
 
 import UIKit
 
-struct Option {
-    let icon: String
-    let title: String
-}
-
 class TrackOptionTableViewCell: UITableViewCell {
     @IBOutlet private weak var titleOptionLabel: UILabel!
     @IBOutlet private weak var iconOptionImageView: UIImageView!
@@ -20,8 +15,8 @@ class TrackOptionTableViewCell: UITableViewCell {
         super.awakeFromNib()
     }
     
-    func configure(option: Option) {
-        iconOptionImageView.image = .init(named: option.icon)
-        titleOptionLabel.text = option.title
+    func configure(option: TrackOption) {
+        iconOptionImageView.image = .init(systemName: option.icon)
+        titleOptionLabel.text = option.name
     }
 }

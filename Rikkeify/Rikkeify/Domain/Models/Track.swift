@@ -12,4 +12,5 @@ struct Track {
     let name: String
     let author: String
     let lyrics: String
+    let playlist: String
 }
