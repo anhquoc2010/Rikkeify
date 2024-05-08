@@ -2,12 +2,12 @@
 //  Cover.swift
 //  Rikkeify
 //
-//  Created by QuocLA on 07/05/2024.
+//  Created by QuocLA on 08/05/2024.
 //
 
 import Foundation
 
-struct Image {
+struct Cover {
     let url: String
     let width: Int
     let height: Int

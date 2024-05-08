@@ -15,6 +15,29 @@
 		841B43452BE87AC900D1B490 /* RikkeifyUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841B43442BE87AC900D1B490 /* RikkeifyUITestsLaunchTests.swift */; };
 		841B436C2BE8965B00D1B490 /* TrackViewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841B436A2BE8965B00D1B490 /* TrackViewVC.swift */; };
 		841B436D2BE8965B00D1B490 /* TrackViewVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 841B436B2BE8965B00D1B490 /* TrackViewVC.xib */; };
+		84C561182BEB28AA00948ECA /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C561172BEB28AA00948ECA /* Endpoint.swift */; };
+		84C5611A2BEB28BB00948ECA /* RequestMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C561192BEB28BB00948ECA /* RequestMethod.swift */; };
+		84C5611C2BEB28D800948ECA /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C5611B2BEB28D800948ECA /* NetworkError.swift */; };
+		84C5611E2BEB28E300948ECA /* Networkable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C5611D2BEB28E300948ECA /* Networkable.swift */; };
+		84C561222BEB2D7200948ECA /* AppEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C561212BEB2D7200948ECA /* AppEndpoint.swift */; };
+		84C561242BEB363B00948ECA /* TrackRemoteDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C561232BEB363B00948ECA /* TrackRemoteDataSource.swift */; };
+		84C561272BEB373D00948ECA /* TrackResponseDTO+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C561262BEB373D00948ECA /* TrackResponseDTO+Mapping.swift */; };
+		84C5612D2BEB484C00948ECA /* LyricsResponseDTO+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C5612C2BEB484C00948ECA /* LyricsResponseDTO+Mapping.swift */; };
+		84C5612F2BEB486400948ECA /* AudioTypeResponseDTO+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C5612E2BEB486400948ECA /* AudioTypeResponseDTO+Mapping.swift */; };
+		84C561312BEB611100948ECA /* Visual.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C561302BEB611100948ECA /* Visual.swift */; };
+		84C561332BEB612D00948ECA /* Avatar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C561322BEB612D00948ECA /* Avatar.swift */; };
+		84C561352BEB62A300948ECA /* Cover.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C561342BEB62A300948ECA /* Cover.swift */; };
+		84C561372BEB63F300948ECA /* AudioTrack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C561362BEB63F300948ECA /* AudioTrack.swift */; };
+		84C561392BEB64F000948ECA /* AudioType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C561382BEB64F000948ECA /* AudioType.swift */; };
+		84C5613B2BEB6EA500948ECA /* TrackRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C5613A2BEB6EA500948ECA /* TrackRepository.swift */; };
+		84C5613D2BEB6FEB00948ECA /* TrackRepositoryImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C5613C2BEB6FEB00948ECA /* TrackRepositoryImp.swift */; };
+		84C5614F2BEB8B7F00948ECA /* RepositoryModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C561442BEB8B7F00948ECA /* RepositoryModule.swift */; };
+		84C561502BEB8B7F00948ECA /* ViewModelModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C561452BEB8B7F00948ECA /* ViewModelModule.swift */; };
+		84C561512BEB8B7F00948ECA /* Inject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C561472BEB8B7F00948ECA /* Inject.swift */; };
+		84C561522BEB8B7F00948ECA /* DI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C561492BEB8B7F00948ECA /* DI.swift */; };
+		84C561532BEB8B7F00948ECA /* Resolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C5614A2BEB8B7F00948ECA /* Resolver.swift */; };
+		84C561552BEB92A200948ECA /* DataSourceModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C561542BEB92A200948ECA /* DataSourceModule.swift */; };
+		84C561572BEB92D800948ECA /* NetworkModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C561562BEB92D800948ECA /* NetworkModule.swift */; };
 		84E8F12E2BE8E02900A59879 /* TrackOptionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E8F12C2BE8E02900A59879 /* TrackOptionVC.swift */; };
 		84E8F12F2BE8E02900A59879 /* TrackOptionVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84E8F12D2BE8E02900A59879 /* TrackOptionVC.xib */; };
 		84E8F1332BE8E53E00A59879 /* TrackOptionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E8F1312BE8E53E00A59879 /* TrackOptionTableViewCell.swift */; };
@@ -26,7 +49,6 @@
 		84F771912BE9DD28006379BB /* LyricViewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F7718E2BE9DD28006379BB /* LyricViewVC.swift */; };
 		84F771932BE9DF09006379BB /* Lyric.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F771922BE9DF09006379BB /* Lyric.swift */; };
 		84F771952BE9EA3A006379BB /* Album.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F771942BE9EA3A006379BB /* Album.swift */; };
-		84F771992BE9EA64006379BB /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F771982BE9EA64006379BB /* Image.swift */; };
 		84F7719B2BE9EA77006379BB /* Artist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F7719A2BE9EA77006379BB /* Artist.swift */; };
 		84F7719D2BE9FEA7006379BB /* Audio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F7719C2BE9FEA7006379BB /* Audio.swift */; };
 		84F771A02BEA068A006379BB /* UIImage+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F7719F2BEA068A006379BB /* UIImage+Ext.swift */; };
@@ -35,6 +57,7 @@
 		84F771A72BEA1115006379BB /* LyricViewVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F771A62BEA1115006379BB /* LyricViewVM.swift */; };
 		FA75A8872BE9491700FEB35F /* Track.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA75A8862BE9491700FEB35F /* Track.swift */; };
 		FA75A8892BE94A5A00FEB35F /* TrackViewVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA75A8882BE94A5A00FEB35F /* TrackViewVM.swift */; };
+		FE7FFE763D25E9A763827863 /* Pods_Rikkeify.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C075338B426EBFDD8C672E9 /* Pods_Rikkeify.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +78,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1BFFF90726AC96CCCA9B9A03 /* Pods-Rikkeify.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rikkeify.debug.xcconfig"; path = "Target Support Files/Pods-Rikkeify/Pods-Rikkeify.debug.xcconfig"; sourceTree = "<group>"; };
+		3C075338B426EBFDD8C672E9 /* Pods_Rikkeify.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Rikkeify.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		841B431E2BE87AC600D1B490 /* Rikkeify.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Rikkeify.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		841B43212BE87AC600D1B490 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		841B432A2BE87AC800D1B490 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -67,6 +92,30 @@
 		841B43442BE87AC900D1B490 /* RikkeifyUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RikkeifyUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		841B436A2BE8965B00D1B490 /* TrackViewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackViewVC.swift; sourceTree = "<group>"; };
 		841B436B2BE8965B00D1B490 /* TrackViewVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TrackViewVC.xib; sourceTree = "<group>"; };
+		844C7DCD57FF50DD78492C48 /* Pods-Rikkeify.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rikkeify.release.xcconfig"; path = "Target Support Files/Pods-Rikkeify/Pods-Rikkeify.release.xcconfig"; sourceTree = "<group>"; };
+		84C561172BEB28AA00948ECA /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
+		84C561192BEB28BB00948ECA /* RequestMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestMethod.swift; sourceTree = "<group>"; };
+		84C5611B2BEB28D800948ECA /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
+		84C5611D2BEB28E300948ECA /* Networkable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networkable.swift; sourceTree = "<group>"; };
+		84C561212BEB2D7200948ECA /* AppEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEndpoint.swift; sourceTree = "<group>"; };
+		84C561232BEB363B00948ECA /* TrackRemoteDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackRemoteDataSource.swift; sourceTree = "<group>"; };
+		84C561262BEB373D00948ECA /* TrackResponseDTO+Mapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TrackResponseDTO+Mapping.swift"; sourceTree = "<group>"; };
+		84C5612C2BEB484C00948ECA /* LyricsResponseDTO+Mapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LyricsResponseDTO+Mapping.swift"; sourceTree = "<group>"; };
+		84C5612E2BEB486400948ECA /* AudioTypeResponseDTO+Mapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AudioTypeResponseDTO+Mapping.swift"; sourceTree = "<group>"; };
+		84C561302BEB611100948ECA /* Visual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Visual.swift; sourceTree = "<group>"; };
+		84C561322BEB612D00948ECA /* Avatar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Avatar.swift; sourceTree = "<group>"; };
+		84C561342BEB62A300948ECA /* Cover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cover.swift; sourceTree = "<group>"; };
+		84C561362BEB63F300948ECA /* AudioTrack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioTrack.swift; sourceTree = "<group>"; };
+		84C561382BEB64F000948ECA /* AudioType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioType.swift; sourceTree = "<group>"; };
+		84C5613A2BEB6EA500948ECA /* TrackRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackRepository.swift; sourceTree = "<group>"; };
+		84C5613C2BEB6FEB00948ECA /* TrackRepositoryImp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackRepositoryImp.swift; sourceTree = "<group>"; };
+		84C561442BEB8B7F00948ECA /* RepositoryModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RepositoryModule.swift; sourceTree = "<group>"; };
+		84C561452BEB8B7F00948ECA /* ViewModelModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewModelModule.swift; sourceTree = "<group>"; };
+		84C561472BEB8B7F00948ECA /* Inject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Inject.swift; sourceTree = "<group>"; };
+		84C561492BEB8B7F00948ECA /* DI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DI.swift; sourceTree = "<group>"; };
+		84C5614A2BEB8B7F00948ECA /* Resolver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Resolver.swift; sourceTree = "<group>"; };
+		84C561542BEB92A200948ECA /* DataSourceModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSourceModule.swift; sourceTree = "<group>"; };
+		84C561562BEB92D800948ECA /* NetworkModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkModule.swift; sourceTree = "<group>"; };
 		84E8F12C2BE8E02900A59879 /* TrackOptionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackOptionVC.swift; sourceTree = "<group>"; };
 		84E8F12D2BE8E02900A59879 /* TrackOptionVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TrackOptionVC.xib; sourceTree = "<group>"; };
 		84E8F1312BE8E53E00A59879 /* TrackOptionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackOptionTableViewCell.swift; sourceTree = "<group>"; };
@@ -78,7 +127,6 @@
 		84F7718F2BE9DD28006379BB /* LyricViewVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LyricViewVC.xib; sourceTree = "<group>"; };
 		84F771922BE9DF09006379BB /* Lyric.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lyric.swift; sourceTree = "<group>"; };
 		84F771942BE9EA3A006379BB /* Album.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Album.swift; sourceTree = "<group>"; };
-		84F771982BE9EA64006379BB /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 		84F7719A2BE9EA77006379BB /* Artist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Artist.swift; sourceTree = "<group>"; };
 		84F7719C2BE9FEA7006379BB /* Audio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Audio.swift; sourceTree = "<group>"; };
 		84F7719F2BEA068A006379BB /* UIImage+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Ext.swift"; sourceTree = "<group>"; };
@@ -94,6 +142,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FE7FFE763D25E9A763827863 /* Pods_Rikkeify.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -114,6 +163,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2EA104E8F265459316E51678 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				1BFFF90726AC96CCCA9B9A03 /* Pods-Rikkeify.debug.xcconfig */,
+				844C7DCD57FF50DD78492C48 /* Pods-Rikkeify.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		841B43152BE87AC600D1B490 = {
 			isa = PBXGroup;
 			children = (
@@ -121,6 +179,8 @@
 				841B43372BE87AC900D1B490 /* RikkeifyTests */,
 				841B43412BE87AC900D1B490 /* RikkeifyUITests */,
 				841B431F2BE87AC600D1B490 /* Products */,
+				2EA104E8F265459316E51678 /* Pods */,
+				9F829766C221301B3E422DAD /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -140,6 +200,7 @@
 				841B43512BE87D1E00D1B490 /* GlobalDefine */,
 				841B43602BE884A800D1B490 /* Application */,
 				FA75A8812BE9487E00FEB35F /* Domain */,
+				84C5610D2BEB18DA00948ECA /* Data */,
 				841B43532BE87D4B00D1B490 /* Resources */,
 			);
 			path = Rikkeify;
@@ -191,6 +252,7 @@
 		841B43602BE884A800D1B490 /* Application */ = {
 			isa = PBXGroup;
 			children = (
+				84C5614B2BEB8B7F00948ECA /* DI */,
 				841B43522BE87D3400D1B490 /* ViewControllers */,
 				84F7719E2BEA0674006379BB /* Extensions */,
 				84F771882BE9CB97006379BB /* Views */,
@@ -217,6 +279,117 @@
 				841B436B2BE8965B00D1B490 /* TrackViewVC.xib */,
 			);
 			path = TrackViewVC;
+			sourceTree = "<group>";
+		};
+		84C5610C2BEB18BD00948ECA /* RepositoriesInterfaces */ = {
+			isa = PBXGroup;
+			children = (
+				84C5613A2BEB6EA500948ECA /* TrackRepository.swift */,
+			);
+			path = RepositoriesInterfaces;
+			sourceTree = "<group>";
+		};
+		84C5610D2BEB18DA00948ECA /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				84C5610E2BEB19B900948ECA /* RepositoriesImplementations */,
+				84C561112BEB275600948ECA /* DataSources */,
+				84C561252BEB36A300948ECA /* DTOs */,
+				84C5610F2BEB19D400948ECA /* Network */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		84C5610E2BEB19B900948ECA /* RepositoriesImplementations */ = {
+			isa = PBXGroup;
+			children = (
+				84C5613C2BEB6FEB00948ECA /* TrackRepositoryImp.swift */,
+			);
+			path = RepositoriesImplementations;
+			sourceTree = "<group>";
+		};
+		84C5610F2BEB19D400948ECA /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				84C5611F2BEB2C7B00948ECA /* Core */,
+				84C561212BEB2D7200948ECA /* AppEndpoint.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		84C561112BEB275600948ECA /* DataSources */ = {
+			isa = PBXGroup;
+			children = (
+				84C561152BEB280A00948ECA /* Remote */,
+				84C561142BEB27BD00948ECA /* Local */,
+			);
+			path = DataSources;
+			sourceTree = "<group>";
+		};
+		84C561142BEB27BD00948ECA /* Local */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Local;
+			sourceTree = "<group>";
+		};
+		84C561152BEB280A00948ECA /* Remote */ = {
+			isa = PBXGroup;
+			children = (
+				84C561232BEB363B00948ECA /* TrackRemoteDataSource.swift */,
+			);
+			path = Remote;
+			sourceTree = "<group>";
+		};
+		84C5611F2BEB2C7B00948ECA /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				84C561172BEB28AA00948ECA /* Endpoint.swift */,
+				84C5611D2BEB28E300948ECA /* Networkable.swift */,
+				84C561192BEB28BB00948ECA /* RequestMethod.swift */,
+				84C5611B2BEB28D800948ECA /* NetworkError.swift */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		84C561252BEB36A300948ECA /* DTOs */ = {
+			isa = PBXGroup;
+			children = (
+				84C561262BEB373D00948ECA /* TrackResponseDTO+Mapping.swift */,
+				84C5612C2BEB484C00948ECA /* LyricsResponseDTO+Mapping.swift */,
+				84C5612E2BEB486400948ECA /* AudioTypeResponseDTO+Mapping.swift */,
+			);
+			path = DTOs;
+			sourceTree = "<group>";
+		};
+		84C561462BEB8B7F00948ECA /* Module */ = {
+			isa = PBXGroup;
+			children = (
+				84C561562BEB92D800948ECA /* NetworkModule.swift */,
+				84C561542BEB92A200948ECA /* DataSourceModule.swift */,
+				84C561442BEB8B7F00948ECA /* RepositoryModule.swift */,
+				84C561452BEB8B7F00948ECA /* ViewModelModule.swift */,
+			);
+			path = Module;
+			sourceTree = "<group>";
+		};
+		84C561482BEB8B7F00948ECA /* PropertyWrapper */ = {
+			isa = PBXGroup;
+			children = (
+				84C561472BEB8B7F00948ECA /* Inject.swift */,
+			);
+			path = PropertyWrapper;
+			sourceTree = "<group>";
+		};
+		84C5614B2BEB8B7F00948ECA /* DI */ = {
+			isa = PBXGroup;
+			children = (
+				84C561462BEB8B7F00948ECA /* Module */,
+				84C561482BEB8B7F00948ECA /* PropertyWrapper */,
+				84C561492BEB8B7F00948ECA /* DI.swift */,
+				84C5614A2BEB8B7F00948ECA /* Resolver.swift */,
+			);
+			path = DI;
 			sourceTree = "<group>";
 		};
 		84E8F12B2BE8E01100A59879 /* TrackOptionVC */ = {
@@ -274,9 +447,18 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
+		9F829766C221301B3E422DAD /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3C075338B426EBFDD8C672E9 /* Pods_Rikkeify.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		FA75A8812BE9487E00FEB35F /* Domain */ = {
 			isa = PBXGroup;
 			children = (
+				84C5610C2BEB18BD00948ECA /* RepositoriesInterfaces */,
 				FA75A8842BE948DD00FEB35F /* Models */,
 			);
 			path = Domain;
@@ -289,9 +471,13 @@
 				84F771862BE9C27A006379BB /* TrackOption.swift */,
 				84F771922BE9DF09006379BB /* Lyric.swift */,
 				84F771942BE9EA3A006379BB /* Album.swift */,
-				84F771982BE9EA64006379BB /* Image.swift */,
 				84F7719A2BE9EA77006379BB /* Artist.swift */,
 				84F7719C2BE9FEA7006379BB /* Audio.swift */,
+				84C561302BEB611100948ECA /* Visual.swift */,
+				84C561322BEB612D00948ECA /* Avatar.swift */,
+				84C561342BEB62A300948ECA /* Cover.swift */,
+				84C561362BEB63F300948ECA /* AudioTrack.swift */,
+				84C561382BEB64F000948ECA /* AudioType.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -303,9 +489,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 841B43482BE87AC900D1B490 /* Build configuration list for PBXNativeTarget "Rikkeify" */;
 			buildPhases = (
+				0D65300A7B284061DEA43BC7 /* [CP] Check Pods Manifest.lock */,
 				841B431A2BE87AC600D1B490 /* Sources */,
 				841B431B2BE87AC600D1B490 /* Frameworks */,
 				841B431C2BE87AC600D1B490 /* Resources */,
+				422C583671FD004AEBACF67B /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -426,27 +614,91 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		0D65300A7B284061DEA43BC7 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Rikkeify-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		422C583671FD004AEBACF67B /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Rikkeify/Pods-Rikkeify-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Rikkeify/Pods-Rikkeify-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Rikkeify/Pods-Rikkeify-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		841B431A2BE87AC600D1B490 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				84F7718A2BE9CBF4006379BB /* IntrinsicTableView.swift in Sources */,
+				84C561392BEB64F000948ECA /* AudioType.swift in Sources */,
+				84C561352BEB62A300948ECA /* Cover.swift in Sources */,
 				84F771912BE9DD28006379BB /* LyricViewVC.swift in Sources */,
+				84C561332BEB612D00948ECA /* Avatar.swift in Sources */,
+				84C5613B2BEB6EA500948ECA /* TrackRepository.swift in Sources */,
 				84E8F1362BE8E96E00A59879 /* TrackOptionVM.swift in Sources */,
 				841B43222BE87AC600D1B490 /* AppDelegate.swift in Sources */,
+				84C561522BEB8B7F00948ECA /* DI.swift in Sources */,
 				84F771872BE9C27A006379BB /* TrackOption.swift in Sources */,
 				84E8F12E2BE8E02900A59879 /* TrackOptionVC.swift in Sources */,
 				84F7719B2BE9EA77006379BB /* Artist.swift in Sources */,
 				84F771A72BEA1115006379BB /* LyricViewVM.swift in Sources */,
+				84C561242BEB363B00948ECA /* TrackRemoteDataSource.swift in Sources */,
+				84C5611A2BEB28BB00948ECA /* RequestMethod.swift in Sources */,
+				84C561532BEB8B7F00948ECA /* Resolver.swift in Sources */,
 				84F771932BE9DF09006379BB /* Lyric.swift in Sources */,
 				84F771A52BEA0998006379BB /* TrackViewLyricTableViewCell.swift in Sources */,
+				84C561512BEB8B7F00948ECA /* Inject.swift in Sources */,
+				84C5614F2BEB8B7F00948ECA /* RepositoryModule.swift in Sources */,
 				84E8F1332BE8E53E00A59879 /* TrackOptionTableViewCell.swift in Sources */,
+				84C561552BEB92A200948ECA /* DataSourceModule.swift in Sources */,
+				84C561572BEB92D800948ECA /* NetworkModule.swift in Sources */,
+				84C561222BEB2D7200948ECA /* AppEndpoint.swift in Sources */,
 				84F771A02BEA068A006379BB /* UIImage+Ext.swift in Sources */,
+				84C561312BEB611100948ECA /* Visual.swift in Sources */,
+				84C561182BEB28AA00948ECA /* Endpoint.swift in Sources */,
 				84F7719D2BE9FEA7006379BB /* Audio.swift in Sources */,
-				84F771992BE9EA64006379BB /* Image.swift in Sources */,
+				84C561502BEB8B7F00948ECA /* ViewModelModule.swift in Sources */,
+				84C5611C2BEB28D800948ECA /* NetworkError.swift in Sources */,
 				FA75A8892BE94A5A00FEB35F /* TrackViewVM.swift in Sources */,
+				84C5613D2BEB6FEB00948ECA /* TrackRepositoryImp.swift in Sources */,
+				84C5611E2BEB28E300948ECA /* Networkable.swift in Sources */,
 				841B436C2BE8965B00D1B490 /* TrackViewVC.swift in Sources */,
+				84C561272BEB373D00948ECA /* TrackResponseDTO+Mapping.swift in Sources */,
+				84C5612D2BEB484C00948ECA /* LyricsResponseDTO+Mapping.swift in Sources */,
+				84C561372BEB63F300948ECA /* AudioTrack.swift in Sources */,
+				84C5612F2BEB486400948ECA /* AudioTypeResponseDTO+Mapping.swift in Sources */,
 				FA75A8872BE9491700FEB35F /* Track.swift in Sources */,
 				84F771952BE9EA3A006379BB /* Album.swift in Sources */,
 			);
@@ -617,11 +869,13 @@
 		};
 		841B43492BE87AC900D1B490 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1BFFF90726AC96CCCA9B9A03 /* Pods-Rikkeify.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Rikkeify/GlobalDefine/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -643,11 +897,13 @@
 		};
 		841B434A2BE87AC900D1B490 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 844C7DCD57FF50DD78492C48 /* Pods-Rikkeify.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Rikkeify/GlobalDefine/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

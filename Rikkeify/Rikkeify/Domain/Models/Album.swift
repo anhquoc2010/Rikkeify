@@ -11,5 +11,5 @@ struct Album {
     let id: String
     let name: String
     let shareUrl: String
-    let cover: [Image]
+    let cover: [Cover]
 }

@@ -12,7 +12,11 @@ enum LoopState {
 }
 
 class TrackViewVM {
-    let track: Track
+    @Inject
+    private var trackRepository: TrackRepository
+    private let trackId: String
+    
+    var track: Track!
     
     var loopState: LoopState = .none
     
@@ -20,8 +24,21 @@ class TrackViewVM {
     var isShuffled = false
     var isPlaying = false
     
-    init(track: Track) {
-        self.track = track
+    init(trackId: String) {
+        self.trackId = trackId
+    }
+    
+    func fetchTrackMetadata(completion: @escaping (Result<Void, NetworkError>) -> Void) {
+        trackRepository.getTrackMetadata(trackId: trackId) { [weak self] (result: Result<Track, NetworkError>) in
+            guard let self = self else { return }
+            switch result {
+            case .success(let track):
+                self.track = track
+                completion(.success(()))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
     }
     
     func toggleLoopState() {

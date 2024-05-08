@@ -10,7 +10,7 @@ import Foundation
 struct Audio {
     let quality: String
     let url: String
-    let durationMs: Int
+    let durationMs: Int64
     let durationText: String
     let mimeType: String
     let format: String
