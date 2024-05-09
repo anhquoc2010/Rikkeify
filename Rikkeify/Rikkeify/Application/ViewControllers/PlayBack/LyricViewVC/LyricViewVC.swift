@@ -18,8 +18,8 @@ class LyricViewVC: UIViewController {
     private let viewModel: LyricViewVM
     
     // MARK: - Lifecycle
-    init(viewModel: LyricViewVM) {
-        self.viewModel = viewModel
+    init(track: Track) {
+        self.viewModel = LyricViewVM(track: track)
         super.init(nibName: nil, bundle: nil)
     }
     

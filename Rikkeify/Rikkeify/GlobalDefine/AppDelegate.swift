@@ -22,7 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 extension AppDelegate {
     private func setupWindow() {
         window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = TrackViewVC()
+        window?.rootViewController = TrackViewVC(trackId: "6YndJvp5XpMuzmtWLWI8hp")
         window?.makeKeyAndVisible()
     }
     

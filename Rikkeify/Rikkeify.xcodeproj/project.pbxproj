@@ -32,7 +32,6 @@
 		84C5613B2BEB6EA500948ECA /* TrackRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C5613A2BEB6EA500948ECA /* TrackRepository.swift */; };
 		84C5613D2BEB6FEB00948ECA /* TrackRepositoryImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C5613C2BEB6FEB00948ECA /* TrackRepositoryImp.swift */; };
 		84C5614F2BEB8B7F00948ECA /* RepositoryModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C561442BEB8B7F00948ECA /* RepositoryModule.swift */; };
-		84C561502BEB8B7F00948ECA /* ViewModelModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C561452BEB8B7F00948ECA /* ViewModelModule.swift */; };
 		84C561512BEB8B7F00948ECA /* Inject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C561472BEB8B7F00948ECA /* Inject.swift */; };
 		84C561522BEB8B7F00948ECA /* DI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C561492BEB8B7F00948ECA /* DI.swift */; };
 		84C561532BEB8B7F00948ECA /* Resolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C5614A2BEB8B7F00948ECA /* Resolver.swift */; };
@@ -110,7 +109,6 @@
 		84C5613A2BEB6EA500948ECA /* TrackRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackRepository.swift; sourceTree = "<group>"; };
 		84C5613C2BEB6FEB00948ECA /* TrackRepositoryImp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackRepositoryImp.swift; sourceTree = "<group>"; };
 		84C561442BEB8B7F00948ECA /* RepositoryModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RepositoryModule.swift; sourceTree = "<group>"; };
-		84C561452BEB8B7F00948ECA /* ViewModelModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewModelModule.swift; sourceTree = "<group>"; };
 		84C561472BEB8B7F00948ECA /* Inject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Inject.swift; sourceTree = "<group>"; };
 		84C561492BEB8B7F00948ECA /* DI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DI.swift; sourceTree = "<group>"; };
 		84C5614A2BEB8B7F00948ECA /* Resolver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Resolver.swift; sourceTree = "<group>"; };
@@ -368,7 +366,6 @@
 				84C561562BEB92D800948ECA /* NetworkModule.swift */,
 				84C561542BEB92A200948ECA /* DataSourceModule.swift */,
 				84C561442BEB8B7F00948ECA /* RepositoryModule.swift */,
-				84C561452BEB8B7F00948ECA /* ViewModelModule.swift */,
 			);
 			path = Module;
 			sourceTree = "<group>";
@@ -689,7 +686,6 @@
 				84C561312BEB611100948ECA /* Visual.swift in Sources */,
 				84C561182BEB28AA00948ECA /* Endpoint.swift in Sources */,
 				84F7719D2BE9FEA7006379BB /* Audio.swift in Sources */,
-				84C561502BEB8B7F00948ECA /* ViewModelModule.swift in Sources */,
 				84C5611C2BEB28D800948ECA /* NetworkError.swift in Sources */,
 				FA75A8892BE94A5A00FEB35F /* TrackViewVM.swift in Sources */,
 				84C5613D2BEB6FEB00948ECA /* TrackRepositoryImp.swift in Sources */,

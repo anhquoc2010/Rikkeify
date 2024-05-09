@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SkeletonView
 
 class TrackViewVC: UIViewController {
     // MARK: Outlets
@@ -22,27 +23,26 @@ class TrackViewVC: UIViewController {
     @IBOutlet private weak var titleLabel: UILabel!
     
     // MARK: Properties
-    @Inject
-    private var viewModel: TrackViewVM!
+    private var viewModel: TrackViewVM
     
     private var timer: Timer?
     
     // MARK: Lifecycle
+    init(trackId: String) {
+        viewModel = TrackViewVM(trackId: trackId)
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        viewModel.fetchTrackMetadata { [weak self] result in
-            guard let self = self else { return }
-            switch result {
-            case .success:
-                self.setupViews()
-                self.setupListViews()
-                self.setupEvents()
-                self.bindViewModel()
-            case .failure(let error):
-                print("error \(error)")
-            }
-        }
+        self.setupViews()
+        self.setupEvents()
+        self.bindViewModel()
     }
     
     // MARK: - Actions
@@ -95,7 +95,7 @@ class TrackViewVC: UIViewController {
     }
     
     @IBAction private func onActionButtonTapped(_ sender: UIButton) {
-        let vc = TrackOptionVC(viewModel: TrackOptionVM(track: viewModel.track!))
+        let vc = TrackOptionVC(track: viewModel.track!)
         vc.modalPresentationStyle = .overFullScreen
         present(vc, animated: true)
     }
@@ -124,15 +124,24 @@ extension TrackViewVC: UITableViewDataSource {
 // MARK: - Private Methods
 extension TrackViewVC {
     private func setupViews() {
-        titleLabel.text = viewModel.track.album.name
-        thumbnailImageView.setImage(from: viewModel.track.album.cover[0].url)
-        trackNameLabel.text = viewModel.track.name
-        authorNameLabel.text = viewModel.track.artists[0].name
-        trackProgressSlider.maximumValue = Float(viewModel.track.durationMs)
-        trackTimeSumOrRemainLabel.text = "-\(viewModel.track.durationText)"
+        showSkeleton(views: titleLabel,
+                     thumbnailImageView,
+                     trackNameLabel,
+                     authorNameLabel,
+                     trackTimeNowLabel,
+                     trackTimeSumOrRemainLabel,
+                     lyricsView)
         let configuration = UIImage.SymbolConfiguration(pointSize: 14)
         let image = UIImage(systemName: "circle.fill", withConfiguration: configuration)
         trackProgressSlider.setThumbImage(image, for: .normal)
+    }
+    
+    private func showSkeleton(views: UIView...) {
+        views.forEach { $0.showAnimatedSkeleton() }
+    }
+    
+    private func hideSkeleton(views: UIView...) {
+        views.forEach { $0.hideSkeleton() }
     }
     
     private func setupListViews() {
@@ -147,7 +156,31 @@ extension TrackViewVC {
     }
     
     private func bindViewModel() {
-        lyricsTableView.reloadData()
+        viewModel.fetchTrackMetadata { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success:
+                self.hideSkeleton(views: titleLabel,
+                                  thumbnailImageView,
+                                  trackNameLabel,
+                                  authorNameLabel,
+                                  trackTimeNowLabel,
+                                  trackTimeSumOrRemainLabel,
+                                  lyricsView)
+                
+                self.titleLabel.text = viewModel.track.album.name
+                self.thumbnailImageView.setImage(from: viewModel.track.album.cover[0].url)
+                self.trackNameLabel.text = viewModel.track.name
+                self.authorNameLabel.text = viewModel.track.artists[0].name
+                self.trackProgressSlider.maximumValue = Float(viewModel.track.durationMs)
+                self.trackTimeSumOrRemainLabel.text = "-\(viewModel.track.durationText)"
+                
+                self.setupListViews()
+                self.lyricsTableView.reloadData()
+            case .failure(let error):
+                print("error \(error)")
+            }
+        }
     }
     
     private func updateLoopButton(_ button: UIButton) {
@@ -202,7 +235,7 @@ extension TrackViewVC {
 // MARK: - Private @objc Methods
 extension TrackViewVC {
     @objc private func lyricsViewTapped() {
-        let vc = LyricViewVC(viewModel: LyricViewVM(track: viewModel.track))
+        let vc = LyricViewVC(track: viewModel.track)
         vc.modalPresentationStyle = .overFullScreen
         present(vc, animated: true)
     }
@@ -213,7 +246,7 @@ extension TrackViewVC {
         trackTimeSumOrRemainLabel.text = "-\(millisecondsToMinutesSeconds(Int(trackProgressSlider.maximumValue - trackProgressSlider.value)))"
         
         if trackProgressSlider.value >= trackProgressSlider.maximumValue {
-            trackProgressSlider.setValue(0, animated: true)
+            trackProgressSlider.value = 0
         }
     }
 }

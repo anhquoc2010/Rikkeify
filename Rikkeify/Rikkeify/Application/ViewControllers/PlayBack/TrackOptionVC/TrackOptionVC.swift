@@ -18,8 +18,8 @@ class TrackOptionVC: UIViewController {
     private let viewModel: TrackOptionVM
     
     // MARK: - Lifecycle
-    init(viewModel: TrackOptionVM) {
-        self.viewModel = viewModel
+    init(track: Track) {
+        self.viewModel = TrackOptionVM(track: track)
         super.init(nibName: nil, bundle: nil)
     }
     

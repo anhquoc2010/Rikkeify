@@ -7,8 +7,11 @@ target 'Rikkeify' do
 
   # Pods for Rikkeify
   
-  # d.i
+  # DI
   pod 'Swinject'
+  
+  # UI
+  pod 'SkeletonView'
   
   post_install do |pi|
         pi.pods_project.targets.each do |target|

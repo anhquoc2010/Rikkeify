@@ -18,7 +18,6 @@ public class DI {
         NetworkModule().register(container: container)
         DataSourceModule().register(container: container)
         RepositoryModule().register(container: container)
-        ViewModelModule().register(container: container)
     }
     
     func resolve<T>() -> T {

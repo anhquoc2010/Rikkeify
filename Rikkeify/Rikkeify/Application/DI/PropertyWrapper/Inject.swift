@@ -16,4 +16,3 @@ public struct Inject<Value> {
         self.wrappedValue = DI.shared.resolve()
     }
 }
-
