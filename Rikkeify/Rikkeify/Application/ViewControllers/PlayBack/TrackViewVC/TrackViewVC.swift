@@ -5,11 +5,12 @@
 //  Created by QuocLA on 06/05/2024.
 //
 
-import UIKit
+import AVFoundation
 import SkeletonView
 
 class TrackViewVC: UIViewController {
     // MARK: Outlets
+    @IBOutlet private weak var playPauseButton: UIButton!
     @IBOutlet private weak var lyricsTableView: UITableView!
     @IBOutlet private weak var lyricsView: UIView!
     @IBOutlet private weak var speakerButtonLabel: UILabel!
@@ -24,8 +25,6 @@ class TrackViewVC: UIViewController {
     
     // MARK: Properties
     private var viewModel: TrackViewVM
-    
-    private var timer: Timer?
     
     // MARK: Lifecycle
     init(trackId: String) {
@@ -57,7 +56,6 @@ class TrackViewVC: UIViewController {
     
     @IBAction private func onPlayPauseButtonTapped(_ sender: UIButton) {
         viewModel.togglePlayPauseState()
-        updatePlayPauseButton(sender)
     }
     
     @IBAction private func onShuffleButtonTapped(_ sender: UIButton) {
@@ -98,6 +96,10 @@ class TrackViewVC: UIViewController {
         let vc = TrackOptionVC(track: viewModel.track!)
         vc.modalPresentationStyle = .overFullScreen
         present(vc, animated: true)
+    }
+    
+    @IBAction func onSliderSlided(_ sender: UISlider) {
+        viewModel.didSlideSlider(toTime: Double(sender.value))
     }
 }
 
@@ -177,10 +179,35 @@ extension TrackViewVC {
                 
                 self.setupListViews()
                 self.lyricsTableView.reloadData()
+                
+                self.viewModel.startPlayback(audioTrack: viewModel.track.audio[0])
+                
+                self.viewModel.player?
+                    .addPeriodicTimeObserver(
+                        forInterval: CMTimeMake(value: 1, timescale: 1),
+                        queue: .main) { [weak self] time in
+                            guard let self = self else { return }
+                            self.updateSlider(time: time)
+                            self.updatePlayPauseButton(playPauseButton)
+                        }
             case .failure(let error):
                 print("error \(error)")
             }
         }
+    }
+    
+    func updateSlider(time: CMTime) {
+        guard let player = viewModel.player else { return }
+        
+        trackProgressSlider.setValue(Float(player.currentTime().seconds * 1000), animated: true)
+        
+        if trackProgressSlider.value >= trackProgressSlider.maximumValue {
+            trackProgressSlider.value = 0
+            viewModel.didSlideSlider(toTime: 0)
+        }
+        
+        trackTimeNowLabel.text = millisecondsToMinutesSeconds(Int(trackProgressSlider.value))
+        trackTimeSumOrRemainLabel.text = "-\(millisecondsToMinutesSeconds(Int(trackProgressSlider.maximumValue - trackProgressSlider.value)))"
     }
     
     private func updateLoopButton(_ button: UIButton) {
@@ -200,14 +227,22 @@ extension TrackViewVC {
     }
     
     private func updatePlayPauseButton(_ button: UIButton) {
-        let imageName = viewModel.isPlaying ? "pause.circle.fill" : "play.circle.fill"
-        let image = UIImage(systemName: imageName)
-        button.setBackgroundImage(image, for: .normal)
-        
-        if viewModel.isPlaying {
-            timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateSlider), userInfo: nil, repeats: true)
-        } else {
-            timer?.invalidate()
+        if let playerStatus = viewModel.player?.timeControlStatus {
+            var imageName = "play.circle.fill"
+            
+            switch playerStatus {
+            case .paused:
+                imageName = "play.circle.fill"
+            case .waitingToPlayAtSpecifiedRate:
+                imageName = "play.circle.fill"
+            case .playing:
+                imageName = "pause.circle.fill"
+            @unknown default:
+                imageName = "play.circle.fill"
+            }
+            
+            let image = UIImage(systemName: imageName)
+            button.setBackgroundImage(image, for: .normal)
         }
     }
     
@@ -238,15 +273,5 @@ extension TrackViewVC {
         let vc = LyricViewVC(track: viewModel.track)
         vc.modalPresentationStyle = .overFullScreen
         present(vc, animated: true)
-    }
-    
-    @objc func updateSlider() {
-        trackProgressSlider.setValue(trackProgressSlider.value + 1000, animated: true)
-        trackTimeNowLabel.text = millisecondsToMinutesSeconds(Int(trackProgressSlider.value))
-        trackTimeSumOrRemainLabel.text = "-\(millisecondsToMinutesSeconds(Int(trackProgressSlider.maximumValue - trackProgressSlider.value)))"
-        
-        if trackProgressSlider.value >= trackProgressSlider.maximumValue {
-            trackProgressSlider.value = 0
-        }
     }
 }

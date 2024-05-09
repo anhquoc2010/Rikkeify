@@ -45,7 +45,7 @@ extension AppEndpoint: EndPoint {
     
     var header: [String: String]? {
         return [
-            "X-RapidAPI-Key": "463da3156fmshe4d6bbce8c9712cp1b2aa5jsn6be082395942",
+            "X-RapidAPI-Key": "0e5d740037mshed0caed0971851bp1d95c7jsn0baa1414a7b3",
             "X-RapidAPI-Host": "spotify-scraper.p.rapidapi.com"
         ]
     }

@@ -14,6 +14,7 @@
                 <outlet property="authorNameLabel" destination="Mwc-1O-FoW" id="jRe-hX-b8X"/>
                 <outlet property="lyricsTableView" destination="LD4-Sg-Nvo" id="la4-Lk-y5R"/>
                 <outlet property="lyricsView" destination="wvH-4w-obl" id="qnk-Kz-feJ"/>
+                <outlet property="playPauseButton" destination="LLB-5q-Qjs" id="MfC-qU-Wbj"/>
                 <outlet property="speakerButtonImageView" destination="cxZ-zp-727" id="5WP-bh-fiX"/>
                 <outlet property="speakerButtonLabel" destination="FOh-Tr-XY8" id="Gfk-E1-FvW"/>
                 <outlet property="thumbnailImageView" destination="5ds-nY-Hqw" id="Oir-NX-3XV"/>
@@ -132,6 +133,9 @@
                                 <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="Pao-Ye-aJO" userLabel="trackProgressSlider">
                                     <rect key="frame" x="18" y="615.33333333333337" width="357" height="31"/>
                                     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <connections>
+                                        <action selector="onSliderSlided:" destination="-1" eventType="valueChanged" id="3fR-EI-GNq"/>
+                                    </connections>
                                 </slider>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yzr-pT-HKn" userLabel="trackTimeNowLabel">
                                     <rect key="frame" x="20" y="645.33333333333337" width="20.666666666666671" height="13.666666666666629"/>
