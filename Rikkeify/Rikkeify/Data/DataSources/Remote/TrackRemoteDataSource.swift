@@ -8,7 +8,8 @@
 import Foundation
 
 protocol TrackRemoteDataSource {
-    func getTrackMetadata(trackId: String, completion: @escaping (Result<Track, NetworkError>) -> Void)
+    func getTrackMetadata(trackId: String, getAudio: Bool, completion: @escaping (Result<Track, NetworkError>) -> Void)
+    func getRecommendTracks(seedTrackId: String, completion: @escaping (Result<[RecommendTrack], NetworkError>) -> Void)
 }
 
 final class TrackRemoteDataSourceImp {
@@ -17,7 +18,39 @@ final class TrackRemoteDataSourceImp {
 }
 
 extension TrackRemoteDataSourceImp: TrackRemoteDataSource {
-    func getTrackMetadata(trackId: String, completion: @escaping (Result<Track, NetworkError>) -> Void) {
+    func getRecommendTracks(seedTrackId: String, completion: @escaping (Result<[RecommendTrack], NetworkError>) -> Void) {
+        networkService.sendRequest(endpoint: AppEndpoint.getRecommendTracks(seedTrackId: seedTrackId))
+        { (result: Result<RecommendTracksResponseDTO, NetworkError>) in
+            switch result {
+            case .success(var recommendTracksResponseDTO):
+                let group = DispatchGroup()
+                
+                for index in 0..<recommendTracksResponseDTO.tracks.count {
+                    let recommendTrackDTO = recommendTracksResponseDTO.tracks[index]
+                    
+                    group.enter()
+                    self.fetchTrackAudio(trackName: recommendTrackDTO.name) { result in
+                        switch result {
+                        case .failure(let error):
+                            completion(.failure(error))
+                        case .success(let audioResponseDTO):
+                            recommendTracksResponseDTO.tracks[index].audio = audioResponseDTO
+                        }
+                        
+                        group.leave()
+                    }
+                }
+                
+                group.notify(queue: .main) {
+                    completion(.success(recommendTracksResponseDTO.tracks.map { $0.toDomain() }))
+                }
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    func getTrackMetadata(trackId: String, getAudio: Bool, completion: @escaping (Result<Track, NetworkError>) -> Void) {
         networkService.sendRequest(endpoint: AppEndpoint.getTrack(trackId: trackId))
         { (result: Result<TrackResponseDTO, NetworkError>) in
             switch result {
@@ -35,14 +68,16 @@ extension TrackRemoteDataSourceImp: TrackRemoteDataSource {
                     }
                 }
                 
-                group.enter()
-                self.fetchTrackAudio(trackName: trackResponseDTO.name) { result in
-                    defer { group.leave() }
-                    switch result {
-                    case .failure(let error):
-                        completion(.failure(error))
-                    case .success(let audioResponseDTO):
-                        trackResponseDTO.audio = audioResponseDTO
+                if getAudio {
+                    group.enter()
+                    self.fetchTrackAudio(trackName: trackResponseDTO.name) { result in
+                        defer { group.leave() }
+                        switch result {
+                        case .failure(let error):
+                            completion(.failure(error))
+                        case .success(let audioResponseDTO):
+                            trackResponseDTO.audio = audioResponseDTO
+                        }
                     }
                 }
                 

@@ -21,6 +21,24 @@ struct TrackResponseDTO: Decodable {
     let album: AlbumDTO
     var lyrics: [LyricsResponseDTO]?
     var audio: AudioTypeResponseDTO?
+//    var recommendTracks: [RecommendTrackResponseDTO]?
+    
+    enum CodingKeys: String, CodingKey {
+        case status
+        case type
+        case id
+        case name
+        case shareUrl
+        case durationMs
+        case durationText
+        case trackNumber
+        case playCount
+        case artists
+        case album
+        case lyrics
+        case audio
+//        case recommendTracks = "tracks"
+    }
 }
 
 extension TrackResponseDTO {
@@ -78,7 +96,9 @@ extension TrackResponseDTO {
                      artists: artists.map { $0.toDomain() },
                      album: album.toDomain(),
                      lyrics: lyrics?.map { $0.toDomain() } ?? [],
-                     audio: audio?.soundcloudTrack.audio.map { $0.toDomain() } ?? [])
+                     audio: audio?.soundcloudTrack.audio.map { $0.toDomain() } ?? []
+//                     recommendTracks: recommendTracks?.map { $0.toDomain() } ?? []
+        )
     }
 }
 

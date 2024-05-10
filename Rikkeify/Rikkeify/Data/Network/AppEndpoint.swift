@@ -11,11 +11,17 @@ enum AppEndpoint {
     case getTrack(trackId: String)
     case getTrackLyrics(trackId: String)
     case getTrackAudio(trackName: String)
+    case getRecommendTracks(seedTrackId: String)
 }
 
 extension AppEndpoint: EndPoint {
     var host: String {
-        return "spotify-scraper.p.rapidapi.com"
+        switch self {
+        case .getRecommendTracks:
+            return "spotify23.p.rapidapi.com"
+        default:
+            return "spotify-scraper.p.rapidapi.com"
+        }
     }
     
     var scheme: String {
@@ -31,23 +37,31 @@ extension AppEndpoint: EndPoint {
             return "\(prefix)/track/lyrics"
         case .getTrackAudio:
             return "\(prefix)/track/download/soundcloud"
+        case .getRecommendTracks:
+            return "/recommendations/"
         }
     }
     
     var method: RequestMethod {
         switch self {
-        case .getTrack:
-            return .get
         default:
             return .get
         }
     }
     
     var header: [String: String]? {
-        return [
-            "X-RapidAPI-Key": "0e5d740037mshed0caed0971851bp1d95c7jsn0baa1414a7b3",
-            "X-RapidAPI-Host": "spotify-scraper.p.rapidapi.com"
-        ]
+        switch self {
+        case .getRecommendTracks:
+            return [
+                "X-RapidAPI-Key": "0e5d740037mshed0caed0971851bp1d95c7jsn0baa1414a7b3",
+                "X-RapidAPI-Host": "spotify23.p.rapidapi.com"
+            ]
+        default:
+            return [
+                "X-RapidAPI-Key": "9f204def71msh9de67e98f8d323cp173c04jsnc1af62f75a25",
+                "X-RapidAPI-Host": "spotify-scraper.p.rapidapi.com"
+            ]
+        }
     }
     
     var queryParams: [String : String]? {
@@ -62,6 +76,11 @@ extension AppEndpoint: EndPoint {
             ]
         case .getTrackAudio(let trackName):
             return ["track": trackName]
+        case .getRecommendTracks(let seedTrackId):
+            return [
+                "limit": "5",
+                "seed_tracks": seedTrackId
+            ]
         }
     }
     

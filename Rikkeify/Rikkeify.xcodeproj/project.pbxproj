@@ -54,6 +54,8 @@
 		84F771A42BEA0998006379BB /* TrackViewLyricTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84F771A32BEA0998006379BB /* TrackViewLyricTableViewCell.xib */; };
 		84F771A52BEA0998006379BB /* TrackViewLyricTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F771A22BEA0998006379BB /* TrackViewLyricTableViewCell.swift */; };
 		84F771A72BEA1115006379BB /* LyricViewVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F771A62BEA1115006379BB /* LyricViewVM.swift */; };
+		FA6469562BECF39700F521E0 /* RecommendTrack.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6469552BECF39700F521E0 /* RecommendTrack.swift */; };
+		FA6469582BED9D1200F521E0 /* RecommendTrackResponseDTO+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6469572BED9D1200F521E0 /* RecommendTrackResponseDTO+Mapping.swift */; };
 		FA75A8872BE9491700FEB35F /* Track.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA75A8862BE9491700FEB35F /* Track.swift */; };
 		FA75A8892BE94A5A00FEB35F /* TrackViewVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA75A8882BE94A5A00FEB35F /* TrackViewVM.swift */; };
 		FE7FFE763D25E9A763827863 /* Pods_Rikkeify.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C075338B426EBFDD8C672E9 /* Pods_Rikkeify.framework */; };
@@ -131,6 +133,8 @@
 		84F771A22BEA0998006379BB /* TrackViewLyricTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackViewLyricTableViewCell.swift; sourceTree = "<group>"; };
 		84F771A32BEA0998006379BB /* TrackViewLyricTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TrackViewLyricTableViewCell.xib; sourceTree = "<group>"; };
 		84F771A62BEA1115006379BB /* LyricViewVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LyricViewVM.swift; sourceTree = "<group>"; };
+		FA6469552BECF39700F521E0 /* RecommendTrack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendTrack.swift; sourceTree = "<group>"; };
+		FA6469572BED9D1200F521E0 /* RecommendTrackResponseDTO+Mapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RecommendTrackResponseDTO+Mapping.swift"; sourceTree = "<group>"; };
 		FA75A8862BE9491700FEB35F /* Track.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Track.swift; sourceTree = "<group>"; };
 		FA75A8882BE94A5A00FEB35F /* TrackViewVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackViewVM.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -319,16 +323,8 @@
 			isa = PBXGroup;
 			children = (
 				84C561152BEB280A00948ECA /* Remote */,
-				84C561142BEB27BD00948ECA /* Local */,
 			);
 			path = DataSources;
-			sourceTree = "<group>";
-		};
-		84C561142BEB27BD00948ECA /* Local */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Local;
 			sourceTree = "<group>";
 		};
 		84C561152BEB280A00948ECA /* Remote */ = {
@@ -356,6 +352,7 @@
 				84C561262BEB373D00948ECA /* TrackResponseDTO+Mapping.swift */,
 				84C5612C2BEB484C00948ECA /* LyricsResponseDTO+Mapping.swift */,
 				84C5612E2BEB486400948ECA /* AudioTypeResponseDTO+Mapping.swift */,
+				FA6469572BED9D1200F521E0 /* RecommendTrackResponseDTO+Mapping.swift */,
 			);
 			path = DTOs;
 			sourceTree = "<group>";
@@ -475,6 +472,7 @@
 				84C561342BEB62A300948ECA /* Cover.swift */,
 				84C561362BEB63F300948ECA /* AudioTrack.swift */,
 				84C561382BEB64F000948ECA /* AudioType.swift */,
+				FA6469552BECF39700F521E0 /* RecommendTrack.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -660,6 +658,7 @@
 			files = (
 				84F7718A2BE9CBF4006379BB /* IntrinsicTableView.swift in Sources */,
 				84C561392BEB64F000948ECA /* AudioType.swift in Sources */,
+				FA6469582BED9D1200F521E0 /* RecommendTrackResponseDTO+Mapping.swift in Sources */,
 				84C561352BEB62A300948ECA /* Cover.swift in Sources */,
 				84F771912BE9DD28006379BB /* LyricViewVC.swift in Sources */,
 				84C561332BEB612D00948ECA /* Avatar.swift in Sources */,
@@ -672,6 +671,7 @@
 				84F7719B2BE9EA77006379BB /* Artist.swift in Sources */,
 				84F771A72BEA1115006379BB /* LyricViewVM.swift in Sources */,
 				84C561242BEB363B00948ECA /* TrackRemoteDataSource.swift in Sources */,
+				FA6469562BECF39700F521E0 /* RecommendTrack.swift in Sources */,
 				84C5611A2BEB28BB00948ECA /* RequestMethod.swift in Sources */,
 				84C561532BEB8B7F00948ECA /* Resolver.swift in Sources */,
 				84F771932BE9DF09006379BB /* Lyric.swift in Sources */,

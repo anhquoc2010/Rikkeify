@@ -14,7 +14,11 @@ final class TrackRepositoryImp {
 }
 
 extension TrackRepositoryImp: TrackRepository {
-    func getTrackMetadata(trackId: String, completion: @escaping (Result<Track, NetworkError>) -> Void) {
-        remoteDataSource.getTrackMetadata(trackId: trackId, completion: completion)
+    func getTrackMetadata(trackId: String, getAudio: Bool, completion: @escaping (Result<Track, NetworkError>) -> Void) {
+        remoteDataSource.getTrackMetadata(trackId: trackId, getAudio: getAudio, completion: completion)
+    }
+    
+    func getRecommendTracks(seedTrackId: String, completion: @escaping (Result<[RecommendTrack], NetworkError>) -> Void) {
+        remoteDataSource.getRecommendTracks(seedTrackId: seedTrackId, completion: completion)
     }
 }

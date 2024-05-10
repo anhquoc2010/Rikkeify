@@ -10,6 +10,9 @@ import SkeletonView
 
 class TrackViewVC: UIViewController {
     // MARK: Outlets
+    
+    @IBOutlet weak var forwardButton: UIButton!
+    @IBOutlet private weak var backwardButton: UIButton!
     @IBOutlet private weak var playPauseButton: UIButton!
     @IBOutlet private weak var lyricsTableView: UITableView!
     @IBOutlet private weak var lyricsView: UIView!
@@ -85,15 +88,21 @@ class TrackViewVC: UIViewController {
     }
     
     @IBAction private func onForwardButtonTapped(_ sender: UIButton) {
-        // TODO: Implement
+        viewModel.didTapForward {
+            self.setBackFordwardStatus()
+            self.bindViewModel()
+        }
     }
     
     @IBAction private func onBackwardButtonTapped(_ sender: UIButton) {
-        // TODO: Implement
+        viewModel.didTapBackward() {
+            self.setBackFordwardStatus()
+            self.bindViewModel()
+        }
     }
     
     @IBAction private func onActionButtonTapped(_ sender: UIButton) {
-        let vc = TrackOptionVC(track: viewModel.track!)
+        let vc = TrackOptionVC(track: viewModel.tracks[viewModel.currentTrackIndex])
         vc.modalPresentationStyle = .overFullScreen
         present(vc, animated: true)
     }
@@ -106,7 +115,7 @@ class TrackViewVC: UIViewController {
 // MARK: - UITableViewDataSource
 extension TrackViewVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        viewModel.track.lyrics.count
+        viewModel.tracks[viewModel.currentTrackIndex].lyrics.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -117,7 +126,7 @@ extension TrackViewVC: UITableViewDataSource {
             ) as? TrackViewLyricTableViewCell
         else { return .init() }
         
-        cell.configure(lyric: viewModel.track.lyrics[indexPath.row].text, color: .black)
+        cell.configure(lyric: viewModel.tracks[viewModel.currentTrackIndex].lyrics[indexPath.row].text, color: .black)
         
         return cell
     }
@@ -134,7 +143,7 @@ extension TrackViewVC {
                      trackTimeSumOrRemainLabel,
                      lyricsView)
         let configuration = UIImage.SymbolConfiguration(pointSize: 14)
-        let image = UIImage(systemName: "circle.fill", withConfiguration: configuration)
+        let image = UIImage(systemName: IconSystem.sliderThumb.systemName(), withConfiguration: configuration)
         trackProgressSlider.setThumbImage(image, for: .normal)
     }
     
@@ -158,52 +167,169 @@ extension TrackViewVC {
     }
     
     private func bindViewModel() {
+        if viewModel.isFirstLoad {
+            bindViewModelFirstLoad()
+        } else if viewModel.currentTrackIndex == viewModel.tracks.count - 1 {
+            bindViewModelLastReadyItem()
+        } else if viewModel.currentTrackIndex == viewModel.recommendTracks.count {
+            bindViewModelLastRecommendItem()
+        } else {
+            bindViewModelNormal()
+        }
+    }
+    
+    private func setBackFordwardStatus() {
+        DispatchQueue.main.async {
+            if self.viewModel.isFirstLoad || self.viewModel.isFirstTrack {
+                self.backwardButton.isEnabled = false
+                self.forwardButton.isEnabled = true
+            } else if self.viewModel.currentTrackIndex == self.viewModel.tracks.count - 1 {
+                self.backwardButton.isEnabled = true
+                self.forwardButton.isEnabled = false
+            } else if self.viewModel.currentTrackIndex == self.viewModel.recommendTracks.count {
+                self.backwardButton.isEnabled = true
+                self.forwardButton.isEnabled = false
+            } else {
+                self.backwardButton.isEnabled = true
+                self.forwardButton.isEnabled = true
+            }
+        }
+    }
+    
+    private func bindViewModelLastRecommendItem() {
+        viewModel.fetchRecommendTracks { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success:
+                DispatchQueue.main.async {
+                    self.backwardButton.isEnabled = !self.viewModel.isFirstTrack
+                }
+                viewModel.preFetchNextTrackMetadata { [weak self] result in
+                    guard let self = self else { return }
+                    switch result {
+                    case .success:
+                        DispatchQueue.main.async {
+                            self.forwardButton.isEnabled = !self.viewModel.isLastTrack
+                        }
+                    case .failure:
+                        DispatchQueue.main.async {
+                            self.forwardButton.isEnabled = false
+                        }
+                    }
+                }
+            case .failure:
+                DispatchQueue.main.async {
+                    self.backwardButton.isEnabled = false
+                }
+            }
+        }
+        bindViewModelNormal()
+    }
+    
+    private func bindViewModelLastReadyItem() {
+        viewModel.preFetchNextTrackMetadata { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success:
+                DispatchQueue.main.async {
+                    self.forwardButton.isEnabled = !self.viewModel.isLastTrack
+                }
+            case .failure:
+                DispatchQueue.main.async {
+                    self.forwardButton.isEnabled = false
+                }
+            }
+        }
+        bindViewModelNormal()
+    }
+    
+    private func bindViewModelFirstLoad() {
         viewModel.fetchTrackMetadata { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .success:
-                self.hideSkeleton(views: titleLabel,
-                                  thumbnailImageView,
-                                  trackNameLabel,
-                                  authorNameLabel,
-                                  trackTimeNowLabel,
-                                  trackTimeSumOrRemainLabel,
-                                  lyricsView)
-                
-                self.titleLabel.text = viewModel.track.album.name
-                self.thumbnailImageView.setImage(from: viewModel.track.album.cover[0].url)
-                self.trackNameLabel.text = viewModel.track.name
-                self.authorNameLabel.text = viewModel.track.artists[0].name
-                self.trackProgressSlider.maximumValue = Float(viewModel.track.durationMs)
-                self.trackTimeSumOrRemainLabel.text = "-\(viewModel.track.durationText)"
-                
-                self.setupListViews()
-                self.lyricsTableView.reloadData()
-                
-                self.viewModel.startPlayback(audioTrack: viewModel.track.audio[0])
-                
-                self.viewModel.player?
-                    .addPeriodicTimeObserver(
-                        forInterval: CMTimeMake(value: 1, timescale: 1),
-                        queue: .main) { [weak self] time in
-                            guard let self = self else { return }
-                            self.updateSlider(time: time)
-                            self.updatePlayPauseButton(playPauseButton)
+                viewModel.isFirstLoad = false
+                viewModel.fetchRecommendTracks { [weak self] result in
+                    guard let self = self else { return }
+                    switch result {
+                    case .success:
+                        DispatchQueue.main.async {
+                            self.backwardButton.isEnabled = !self.viewModel.isFirstTrack
                         }
+                        viewModel.preFetchNextTrackMetadata { [weak self] result in
+                            guard let self = self else { return }
+                            switch result {
+                            case .success:
+                                DispatchQueue.main.async {
+                                    self.forwardButton.isEnabled = !self.viewModel.isLastTrack
+                                }
+                            case .failure:
+                                DispatchQueue.main.async {
+                                    self.forwardButton.isEnabled = false
+                                }
+                            }
+                        }
+                    case .failure:
+                        DispatchQueue.main.async {
+                            self.backwardButton.isEnabled = false
+                        }
+                    }
+                }
+                
+                bindViewModelNormal()
+                
+                self.viewModel.startPlayback()
+                
+                if let player = self.viewModel.player {
+                    player.addPeriodicTimeObserver(forInterval: CMTimeMake(value: 1, timescale: 1), queue: .main) { [weak self] time in
+                        guard let self = self else { return }
+                        self.updateSlider(time: time)
+                        self.updatePlayPauseButton(playPauseButton)
+                    }
+                }
             case .failure(let error):
                 print("error \(error)")
             }
         }
     }
     
-    func updateSlider(time: CMTime) {
-        guard let player = viewModel.player else { return }
+    private func bindViewModelNormal() {
+        self.setupListViews()
+        self.bindToViews()
+    }
+    
+    private func bindToViews() {
+        self.hideSkeleton(views: titleLabel,
+                          thumbnailImageView,
+                          trackNameLabel,
+                          authorNameLabel,
+                          trackTimeNowLabel,
+                          trackTimeSumOrRemainLabel,
+                          lyricsView)
         
-        trackProgressSlider.setValue(Float(player.currentTime().seconds * 1000), animated: true)
+        let currentTrack = viewModel.tracks[viewModel.currentTrackIndex]
+        print("===========================\n\(currentTrack)\n=========================")
+        self.titleLabel.text = currentTrack.album.name
+        self.thumbnailImageView.setImage(from: currentTrack.album.cover[0].url)
+        self.trackNameLabel.text = currentTrack.name
+        self.authorNameLabel.text = currentTrack.artists[0].name
+        self.trackProgressSlider.maximumValue = Float(currentTrack.durationMs)
+        self.trackTimeSumOrRemainLabel.text = "-\(currentTrack.durationText)"
+        
+        self.lyricsTableView.reloadData()
+    }
+    
+    private func updateSlider(time: CMTime) {
+        if let player = viewModel.player {
+            trackProgressSlider.setValue(Float(player.currentTime().seconds * 1000), animated: true)
+        }
         
         if trackProgressSlider.value >= trackProgressSlider.maximumValue {
             trackProgressSlider.value = 0
-            viewModel.didSlideSlider(toTime: 0)
+            viewModel.didTapBackward() {
+                self.setupViews()
+                self.bindToViews()
+            }
         }
         
         trackTimeNowLabel.text = millisecondsToMinutesSeconds(Int(trackProgressSlider.value))
@@ -214,11 +340,11 @@ extension TrackViewVC {
         let imageName: String
         switch viewModel.loopState {
         case .none:
-            imageName = "repeat"
+            imageName = IconSystem.loop.systemName()
         case .loop:
-            imageName = "repeat"
+            imageName = IconSystem.loop.systemName()
         case .loopOne:
-            imageName = "repeat.1"
+            imageName = IconSystem.loopOne.systemName()
         }
         let image = UIImage(systemName: imageName)
         let color: UIColor = viewModel.loopState != .none ? .systemGreen : .white
@@ -228,17 +354,17 @@ extension TrackViewVC {
     
     private func updatePlayPauseButton(_ button: UIButton) {
         if let playerStatus = viewModel.player?.timeControlStatus {
-            var imageName = "play.circle.fill"
+            var imageName = IconSystem.play.systemName()
             
             switch playerStatus {
             case .paused:
-                imageName = "play.circle.fill"
+                imageName = IconSystem.play.systemName()
             case .waitingToPlayAtSpecifiedRate:
-                imageName = "play.circle.fill"
+                imageName = IconSystem.play.systemName()
             case .playing:
-                imageName = "pause.circle.fill"
+                imageName = IconSystem.pause.systemName()
             @unknown default:
-                imageName = "play.circle.fill"
+                imageName = IconSystem.play.systemName()
             }
             
             let image = UIImage(systemName: imageName)
@@ -252,7 +378,7 @@ extension TrackViewVC {
     }
     
     private func updateLikeButton(_ button: UIButton) {
-        let imageName = viewModel.isLiked ? "heart.fill" : "heart"
+        let imageName = viewModel.isLiked ? IconSystem.liked.systemName() : IconSystem.liked.systemName()
         let image = UIImage(systemName: imageName)
         button.setImage(image, for: .normal)
         let color: UIColor = viewModel.isLiked ? .systemGreen : .white
@@ -270,8 +396,33 @@ extension TrackViewVC {
 // MARK: - Private @objc Methods
 extension TrackViewVC {
     @objc private func lyricsViewTapped() {
-        let vc = LyricViewVC(track: viewModel.track)
+        let vc = LyricViewVC(track: viewModel.tracks[viewModel.currentTrackIndex])
         vc.modalPresentationStyle = .overFullScreen
         present(vc, animated: true)
+    }
+}
+
+extension TrackViewVC {
+    enum IconSystem {
+        case sliderThumb, loop, loopOne, play, pause, like, liked
+        
+        func systemName() -> String {
+            switch self {
+            case .sliderThumb:
+                return "circle.fill"
+            case .loop:
+                return "repeat"
+            case .loopOne:
+                return "repeat.1"
+            case .play:
+                return "play.circle.fill"
+            case .pause:
+                return "pause.circle.fill"
+            case .like:
+                return "heart"
+            case .liked:
+                return "heart.fill"
+            }
+        }
     }
 }

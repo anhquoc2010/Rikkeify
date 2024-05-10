@@ -18,7 +18,7 @@ struct Track {
     let artists: [Artist]
     let album: Album
     let lyrics: [Lyric]
-    let audio: [Audio]
+    var audio: [Audio]
 }
 
 //struct Track {

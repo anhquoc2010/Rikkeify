@@ -83,11 +83,18 @@ public final class NetworkService: Networkable {
                 resultHandler(.failure(.unknown))
                 return
             }
-            guard let decodedResponse = try? JSONDecoder().decode(T.self, from: data) else {
+            do {
+                let decodedResponse = try JSONDecoder().decode(T.self, from: data)
+                resultHandler(.success(decodedResponse))
+            } catch {
+                print(error)
                 resultHandler(.failure(.decode))
-                return
             }
-            resultHandler(.success(decodedResponse))
+//            guard let decodedResponse = try? JSONDecoder().decode(T.self, from: data) else {
+//                resultHandler(.failure(.decode))
+//                return
+//            }
+//            resultHandler(.success(decodedResponse))
         }
         urlTask.resume()
     }

@@ -14,27 +14,25 @@ enum LoopState {
 class TrackViewVM {
     @Inject
     private var trackRepository: TrackRepository
-    private let trackId: String
+    private var trackId: String
     
-    var track: Track!
+    var tracks = [Track]()
+    var recommendTracks = [RecommendTrack]()
     
-    private var audioTrack: Audio?
-    private var audioTracks = [Audio]()
+    var currentTrackIndex = 0
     
-    var currentAudioTrackIndex = 0
+    var isFirstLoad = true
     
-    var currentAudioTrack: Audio? {
-        if let audioTrack = audioTrack, audioTracks.isEmpty {
-            return audioTrack
-        }
-        else if let _ = self.playerQueue, !audioTracks.isEmpty {
-            return audioTracks[currentAudioTrackIndex]
-        }
-        return nil
+    var isFirstTrack: Bool {
+        currentTrackIndex - 1 < 0
+    }
+    
+    var isLastTrack: Bool {
+        currentTrackIndex + 1 > playerItems.count
     }
     
     var player: AVPlayer?
-    var playerQueue: AVQueuePlayer?
+    var playerItems = [AVPlayerItem]()
     
     var loopState: LoopState = .none
     
@@ -46,11 +44,13 @@ class TrackViewVM {
     }
     
     func fetchTrackMetadata(completion: @escaping (Result<Void, NetworkError>) -> Void) {
-        trackRepository.getTrackMetadata(trackId: trackId) { [weak self] (result: Result<Track, NetworkError>) in
+        trackRepository.getTrackMetadata(trackId: currentTrackIndex == 0 ? trackId : tracks[currentTrackIndex].id, getAudio: true) { [weak self] (result: Result<Track, NetworkError>) in
             guard let self = self else { return }
             switch result {
             case .success(let track):
-                self.track = track
+                self.tracks.append(track)
+                guard let url = URL(string: track.audio[0].url) else { return }
+                self.playerItems.append(AVPlayerItem(url: url))
                 completion(.success(()))
             case .failure(let error):
                 completion(.failure(error))
@@ -58,39 +58,101 @@ class TrackViewVM {
         }
     }
     
-    func startPlayback(audioTrack: Audio) {
-        guard let url = URL(string: audioTrack.url) else { return }
-        self.audioTrack = audioTrack
-        self.audioTracks = []
-        player = AVPlayer(url: url)
-        player?.automaticallyWaitsToMinimizeStalling = true
-        player?.actionAtItemEnd = .pause
-        player?.volume = 1.0
-        player?.play()
+    func fetchRecommendTracks(completion: @escaping (Result<Void, NetworkError>) -> Void) {
+        trackRepository.getRecommendTracks(seedTrackId: currentTrackIndex == 0 ? trackId : tracks[currentTrackIndex].id) { [weak self] (result: Result<[RecommendTrack], NetworkError>) in
+            guard let self = self else { return }
+            switch result {
+            case .success(let recommendTracks):
+                self.recommendTracks = recommendTracks
+                let newTracks = recommendTracks.map { $0.audio[0] }
+                self.addTracksToQueue(tracks: newTracks)
+                checkplayerItems()
+                completion(.success(()))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+        
+        func checkplayerItems() {
+            guard let _ = self.player else {
+                print("Player is not initialized.")
+                return
+            }
+            print("Items in player queue:")
+            for index in 0..<playerItems.count {
+                let item = playerItems[index]
+                print("Item \(index + 1): \(item.asset)")
+            }
+        }
     }
     
-    func startPlayback(audioTracks: [Audio]) {
-        self.audioTracks = audioTracks
-        self.audioTrack = nil
-        
-        self.playerQueue = AVQueuePlayer(items: audioTracks.compactMap {
-            guard let url = URL(string: $0.url) else {
-                return nil
+    func preFetchNextTrackMetadata(completion: @escaping (Result<Void, NetworkError>) -> Void) {
+        trackRepository.getTrackMetadata(trackId: recommendTracks[currentTrackIndex <= recommendTracks.count ? currentTrackIndex : currentTrackIndex - (5 * (tracks.count / 5))].id, getAudio: false) { [weak self] (result: Result<Track, NetworkError>) in
+            guard let self = self else { return }
+            switch result {
+            case .success(var track):
+                track.audio = recommendTracks[0].audio
+                self.tracks.append(track)
+                print(tracks)
+                completion(.success(()))
+            case .failure(let error):
+                completion(.failure(error))
             }
-            return AVPlayerItem(url: url)
-        })
-        self.playerQueue?.volume = 1.0
-        self.playerQueue?.play()
+        }
+    }
+    
+    func startPlayback() {
+        guard let url = URL(string: tracks[currentTrackIndex].audio[0].url) else { return }
+        self.player = AVPlayer(url: url)
+        self.player?.automaticallyWaitsToMinimizeStalling = true
+        self.player?.volume = 1.0
+        self.player?.play()
+    }
+    
+    private func addTracksToQueue(tracks: [Audio]) {        
+        tracks.forEach { audio in
+            guard let url = URL(string: audio.url) else { return }
+            self.playerItems.append(AVPlayerItem(url: url))
+        }
     }
     
     func didSlideSlider(toTime time: Double) {
-        player?.seek(to: .init(seconds: time / 1000, preferredTimescale: 1))
+        self.player?.seek(to: .init(seconds: time / 1000, preferredTimescale: 1))
+    }
+    
+    func didTapForward(completion: @escaping () -> ()) {
+        if let _ = player {
+            if isLastTrack {
+                currentTrackIndex = 0
+            } else {
+                currentTrackIndex += 1;
+            }
+            completion()
+            playTrack()
+        }
+    }
+    
+    func didTapBackward(completion: @escaping () -> ()) {
+        if let _ = player {
+            if isFirstTrack {
+                currentTrackIndex = 0
+            } else {
+                currentTrackIndex -= 1
+            }
+            completion()
+            playTrack()
+        }
+    }
+    
+    func playTrack() {
+        if let player = player, playerItems.count > 0 {
+            player.replaceCurrentItem(with: playerItems[currentTrackIndex])
+            player.play()
+        }
     }
     
     func togglePlayPauseState() {
         if let player = player {
-            player.timeControlStatus == .playing ? player.pause() : player.play()
-        } else if let player = playerQueue {
             player.timeControlStatus == .playing ? player.pause() : player.play()
         }
     }

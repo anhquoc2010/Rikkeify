@@ -8,5 +8,6 @@
 import Foundation
 
 protocol TrackRepository {
-    func getTrackMetadata(trackId: String, completion: @escaping (Result<Track, NetworkError>) -> Void)
+    func getTrackMetadata(trackId: String, getAudio: Bool, completion: @escaping (Result<Track, NetworkError>) -> Void)
+    func getRecommendTracks(seedTrackId: String, completion: @escaping (Result<[RecommendTrack], NetworkError>) -> Void)
 }
