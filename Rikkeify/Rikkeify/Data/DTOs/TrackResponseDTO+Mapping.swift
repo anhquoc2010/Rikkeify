@@ -41,45 +41,37 @@ struct TrackResponseDTO: Decodable {
     }
 }
 
-extension TrackResponseDTO {
-    struct ArtistDTO: Decodable {
-        let type: String
-        let id: String
-        let name: String
-        let shareUrl: String
-        let visuals: VisualDTO
-    }
-    
-    struct AlbumDTO: Decodable {
-        let type: String
-        let id: String
-        let name: String
-        let shareUrl: String
-        let cover: [CoverDTO]
-        let trackCount: Int
-    }
+struct ArtistDTO: Decodable {
+    let type: String
+    let id: String
+    let name: String
+    let shareUrl: String
+    let visuals: VisualDTO
 }
 
-extension TrackResponseDTO.ArtistDTO {
-    struct VisualDTO: Decodable {
-        let avatar: [AvatarDTO]
-    }
+struct AlbumDTO: Decodable {
+    let type: String
+    let id: String
+    let name: String
+    let shareUrl: String
+    let cover: [CoverDTO]
+    let trackCount: Int
 }
 
-extension TrackResponseDTO.ArtistDTO.VisualDTO {
-    struct AvatarDTO: Decodable {
-        let width: Int
-        let height: Int
-        let url: String
-    }
+struct VisualDTO: Decodable {
+    let avatar: [AvatarDTO]
 }
 
-extension TrackResponseDTO.AlbumDTO {
-    struct CoverDTO: Decodable {
-        let url: String
-        let width: Int
-        let height: Int
-    }
+struct AvatarDTO: Decodable {
+    let width: Int
+    let height: Int
+    let url: String
+}
+
+struct CoverDTO: Decodable {
+    let url: String
+    let width: Int
+    let height: Int
 }
 
 // MARK: - Mappings to Domain
@@ -102,31 +94,31 @@ extension TrackResponseDTO {
     }
 }
 
-extension TrackResponseDTO.ArtistDTO {
+extension ArtistDTO {
     func toDomain() -> Artist {
         return .init(id: id, name: name, visuals: visuals.toDomain())
     }
 }
 
-extension TrackResponseDTO.ArtistDTO.VisualDTO {
+extension VisualDTO {
     func toDomain() -> Visual {
         return .init(avatar: avatar.map { $0.toDomain() })
     }
 }
 
-extension TrackResponseDTO.ArtistDTO.VisualDTO.AvatarDTO {
+extension AvatarDTO {
     func toDomain() -> Avatar {
         return .init(url: url, width: width, height: height)
     }
 }
 
-extension TrackResponseDTO.AlbumDTO {
+extension AlbumDTO {
     func toDomain() -> Album {
         return .init(id: id, name: name, shareUrl: shareUrl, cover: cover.map { $0.toDomain() })
     }
 }
 
-extension TrackResponseDTO.AlbumDTO.CoverDTO {
+extension CoverDTO {
     func toDomain() -> Cover {
         return .init(url: url, width: width, height: height)
     }

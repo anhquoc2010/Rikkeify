@@ -12,6 +12,7 @@ enum AppEndpoint {
     case getTrackLyrics(trackId: String)
     case getTrackAudio(trackName: String)
     case getRecommendTracks(seedTrackId: String)
+    case getSections
 }
 
 extension AppEndpoint: EndPoint {
@@ -39,6 +40,8 @@ extension AppEndpoint: EndPoint {
             return "\(prefix)/track/download/soundcloud"
         case .getRecommendTracks:
             return "/recommendations/"
+        case .getSections:
+            return "\(prefix)/home"
         }
     }
     
@@ -58,7 +61,7 @@ extension AppEndpoint: EndPoint {
             ]
         default:
             return [
-                "X-RapidAPI-Key": "9f204def71msh9de67e98f8d323cp173c04jsnc1af62f75a25",
+                "X-RapidAPI-Key": "afaca2579dmsh1fcf68f80862231p175e2fjsn2a17e3665d6b",
                 "X-RapidAPI-Host": "spotify-scraper.p.rapidapi.com"
             ]
         }
@@ -81,6 +84,8 @@ extension AppEndpoint: EndPoint {
                 "limit": "5",
                 "seed_tracks": seedTrackId
             ]
+        default:
+            return nil
         }
     }
     

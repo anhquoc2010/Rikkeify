@@ -22,7 +22,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 extension AppDelegate {
     private func setupWindow() {
         window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = TrackViewVC(trackId: "6YndJvp5XpMuzmtWLWI8hp")
+//        window?.rootViewController = TrackViewVC(trackId: "6YndJvp5XpMuzmtWLWI8hp")
+        window?.rootViewController = HomeVC()
         window?.makeKeyAndVisible()
     }
     

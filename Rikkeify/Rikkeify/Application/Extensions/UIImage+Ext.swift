@@ -8,7 +8,7 @@
 import UIKit
 
 extension UIImageView {
-    func setImage(from urlString: String) {
+    func setNetworkImage(urlString: String) {
         // Check if the URL is valid
         guard let imageUrl = URL(string: urlString) else {
             print("Invalid URL")

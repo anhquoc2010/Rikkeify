@@ -310,7 +310,7 @@ extension TrackViewVC {
         let currentTrack = viewModel.tracks[viewModel.currentTrackIndex]
         print("===========================\n\(currentTrack)\n=========================")
         self.titleLabel.text = currentTrack.album.name
-        self.thumbnailImageView.setImage(from: currentTrack.album.cover[0].url)
+        self.thumbnailImageView.setNetworkImage(urlString: currentTrack.album.cover[0].url)
         self.trackNameLabel.text = currentTrack.name
         self.authorNameLabel.text = currentTrack.artists[0].name
         self.trackProgressSlider.maximumValue = Float(currentTrack.durationMs)
