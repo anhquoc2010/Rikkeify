@@ -14,10 +14,9 @@ enum LoopState {
 class TrackViewVM {
     @Inject
     private var trackRepository: TrackRepository
-    private var trackId: String
     
     var tracks = [Track]()
-    var recommendTracks = [RecommendTrack]()
+//    var recommendTracks = [RecommendTrack]()
     
     var currentTrackIndex = 0
     
@@ -39,16 +38,16 @@ class TrackViewVM {
     var isLiked = false
     var isShuffled = false
     
-    init(trackId: String) {
-        self.trackId = trackId
+    init(tracks: [Track]) {
+        self.tracks = tracks
     }
     
-    func fetchTrackMetadata(completion: @escaping (Result<Void, NetworkError>) -> Void) {
-        trackRepository.getTrackMetadata(trackId: currentTrackIndex == 0 ? trackId : tracks[currentTrackIndex].id, getAudio: true) { [weak self] (result: Result<Track, NetworkError>) in
+    func fetchTrackMetadata(index: Int, completion: @escaping (Result<Void, NetworkError>) -> Void) {
+        trackRepository.getTrackMetadata(trackId: tracks[index].id, getAudio: true) { [weak self] (result: Result<Track, NetworkError>) in
             guard let self = self else { return }
             switch result {
             case .success(let track):
-                self.tracks.append(track)
+                self.tracks[index] = track
                 guard let url = URL(string: track.audio[0].url) else { return }
                 self.playerItems.append(AVPlayerItem(url: url))
                 completion(.success(()))
@@ -58,48 +57,48 @@ class TrackViewVM {
         }
     }
     
-    func fetchRecommendTracks(completion: @escaping (Result<Void, NetworkError>) -> Void) {
-        trackRepository.getRecommendTracks(seedTrackId: currentTrackIndex == 0 ? trackId : tracks[currentTrackIndex].id) { [weak self] (result: Result<[RecommendTrack], NetworkError>) in
-            guard let self = self else { return }
-            switch result {
-            case .success(let recommendTracks):
-                self.recommendTracks = recommendTracks
-                let newTracks = recommendTracks.map { $0.audio[0] }
-                self.addTracksToQueue(tracks: newTracks)
-                checkplayerItems()
-                completion(.success(()))
-            case .failure(let error):
-                completion(.failure(error))
-            }
-        }
-        
-        func checkplayerItems() {
-            guard let _ = self.player else {
-                print("Player is not initialized.")
-                return
-            }
-            print("Items in player queue:")
-            for index in 0..<playerItems.count {
-                let item = playerItems[index]
-                print("Item \(index + 1): \(item.asset)")
-            }
-        }
-    }
+//    func fetchRecommendTracks(completion: @escaping (Result<Void, NetworkError>) -> Void) {
+//        trackRepository.getRecommendTracks(seedTrackId: tracks[currentTrackIndex].id) { [weak self] (result: Result<[RecommendTrack], NetworkError>) in
+//            guard let self = self else { return }
+//            switch result {
+//            case .success(let recommendTracks):
+//                self.recommendTracks = recommendTracks
+//                let newTracks = recommendTracks.map { $0.audio[0] }
+//                self.addTracksToQueue(tracks: newTracks)
+//                checkplayerItems()
+//                completion(.success(()))
+//            case .failure(let error):
+//                completion(.failure(error))
+//            }
+//        }
+//        
+//        func checkplayerItems() {
+//            guard let _ = self.player else {
+//                print("Player is not initialized.")
+//                return
+//            }
+//            print("Items in player queue:")
+//            for index in 0..<playerItems.count {
+//                let item = playerItems[index]
+//                print("Item \(index + 1): \(item.asset)")
+//            }
+//        }
+//    }
     
-    func preFetchNextTrackMetadata(completion: @escaping (Result<Void, NetworkError>) -> Void) {
-        trackRepository.getTrackMetadata(trackId: recommendTracks[currentTrackIndex <= recommendTracks.count ? currentTrackIndex : currentTrackIndex - (5 * (tracks.count / 5))].id, getAudio: false) { [weak self] (result: Result<Track, NetworkError>) in
-            guard let self = self else { return }
-            switch result {
-            case .success(var track):
-                track.audio = recommendTracks[0].audio
-                self.tracks.append(track)
-                print(tracks)
-                completion(.success(()))
-            case .failure(let error):
-                completion(.failure(error))
-            }
-        }
-    }
+//    func preFetchNextTrackMetadata(completion: @escaping (Result<Void, NetworkError>) -> Void) {
+//        trackRepository.getTrackMetadata(trackId: recommendTracks[currentTrackIndex <= recommendTracks.count ? currentTrackIndex : currentTrackIndex - (5 * (tracks.count / 5))].id, getAudio: true) { [weak self] (result: Result<Track, NetworkError>) in
+//            guard let self = self else { return }
+//            switch result {
+//            case .success(var track):
+//                track.audio = recommendTracks[0].audio
+//                self.tracks.append(track)
+//                print(tracks)
+//                completion(.success(()))
+//            case .failure(let error):
+//                completion(.failure(error))
+//            }
+//        }
+//    }
     
     func startPlayback() {
         guard let url = URL(string: tracks[currentTrackIndex].audio[0].url) else { return }
@@ -147,6 +146,7 @@ class TrackViewVM {
     func playTrack() {
         if let player = player, playerItems.count > 0 {
             player.replaceCurrentItem(with: playerItems[currentTrackIndex])
+            player.seek(to: .init(seconds: 0, preferredTimescale: 1))
             player.play()
         }
     }

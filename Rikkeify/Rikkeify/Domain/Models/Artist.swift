@@ -10,5 +10,5 @@ import Foundation
 struct Artist {
     let id: String
     let name: String
-    let visuals: Visual
+    let visuals: Visual?
 }

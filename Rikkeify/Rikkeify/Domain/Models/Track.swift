@@ -13,10 +13,10 @@ struct Track {
     let shareUrl: String
     let durationMs: Int64
     let durationText: String
-    let trackNumber: Int
+    let trackNumber: Int?
     let playCount: Int64
     let artists: [Artist]
-    let album: Album
+    let album: Album?
     let lyrics: [Lyric]
     var audio: [Audio]
 }

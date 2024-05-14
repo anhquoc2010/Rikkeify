@@ -10,8 +10,9 @@ import Foundation
 struct SectionContent {
     let type: String
     let id: String
-    let name: String
+    var name: String
     let visuals: Visual?
-    let cover: [Cover]?
+    var cover: [Cover]?
     let images: [Image]?
+    var tracks: [Track]?
 }

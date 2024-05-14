@@ -9,6 +9,7 @@ import Foundation
 
 protocol SectionRemoteDataSource {
     func getSections(completion: @escaping (Result<[Section], NetworkError>) -> Void)
+    func getSectionContents(type: String, id: String, completion: @escaping (Result<SectionContent, NetworkError>) -> Void)
 }
 
 final class SectionRemoteDataSourceImp {
@@ -17,6 +18,17 @@ final class SectionRemoteDataSourceImp {
 }
 
 extension SectionRemoteDataSourceImp: SectionRemoteDataSource {
+    func getSectionContents(type: String, id: String, completion: @escaping (Result<SectionContent, NetworkError>) -> Void) {
+        networkService.sendRequest(endpoint: AppEndpoint.getSectionContent(type: type, id: id)) { (result: Result<SectionContentResponseDTO, NetworkError>) in
+            switch result {
+            case .success(let sectionContentResponseDTO):
+                completion(.success(sectionContentResponseDTO.toDomain()))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+    
     func getSections(completion: @escaping (Result<[Section], NetworkError>) -> Void) {
         networkService.sendRequest(endpoint: AppEndpoint.getSections) { (result: Result<SectionResponseDTO, NetworkError>) in
             switch result {

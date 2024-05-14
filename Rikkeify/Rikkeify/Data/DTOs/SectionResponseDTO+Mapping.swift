@@ -35,18 +35,33 @@ extension SectionResponseDTO.SectionsDTO {
 extension SectionResponseDTO.SectionsDTO.SectionDTO {
     struct SectionContentsDTO: Decodable {
         let totalCount: Int
-        var items: [SectionContentDTO]
+        var items: [SectionContentResponseDTO]
     }
 }
 
-extension SectionResponseDTO.SectionsDTO.SectionDTO.SectionContentsDTO {
-    struct SectionContentDTO: Decodable {
-        let type: String
-        let id: String
-        let name: String
-        let visuals: VisualDTO?
-        let cover: [CoverDTO]?
-        let images: [[ImageDTO]]?
+struct SectionContentResponseDTO: Decodable {
+    let type: String?
+    let id: String?
+    let name: String?
+    let visuals: VisualDTO?
+    let cover: [CoverDTO]?
+    let images: [[ImageDTO]]?
+    let contents: TrackListDTO?
+    let tracks: TrackAlbumDTO?
+    let discography: DiscographyDTO?
+}
+
+extension SectionContentResponseDTO {
+    struct TrackListDTO: Decodable {
+        let items: [TrackResponseDTO]
+    }
+    
+    struct DiscographyDTO: Decodable {
+        let topTracks: [TrackResponseDTO]
+    }
+    
+    struct TrackAlbumDTO: Decodable {
+        let items: [TrackResponseDTO]
     }
 }
 
@@ -70,14 +85,17 @@ extension SectionResponseDTO.SectionsDTO.SectionDTO {
     }
 }
 
-extension SectionResponseDTO.SectionsDTO.SectionDTO.SectionContentsDTO.SectionContentDTO {
+extension SectionContentResponseDTO {
     func toDomain() -> SectionContent {
-        return .init(type: type,
-                     id: id,
-                     name: name,
+        return .init(type: type ?? "",
+                     id: id ?? "",
+                     name: name ?? "",
                      visuals: visuals?.toDomain(),
                      cover: cover?.map { $0.toDomain() },
-                     images: images?[0].map { $0.toDomain() }
+                     images: images?[0].map { $0.toDomain() },
+                     tracks: contents?.items.map { $0.toDomain() }
+                     ?? tracks?.items.map { $0.toDomain() }
+                     ?? discography?.topTracks.map { $0.toDomain() }
         )
     }
 }

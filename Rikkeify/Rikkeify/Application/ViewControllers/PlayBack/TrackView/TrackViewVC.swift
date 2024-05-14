@@ -11,7 +11,7 @@ import SkeletonView
 class TrackViewVC: UIViewController {
     // MARK: Outlets
     
-    @IBOutlet weak var forwardButton: UIButton!
+    @IBOutlet private weak var forwardButton: UIButton!
     @IBOutlet private weak var backwardButton: UIButton!
     @IBOutlet private weak var playPauseButton: UIButton!
     @IBOutlet private weak var lyricsTableView: UITableView!
@@ -30,8 +30,8 @@ class TrackViewVC: UIViewController {
     private var viewModel: TrackViewVM
     
     // MARK: Lifecycle
-    init(trackId: String) {
-        viewModel = TrackViewVM(trackId: trackId)
+    init(tracks: [Track]) {
+        viewModel = TrackViewVM(tracks: tracks)
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -169,10 +169,10 @@ extension TrackViewVC {
     private func bindViewModel() {
         if viewModel.isFirstLoad {
             bindViewModelFirstLoad()
-        } else if viewModel.currentTrackIndex == viewModel.tracks.count - 1 {
+        } else if viewModel.currentTrackIndex == viewModel.playerItems.count - 1 {
             bindViewModelLastReadyItem()
-        } else if viewModel.currentTrackIndex == viewModel.recommendTracks.count {
-            bindViewModelLastRecommendItem()
+//        } else if viewModel.currentTrackIndex == viewModel.recommendTracks.count {
+//            bindViewModelLastRecommendItem()
         } else {
             bindViewModelNormal()
         }
@@ -183,12 +183,12 @@ extension TrackViewVC {
             if self.viewModel.isFirstLoad || self.viewModel.isFirstTrack {
                 self.backwardButton.isEnabled = false
                 self.forwardButton.isEnabled = true
-            } else if self.viewModel.currentTrackIndex == self.viewModel.tracks.count - 1 {
+            } else if self.viewModel.currentTrackIndex == self.viewModel.playerItems.count - 1 {
                 self.backwardButton.isEnabled = true
                 self.forwardButton.isEnabled = false
-            } else if self.viewModel.currentTrackIndex == self.viewModel.recommendTracks.count {
-                self.backwardButton.isEnabled = true
-                self.forwardButton.isEnabled = false
+//            } else if self.viewModel.currentTrackIndex == self.viewModel.recommendTracks.count {
+//                self.backwardButton.isEnabled = true
+//                self.forwardButton.isEnabled = false
             } else {
                 self.backwardButton.isEnabled = true
                 self.forwardButton.isEnabled = true
@@ -196,38 +196,38 @@ extension TrackViewVC {
         }
     }
     
-    private func bindViewModelLastRecommendItem() {
-        viewModel.fetchRecommendTracks { [weak self] result in
-            guard let self = self else { return }
-            switch result {
-            case .success:
-                DispatchQueue.main.async {
-                    self.backwardButton.isEnabled = !self.viewModel.isFirstTrack
-                }
-                viewModel.preFetchNextTrackMetadata { [weak self] result in
-                    guard let self = self else { return }
-                    switch result {
-                    case .success:
-                        DispatchQueue.main.async {
-                            self.forwardButton.isEnabled = !self.viewModel.isLastTrack
-                        }
-                    case .failure:
-                        DispatchQueue.main.async {
-                            self.forwardButton.isEnabled = false
-                        }
-                    }
-                }
-            case .failure:
-                DispatchQueue.main.async {
-                    self.backwardButton.isEnabled = false
-                }
-            }
-        }
-        bindViewModelNormal()
-    }
+//    private func bindViewModelLastRecommendItem() {
+//        viewModel.fetchRecommendTracks { [weak self] result in
+//            guard let self = self else { return }
+//            switch result {
+//            case .success:
+//                DispatchQueue.main.async {
+//                    self.backwardButton.isEnabled = !self.viewModel.isFirstTrack
+//                }
+//                viewModel.preFetchNextTrackMetadata { [weak self] result in
+//                    guard let self = self else { return }
+//                    switch result {
+//                    case .success:
+//                        DispatchQueue.main.async {
+//                            self.forwardButton.isEnabled = !self.viewModel.isLastTrack
+//                        }
+//                    case .failure:
+//                        DispatchQueue.main.async {
+//                            self.forwardButton.isEnabled = false
+//                        }
+//                    }
+//                }
+//            case .failure:
+//                DispatchQueue.main.async {
+//                    self.backwardButton.isEnabled = false
+//                }
+//            }
+//        }
+//        bindViewModelNormal()
+//    }
     
     private func bindViewModelLastReadyItem() {
-        viewModel.preFetchNextTrackMetadata { [weak self] result in
+        viewModel.fetchTrackMetadata(index: viewModel.currentTrackIndex + 1) { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .success:
@@ -244,37 +244,54 @@ extension TrackViewVC {
     }
     
     private func bindViewModelFirstLoad() {
-        viewModel.fetchTrackMetadata { [weak self] result in
+        viewModel.fetchTrackMetadata(index: viewModel.currentTrackIndex) { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .success:
                 viewModel.isFirstLoad = false
-                viewModel.fetchRecommendTracks { [weak self] result in
+                DispatchQueue.main.async {
+                    self.backwardButton.isEnabled = !self.viewModel.isFirstTrack
+                }
+                
+                viewModel.fetchTrackMetadata(index: viewModel.currentTrackIndex + 1) { [weak self] result in
                     guard let self = self else { return }
                     switch result {
                     case .success:
                         DispatchQueue.main.async {
-                            self.backwardButton.isEnabled = !self.viewModel.isFirstTrack
-                        }
-                        viewModel.preFetchNextTrackMetadata { [weak self] result in
-                            guard let self = self else { return }
-                            switch result {
-                            case .success:
-                                DispatchQueue.main.async {
-                                    self.forwardButton.isEnabled = !self.viewModel.isLastTrack
-                                }
-                            case .failure:
-                                DispatchQueue.main.async {
-                                    self.forwardButton.isEnabled = false
-                                }
-                            }
+                            self.forwardButton.isEnabled = !self.viewModel.isLastTrack
                         }
                     case .failure:
                         DispatchQueue.main.async {
-                            self.backwardButton.isEnabled = false
+                            self.forwardButton.isEnabled = false
                         }
                     }
                 }
+//                viewModel.fetchRecommendTracks { [weak self] result in
+//                    guard let self = self else { return }
+//                    switch result {
+//                    case .success:
+//                        DispatchQueue.main.async {
+//                            self.backwardButton.isEnabled = !self.viewModel.isFirstTrack
+//                        }
+//                        viewModel.preFetchNextTrackMetadata { [weak self] result in
+//                            guard let self = self else { return }
+//                            switch result {
+//                            case .success:
+//                                DispatchQueue.main.async {
+//                                    self.forwardButton.isEnabled = !self.viewModel.isLastTrack
+//                                }
+//                            case .failure:
+//                                DispatchQueue.main.async {
+//                                    self.forwardButton.isEnabled = false
+//                                }
+//                            }
+//                        }
+//                    case .failure:
+//                        DispatchQueue.main.async {
+//                            self.backwardButton.isEnabled = false
+//                        }
+//                    }
+//                }
                 
                 bindViewModelNormal()
                 
@@ -309,8 +326,8 @@ extension TrackViewVC {
         
         let currentTrack = viewModel.tracks[viewModel.currentTrackIndex]
         print("===========================\n\(currentTrack)\n=========================")
-        self.titleLabel.text = currentTrack.album.name
-        self.thumbnailImageView.setNetworkImage(urlString: currentTrack.album.cover[0].url)
+        self.titleLabel.text = currentTrack.album?.name ?? ""
+        self.thumbnailImageView.setNetworkImage(urlString: currentTrack.album?.cover[0].url ?? "")
         self.trackNameLabel.text = currentTrack.name
         self.authorNameLabel.text = currentTrack.artists[0].name
         self.trackProgressSlider.maximumValue = Float(currentTrack.durationMs)

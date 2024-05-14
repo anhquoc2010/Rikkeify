@@ -8,7 +8,7 @@
 import Foundation
 
 struct Cover {
-    let url: String
+    var url: String
     let width: Int
     let height: Int
 }

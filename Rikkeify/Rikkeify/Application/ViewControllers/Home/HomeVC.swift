@@ -121,6 +121,11 @@ extension HomeVC: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return .init(width: kWidthForCollectionViewCell, height: kHeightForCollectionViewCell)
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print("prePush: \(TrackListVC(sectionContent: viewModel.sections[collectionView.tag].contents[indexPath.item]))")
+        self.navigationController?.pushViewController(TrackListVC(sectionContent: viewModel.sections[collectionView.tag].contents[indexPath.item]), animated: true)
+    }
 }
 
 // MARK: Custom Functions

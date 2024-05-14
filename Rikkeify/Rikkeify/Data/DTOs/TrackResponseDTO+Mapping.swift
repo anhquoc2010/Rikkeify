@@ -8,17 +8,17 @@
 import Foundation
 
 struct TrackResponseDTO: Decodable {
-    let status: Bool
-    let type: String
+    let status: Bool?
+    let type: String?
     let id: String
     let name: String
     let shareUrl: String
     let durationMs: Int64
     let durationText: String
-    let trackNumber: Int
+    let trackNumber: Int?
     let playCount: Int64
     let artists: [ArtistDTO]
-    let album: AlbumDTO
+    let album: AlbumDTO?
     var lyrics: [LyricsResponseDTO]?
     var audio: AudioTypeResponseDTO?
 //    var recommendTracks: [RecommendTrackResponseDTO]?
@@ -46,16 +46,16 @@ struct ArtistDTO: Decodable {
     let id: String
     let name: String
     let shareUrl: String
-    let visuals: VisualDTO
+    let visuals: VisualDTO?
 }
 
 struct AlbumDTO: Decodable {
     let type: String
     let id: String
-    let name: String
+    let name: String?
     let shareUrl: String
     let cover: [CoverDTO]
-    let trackCount: Int
+    let trackCount: Int?
 }
 
 struct VisualDTO: Decodable {
@@ -70,8 +70,8 @@ struct AvatarDTO: Decodable {
 
 struct CoverDTO: Decodable {
     let url: String
-    let width: Int
-    let height: Int
+    let width: Int?
+    let height: Int?
 }
 
 // MARK: - Mappings to Domain
@@ -86,7 +86,7 @@ extension TrackResponseDTO {
                      trackNumber: trackNumber,
                      playCount: playCount,
                      artists: artists.map { $0.toDomain() },
-                     album: album.toDomain(),
+                     album: album?.toDomain(),
                      lyrics: lyrics?.map { $0.toDomain() } ?? [],
                      audio: audio?.soundcloudTrack.audio.map { $0.toDomain() } ?? []
 //                     recommendTracks: recommendTracks?.map { $0.toDomain() } ?? []
@@ -96,7 +96,7 @@ extension TrackResponseDTO {
 
 extension ArtistDTO {
     func toDomain() -> Artist {
-        return .init(id: id, name: name, visuals: visuals.toDomain())
+        return .init(id: id, name: name, visuals: visuals?.toDomain())
     }
 }
 
@@ -114,12 +114,12 @@ extension AvatarDTO {
 
 extension AlbumDTO {
     func toDomain() -> Album {
-        return .init(id: id, name: name, shareUrl: shareUrl, cover: cover.map { $0.toDomain() })
+        return .init(id: id, name: name ?? "", shareUrl: shareUrl, cover: cover.map { $0.toDomain() })
     }
 }
 
 extension CoverDTO {
     func toDomain() -> Cover {
-        return .init(url: url, width: width, height: height)
+        return .init(url: url, width: width ?? 0, height: height ?? 0)
     }
 }

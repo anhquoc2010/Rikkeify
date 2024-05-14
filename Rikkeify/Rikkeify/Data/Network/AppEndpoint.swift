@@ -13,6 +13,7 @@ enum AppEndpoint {
     case getTrackAudio(trackName: String)
     case getRecommendTracks(seedTrackId: String)
     case getSections
+    case getSectionContent(type: String, id: String)
 }
 
 extension AppEndpoint: EndPoint {
@@ -42,6 +43,17 @@ extension AppEndpoint: EndPoint {
             return "/recommendations/"
         case .getSections:
             return "\(prefix)/home"
+        case .getSectionContent(let type, _):
+            switch type {
+            case ItemType.album.rawValue:
+                return "\(prefix)/album/tracks"
+            case ItemType.playlist.rawValue:
+                return "\(prefix)/playlist/contents"
+            case ItemType.artist.rawValue:
+                return "\(prefix)/artist/overview"
+            default:
+                return ""
+            }
         }
     }
     
@@ -61,7 +73,7 @@ extension AppEndpoint: EndPoint {
             ]
         default:
             return [
-                "X-RapidAPI-Key": "afaca2579dmsh1fcf68f80862231p175e2fjsn2a17e3665d6b",
+                "X-RapidAPI-Key": "c22397deb1msh37995606e335294p133751jsnf2be16da76a1",
                 "X-RapidAPI-Host": "spotify-scraper.p.rapidapi.com"
             ]
         }
@@ -84,6 +96,23 @@ extension AppEndpoint: EndPoint {
                 "limit": "5",
                 "seed_tracks": seedTrackId
             ]
+        case .getSectionContent(let type, let id):
+            switch type {
+            case ItemType.album.rawValue:
+                return [
+                    "albumId": id
+                ]
+            case ItemType.playlist.rawValue:
+                return [
+                    "playlistId": id
+                ]
+            case ItemType.artist.rawValue:
+                return [
+                    "artistId": id
+                ]
+            default:
+                return nil
+            }
         default:
             return nil
         }

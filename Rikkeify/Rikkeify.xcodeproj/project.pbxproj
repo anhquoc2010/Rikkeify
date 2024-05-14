@@ -74,6 +74,11 @@
 		FA75A8892BE94A5A00FEB35F /* TrackViewVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA75A8882BE94A5A00FEB35F /* TrackViewVM.swift */; };
 		FAAF97132BF2FC1500A7A44A /* HomeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FAAF97122BF2FC1500A7A44A /* HomeTableViewCell.xib */; };
 		FAAF97142BF2FC1500A7A44A /* HomeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAAF97112BF2FC1500A7A44A /* HomeTableViewCell.swift */; };
+		FAAF971A2BF3119900A7A44A /* TrackListVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = FAAF97192BF3119900A7A44A /* TrackListVC.xib */; };
+		FAAF971B2BF3119A00A7A44A /* TrackListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAAF97182BF3119900A7A44A /* TrackListVC.swift */; };
+		FAAF971F2BF3184300A7A44A /* TrackListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FAAF971E2BF3184300A7A44A /* TrackListTableViewCell.xib */; };
+		FAAF97202BF3184300A7A44A /* TrackListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAAF971D2BF3184300A7A44A /* TrackListTableViewCell.swift */; };
+		FAAF97242BF320BB00A7A44A /* TrackListVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAAF97232BF320BB00A7A44A /* TrackListVM.swift */; };
 		FE7FFE763D25E9A763827863 /* Pods_Rikkeify.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C075338B426EBFDD8C672E9 /* Pods_Rikkeify.framework */; };
 /* End PBXBuildFile section */
 
@@ -169,6 +174,11 @@
 		FA75A8882BE94A5A00FEB35F /* TrackViewVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackViewVM.swift; sourceTree = "<group>"; };
 		FAAF97112BF2FC1500A7A44A /* HomeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableViewCell.swift; sourceTree = "<group>"; };
 		FAAF97122BF2FC1500A7A44A /* HomeTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeTableViewCell.xib; sourceTree = "<group>"; };
+		FAAF97182BF3119900A7A44A /* TrackListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackListVC.swift; sourceTree = "<group>"; };
+		FAAF97192BF3119900A7A44A /* TrackListVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TrackListVC.xib; sourceTree = "<group>"; };
+		FAAF971D2BF3184300A7A44A /* TrackListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackListTableViewCell.swift; sourceTree = "<group>"; };
+		FAAF971E2BF3184300A7A44A /* TrackListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TrackListTableViewCell.xib; sourceTree = "<group>"; };
+		FAAF97232BF320BB00A7A44A /* TrackListVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackListVM.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -270,7 +280,8 @@
 			isa = PBXGroup;
 			children = (
 				841B432C2BE87AC800D1B490 /* LaunchScreen.storyboard */,
-				FA0CB6A72BF1AEB9001EA4C3 /* HomeVC */,
+				FA0CB6A72BF1AEB9001EA4C3 /* Home */,
+				FAAF97172BF3116500A7A44A /* TrackList */,
 				841B43682BE88E5800D1B490 /* PlayBack */,
 			);
 			path = ViewControllers;
@@ -299,21 +310,21 @@
 			isa = PBXGroup;
 			children = (
 				84F771A12BEA096B006379BB /* Cell */,
-				841B43692BE88E6100D1B490 /* TrackViewVC */,
-				84F7718B2BE9D8D2006379BB /* LyricViewVC */,
-				84E8F12B2BE8E01100A59879 /* TrackOptionVC */,
+				841B43692BE88E6100D1B490 /* TrackView */,
+				84F7718B2BE9D8D2006379BB /* LyricView */,
+				84E8F12B2BE8E01100A59879 /* TrackOption */,
 			);
 			path = PlayBack;
 			sourceTree = "<group>";
 		};
-		841B43692BE88E6100D1B490 /* TrackViewVC */ = {
+		841B43692BE88E6100D1B490 /* TrackView */ = {
 			isa = PBXGroup;
 			children = (
 				FA75A8882BE94A5A00FEB35F /* TrackViewVM.swift */,
 				841B436A2BE8965B00D1B490 /* TrackViewVC.swift */,
 				841B436B2BE8965B00D1B490 /* TrackViewVC.xib */,
 			);
-			path = TrackViewVC;
+			path = TrackView;
 			sourceTree = "<group>";
 		};
 		84C5610C2BEB18BD00948ECA /* RepositoriesInterfaces */ = {
@@ -423,7 +434,7 @@
 			path = DI;
 			sourceTree = "<group>";
 		};
-		84E8F12B2BE8E01100A59879 /* TrackOptionVC */ = {
+		84E8F12B2BE8E01100A59879 /* TrackOption */ = {
 			isa = PBXGroup;
 			children = (
 				84E8F1302BE8E51F00A59879 /* Cell */,
@@ -431,7 +442,7 @@
 				84E8F12C2BE8E02900A59879 /* TrackOptionVC.swift */,
 				84E8F12D2BE8E02900A59879 /* TrackOptionVC.xib */,
 			);
-			path = TrackOptionVC;
+			path = TrackOption;
 			sourceTree = "<group>";
 		};
 		84E8F1302BE8E51F00A59879 /* Cell */ = {
@@ -451,14 +462,14 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		84F7718B2BE9D8D2006379BB /* LyricViewVC */ = {
+		84F7718B2BE9D8D2006379BB /* LyricView */ = {
 			isa = PBXGroup;
 			children = (
 				84F771A62BEA1115006379BB /* LyricViewVM.swift */,
 				84F7718E2BE9DD28006379BB /* LyricViewVC.swift */,
 				84F7718F2BE9DD28006379BB /* LyricViewVC.xib */,
 			);
-			path = LyricViewVC;
+			path = LyricView;
 			sourceTree = "<group>";
 		};
 		84F7719E2BEA0674006379BB /* Extensions */ = {
@@ -505,7 +516,7 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
-		FA0CB6A72BF1AEB9001EA4C3 /* HomeVC */ = {
+		FA0CB6A72BF1AEB9001EA4C3 /* Home */ = {
 			isa = PBXGroup;
 			children = (
 				FA0CB6A42BF1AEB9001EA4C3 /* Cell */,
@@ -513,7 +524,7 @@
 				FA0CB6A52BF1AEB9001EA4C3 /* HomeVC.swift */,
 				FA0CB6A62BF1AEB9001EA4C3 /* HomeVC.xib */,
 			);
-			path = HomeVC;
+			path = Home;
 			sourceTree = "<group>";
 		};
 		FA0CB6CA2BF21C80001EA4C3 /* HomeTableHeaderViewCell */ = {
@@ -563,6 +574,26 @@
 				FAAF97122BF2FC1500A7A44A /* HomeTableViewCell.xib */,
 			);
 			path = HomeTableViewCell;
+			sourceTree = "<group>";
+		};
+		FAAF97172BF3116500A7A44A /* TrackList */ = {
+			isa = PBXGroup;
+			children = (
+				FAAF971C2BF3180700A7A44A /* Cell */,
+				FAAF97232BF320BB00A7A44A /* TrackListVM.swift */,
+				FAAF97182BF3119900A7A44A /* TrackListVC.swift */,
+				FAAF97192BF3119900A7A44A /* TrackListVC.xib */,
+			);
+			path = TrackList;
+			sourceTree = "<group>";
+		};
+		FAAF971C2BF3180700A7A44A /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				FAAF971D2BF3184300A7A44A /* TrackListTableViewCell.swift */,
+				FAAF971E2BF3184300A7A44A /* TrackListTableViewCell.xib */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -678,6 +709,8 @@
 				84E8F12F2BE8E02900A59879 /* TrackOptionVC.xib in Resources */,
 				FA0CB6AF2BF1AEB9001EA4C3 /* HomeVC.xib in Resources */,
 				841B432B2BE87AC800D1B490 /* Assets.xcassets in Resources */,
+				FAAF971A2BF3119900A7A44A /* TrackListVC.xib in Resources */,
+				FAAF971F2BF3184300A7A44A /* TrackListTableViewCell.xib in Resources */,
 				84F771A42BEA0998006379BB /* TrackViewLyricTableViewCell.xib in Resources */,
 				841B432E2BE87AC800D1B490 /* Base in Resources */,
 				FA0CB6A92BF1AEB9001EA4C3 /* HomeItemCell.xib in Resources */,
@@ -782,11 +815,14 @@
 				84C561312BEB611100948ECA /* Visual.swift in Sources */,
 				84C561182BEB28AA00948ECA /* Endpoint.swift in Sources */,
 				84F7719D2BE9FEA7006379BB /* Audio.swift in Sources */,
+				FAAF97202BF3184300A7A44A /* TrackListTableViewCell.swift in Sources */,
 				84C5611C2BEB28D800948ECA /* NetworkError.swift in Sources */,
+				FAAF97242BF320BB00A7A44A /* TrackListVM.swift in Sources */,
 				FA75A8892BE94A5A00FEB35F /* TrackViewVM.swift in Sources */,
 				84C5613D2BEB6FEB00948ECA /* TrackRepositoryImp.swift in Sources */,
 				84C5611E2BEB28E300948ECA /* Networkable.swift in Sources */,
 				841B436C2BE8965B00D1B490 /* TrackViewVC.swift in Sources */,
+				FAAF971B2BF3119A00A7A44A /* TrackListVC.swift in Sources */,
 				FA0CB6BC2BF1ED62001EA4C3 /* SectionRemoteDataSource.swift in Sources */,
 				FA0CB6CE2BF21CD9001EA4C3 /* HomeTableHeaderView.swift in Sources */,
 				FA0CB6A82BF1AEB9001EA4C3 /* HomeItemCell.swift in Sources */,
