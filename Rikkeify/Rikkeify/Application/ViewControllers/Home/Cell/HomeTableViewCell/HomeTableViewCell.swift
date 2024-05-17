@@ -9,7 +9,7 @@ import UIKit
 
 class HomeTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var homeItemCollectionView: UICollectionView!
+    @IBOutlet private weak var homeItemCollectionView: UICollectionView!
     
     override func awakeFromNib() {
         super.awakeFromNib()

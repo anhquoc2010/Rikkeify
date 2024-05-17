@@ -1,20 +1,24 @@
 PODS:
+  - JGProgressHUD (2.2)
   - SkeletonView (1.30.4)
   - Swinject (2.8.6)
 
 DEPENDENCIES:
+  - JGProgressHUD
   - SkeletonView
   - Swinject
 
 SPEC REPOS:
   trunk:
+    - JGProgressHUD
     - SkeletonView
     - Swinject
 
 SPEC CHECKSUMS:
+  JGProgressHUD: d83d7a981b85d11205e19ff8ad5bb9c40571c847
   SkeletonView: 5a050f6411e697abd4cda0a8d767013399dccd69
   Swinject: 64c8eb8b138a8a5988fdf13994e3564feb820217
 
-PODFILE CHECKSUM: d3cbbfbe849a8315210a00bacbb79226b5299aa1
+PODFILE CHECKSUM: 9fc5db70933ed370531f2615e74722a31386ff8a
 
 COCOAPODS: 1.15.2

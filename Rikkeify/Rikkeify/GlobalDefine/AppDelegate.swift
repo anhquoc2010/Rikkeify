@@ -22,8 +22,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 extension AppDelegate {
     private func setupWindow() {
         window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = UINavigationController(rootViewController: HomeVC())
+        
+        let tabbarController = MainTabBarVC()
+                
+        window?.rootViewController = tabbarController
         window?.makeKeyAndVisible()
+//        navigationController.setNavigationBarHidden(true, animated: false)
     }
     
     private func setupBottomNavigation() -> UITabBarController {

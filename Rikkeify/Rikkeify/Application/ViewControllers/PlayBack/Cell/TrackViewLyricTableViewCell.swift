@@ -8,7 +8,7 @@
 import UIKit
 
 class TrackViewLyricTableViewCell: UITableViewCell {
-    @IBOutlet private weak var lyricLabel: UILabel!
+    @IBOutlet weak var lyricLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

@@ -87,9 +87,9 @@ extension TrackOptionVC {
     }
     
     private func bindViewModel() {
-        thumbnailImageView.setNetworkImage(urlString: viewModel.track.album?.cover[0].url ?? "")
+        thumbnailImageView.setNetworkImage(urlString: viewModel.track.album?.cover.first?.url ?? "")
         trackNameLabel.text = viewModel.track.name
-        trackAuthorLabel.text = viewModel.track.artists[0].name
+        trackAuthorLabel.text = viewModel.track.artists.first?.name
         
         viewModel.fetchOptions()
         optionTableView.reloadData()

@@ -10,9 +10,13 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TrackListVC" customModule="Rikkeify" customModuleProvider="target">
             <connections>
+                <outlet property="loadingView" destination="VqR-bg-KBO" id="4Tl-Xh-lBj"/>
+                <outlet property="loadingViewHC" destination="E1g-jD-HVM" id="Cz1-No-dER"/>
                 <outlet property="nameTableView" destination="9at-8E-RHN" id="3eT-P5-nrY"/>
+                <outlet property="playButton" destination="bGS-xy-S6S" id="SJm-ky-kRd"/>
                 <outlet property="thumbImageView" destination="Oyj-ed-HA4" id="K8u-Xs-ycM"/>
                 <outlet property="tracksTableView" destination="DuE-4K-UnF" id="XhQ-qe-weG"/>
+                <outlet property="typeLabel" destination="MdS-9y-hYo" id="4zv-PO-fdj"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -21,8 +25,8 @@
             <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ocf-xd-oHA">
-                    <rect key="frame" x="0.0" y="59" width="393" height="759"/>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ocf-xd-oHA">
+                    <rect key="frame" x="0.0" y="101" width="393" height="717"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zw2-Xq-jQv" userLabel="Content View">
                             <rect key="frame" x="0.0" y="0.0" width="393" height="623.33333333333337"/>
@@ -39,7 +43,7 @@
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bGS-xy-S6S">
+                                <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bGS-xy-S6S">
                                     <rect key="frame" x="319" y="243.66666666666666" width="54" height="52.666666666666714"/>
                                     <constraints>
                                         <constraint firstAttribute="width" secondItem="bGS-xy-S6S" secondAttribute="height" multiplier="1:1" id="Acv-k6-K4j"/>
@@ -56,10 +60,23 @@
                                     <rect key="frame" x="20" y="303.33333333333331" width="353" height="299.99999999999994"/>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 </tableView>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VqR-bg-KBO">
+                                    <rect key="frame" x="20" y="303.33333333333326" width="353" height="500"/>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="500" id="E1g-jD-HVM"/>
+                                    </constraints>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                                    </userDefinedRuntimeAttributes>
+                                </view>
                             </subviews>
                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             <constraints>
+                                <constraint firstItem="VqR-bg-KBO" firstAttribute="top" secondItem="9at-8E-RHN" secondAttribute="bottom" constant="20" id="6nY-a1-7Xk"/>
                                 <constraint firstItem="bGS-xy-S6S" firstAttribute="centerY" secondItem="9at-8E-RHN" secondAttribute="centerY" id="7EY-qq-YlG"/>
+                                <constraint firstItem="VqR-bg-KBO" firstAttribute="leading" secondItem="Zw2-Xq-jQv" secondAttribute="leading" constant="20" id="89Z-rJ-6ho"/>
+                                <constraint firstAttribute="trailing" secondItem="VqR-bg-KBO" secondAttribute="trailing" constant="20" id="8Sf-BP-9pX"/>
                                 <constraint firstItem="9at-8E-RHN" firstAttribute="leading" secondItem="Zw2-Xq-jQv" secondAttribute="leading" constant="20" id="ECs-R8-7ki"/>
                                 <constraint firstItem="Oyj-ed-HA4" firstAttribute="top" secondItem="Zw2-Xq-jQv" secondAttribute="top" id="L1y-wq-9uR"/>
                                 <constraint firstAttribute="bottom" secondItem="DuE-4K-UnF" secondAttribute="bottom" constant="20" id="Z9A-ep-eeU"/>
@@ -93,14 +110,22 @@
                         <action selector="onBackButtonTapped:" destination="-1" eventType="touchUpInside" id="X06-NG-le5"/>
                     </connections>
                 </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MdS-9y-hYo">
+                    <rect key="frame" x="176.33333333333334" y="59" width="40.333333333333343" height="22"/>
+                    <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="16"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
+                <constraint firstItem="MdS-9y-hYo" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="0do-Qb-IA3"/>
                 <constraint firstItem="ocf-xd-oHA" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="2Ug-Qp-1OJ"/>
                 <constraint firstItem="WZo-rT-xGe" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="QTI-w8-1sR"/>
+                <constraint firstItem="MdS-9y-hYo" firstAttribute="centerY" secondItem="WZo-rT-xGe" secondAttribute="centerY" id="ZEj-bE-aGs"/>
                 <constraint firstItem="WZo-rT-xGe" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="ZW0-Mm-Vaq"/>
-                <constraint firstItem="ocf-xd-oHA" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="eXR-Dw-nmf"/>
+                <constraint firstItem="ocf-xd-oHA" firstAttribute="top" secondItem="WZo-rT-xGe" secondAttribute="bottom" constant="20" id="eXR-Dw-nmf"/>
                 <constraint firstItem="ocf-xd-oHA" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="egE-NF-glu"/>
                 <constraint firstItem="ocf-xd-oHA" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="oR4-jO-DFt"/>
             </constraints>

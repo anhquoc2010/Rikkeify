@@ -12,6 +12,7 @@ target 'Rikkeify' do
   
   # UI
   pod 'SkeletonView'
+  pod 'JGProgressHUD'
   
   post_install do |pi|
         pi.pods_project.targets.each do |target|

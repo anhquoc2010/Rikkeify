@@ -92,7 +92,7 @@ extension SectionContentResponseDTO {
                      name: name ?? "",
                      visuals: visuals?.toDomain(),
                      cover: cover?.map { $0.toDomain() },
-                     images: images?[0].map { $0.toDomain() },
+                     images: images?.first?.map { $0.toDomain() },
                      tracks: contents?.items.map { $0.toDomain() }
                      ?? tracks?.items.map { $0.toDomain() }
                      ?? discography?.topTracks.map { $0.toDomain() }

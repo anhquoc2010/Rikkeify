@@ -79,6 +79,14 @@
 		FAAF971F2BF3184300A7A44A /* TrackListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FAAF971E2BF3184300A7A44A /* TrackListTableViewCell.xib */; };
 		FAAF97202BF3184300A7A44A /* TrackListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAAF971D2BF3184300A7A44A /* TrackListTableViewCell.swift */; };
 		FAAF97242BF320BB00A7A44A /* TrackListVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAAF97232BF320BB00A7A44A /* TrackListVM.swift */; };
+		FAAF97262BF45E4200A7A44A /* UIViewController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAAF97252BF45E4200A7A44A /* UIViewController+Ext.swift */; };
+		FAAF97322BF46E6D00A7A44A /* MiniPlaybackView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FAAF97312BF46E6D00A7A44A /* MiniPlaybackView.xib */; };
+		FAAF97332BF46E6D00A7A44A /* MiniPlaybackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAAF97302BF46E6D00A7A44A /* MiniPlaybackView.swift */; };
+		FABE9F842BF47F5F00F22266 /* MainTabBarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABE9F832BF47F5F00F22266 /* MainTabBarVC.swift */; };
+		FABE9F892BF4BE8400F22266 /* PlaybackPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABE9F882BF4BE8400F22266 /* PlaybackPresenter.swift */; };
+		FABE9F8F2BF59CAE00F22266 /* IconSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABE9F8E2BF59CAE00F22266 /* IconSystem.swift */; };
+		FABE9F912BF5A2F300F22266 /* PlaybackModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABE9F902BF5A2F300F22266 /* PlaybackModule.swift */; };
+		FABE9F952BF6F41300F22266 /* LoopState.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABE9F942BF6F41300F22266 /* LoopState.swift */; };
 		FE7FFE763D25E9A763827863 /* Pods_Rikkeify.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C075338B426EBFDD8C672E9 /* Pods_Rikkeify.framework */; };
 /* End PBXBuildFile section */
 
@@ -179,6 +187,14 @@
 		FAAF971D2BF3184300A7A44A /* TrackListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackListTableViewCell.swift; sourceTree = "<group>"; };
 		FAAF971E2BF3184300A7A44A /* TrackListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TrackListTableViewCell.xib; sourceTree = "<group>"; };
 		FAAF97232BF320BB00A7A44A /* TrackListVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackListVM.swift; sourceTree = "<group>"; };
+		FAAF97252BF45E4200A7A44A /* UIViewController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Ext.swift"; sourceTree = "<group>"; };
+		FAAF97302BF46E6D00A7A44A /* MiniPlaybackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniPlaybackView.swift; sourceTree = "<group>"; };
+		FAAF97312BF46E6D00A7A44A /* MiniPlaybackView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MiniPlaybackView.xib; sourceTree = "<group>"; };
+		FABE9F832BF47F5F00F22266 /* MainTabBarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarVC.swift; sourceTree = "<group>"; };
+		FABE9F882BF4BE8400F22266 /* PlaybackPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaybackPresenter.swift; sourceTree = "<group>"; };
+		FABE9F8E2BF59CAE00F22266 /* IconSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconSystem.swift; sourceTree = "<group>"; };
+		FABE9F902BF5A2F300F22266 /* PlaybackModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaybackModule.swift; sourceTree = "<group>"; };
+		FABE9F942BF6F41300F22266 /* LoopState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoopState.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -280,6 +296,7 @@
 			isa = PBXGroup;
 			children = (
 				841B432C2BE87AC800D1B490 /* LaunchScreen.storyboard */,
+				FAAF97272BF464C100A7A44A /* Main */,
 				FA0CB6A72BF1AEB9001EA4C3 /* Home */,
 				FAAF97172BF3116500A7A44A /* TrackList */,
 				841B43682BE88E5800D1B490 /* PlayBack */,
@@ -299,9 +316,11 @@
 			isa = PBXGroup;
 			children = (
 				84C5614B2BEB8B7F00948ECA /* DI */,
+				FAAF972E2BF46E3100A7A44A /* Presenters */,
 				841B43522BE87D3400D1B490 /* ViewControllers */,
-				84F7719E2BEA0674006379BB /* Extensions */,
 				84F771882BE9CB97006379BB /* Views */,
+				FABE9F8C2BF59C9C00F22266 /* Utils */,
+				84F7719E2BEA0674006379BB /* Extensions */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -409,6 +428,7 @@
 			isa = PBXGroup;
 			children = (
 				84C561562BEB92D800948ECA /* NetworkModule.swift */,
+				FABE9F902BF5A2F300F22266 /* PlaybackModule.swift */,
 				84C561542BEB92A200948ECA /* DataSourceModule.swift */,
 				84C561442BEB8B7F00948ECA /* RepositoryModule.swift */,
 			);
@@ -457,7 +477,8 @@
 		84F771882BE9CB97006379BB /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				84F771892BE9CBF4006379BB /* IntrinsicTableView.swift */,
+				FABE9F872BF4BE6900F22266 /* Common */,
+				FAAF972F2BF46E5700A7A44A /* MiniPlayback */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -476,6 +497,7 @@
 			isa = PBXGroup;
 			children = (
 				84F7719F2BEA068A006379BB /* UIImage+Ext.swift */,
+				FAAF97252BF45E4200A7A44A /* UIViewController+Ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -596,6 +618,56 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
+		FAAF97272BF464C100A7A44A /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				FABE9F832BF47F5F00F22266 /* MainTabBarVC.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		FAAF972E2BF46E3100A7A44A /* Presenters */ = {
+			isa = PBXGroup;
+			children = (
+				FABE9F882BF4BE8400F22266 /* PlaybackPresenter.swift */,
+			);
+			path = Presenters;
+			sourceTree = "<group>";
+		};
+		FAAF972F2BF46E5700A7A44A /* MiniPlayback */ = {
+			isa = PBXGroup;
+			children = (
+				FAAF97302BF46E6D00A7A44A /* MiniPlaybackView.swift */,
+				FAAF97312BF46E6D00A7A44A /* MiniPlaybackView.xib */,
+			);
+			path = MiniPlayback;
+			sourceTree = "<group>";
+		};
+		FABE9F872BF4BE6900F22266 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				84F771892BE9CBF4006379BB /* IntrinsicTableView.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		FABE9F8C2BF59C9C00F22266 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				FABE9F8D2BF59CA200F22266 /* Enum */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		FABE9F8D2BF59CA200F22266 /* Enum */ = {
+			isa = PBXGroup;
+			children = (
+				FABE9F8E2BF59CAE00F22266 /* IconSystem.swift */,
+				FABE9F942BF6F41300F22266 /* LoopState.swift */,
+			);
+			path = Enum;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -708,6 +780,7 @@
 				841B436D2BE8965B00D1B490 /* TrackViewVC.xib in Resources */,
 				84E8F12F2BE8E02900A59879 /* TrackOptionVC.xib in Resources */,
 				FA0CB6AF2BF1AEB9001EA4C3 /* HomeVC.xib in Resources */,
+				FAAF97322BF46E6D00A7A44A /* MiniPlaybackView.xib in Resources */,
 				841B432B2BE87AC800D1B490 /* Assets.xcassets in Resources */,
 				FAAF971A2BF3119900A7A44A /* TrackListVC.xib in Resources */,
 				FAAF971F2BF3184300A7A44A /* TrackListTableViewCell.xib in Resources */,
@@ -795,6 +868,7 @@
 				84F771872BE9C27A006379BB /* TrackOption.swift in Sources */,
 				84E8F12E2BE8E02900A59879 /* TrackOptionVC.swift in Sources */,
 				84F7719B2BE9EA77006379BB /* Artist.swift in Sources */,
+				FABE9F952BF6F41300F22266 /* LoopState.swift in Sources */,
 				84F771A72BEA1115006379BB /* LyricViewVM.swift in Sources */,
 				84C561242BEB363B00948ECA /* TrackRemoteDataSource.swift in Sources */,
 				FA6469562BECF39700F521E0 /* RecommendTrack.swift in Sources */,
@@ -809,6 +883,7 @@
 				FAAF97142BF2FC1500A7A44A /* HomeTableViewCell.swift in Sources */,
 				84E8F1332BE8E53E00A59879 /* TrackOptionTableViewCell.swift in Sources */,
 				84C561552BEB92A200948ECA /* DataSourceModule.swift in Sources */,
+				FABE9F842BF47F5F00F22266 /* MainTabBarVC.swift in Sources */,
 				84C561572BEB92D800948ECA /* NetworkModule.swift in Sources */,
 				84C561222BEB2D7200948ECA /* AppEndpoint.swift in Sources */,
 				84F771A02BEA068A006379BB /* UIImage+Ext.swift in Sources */,
@@ -819,21 +894,26 @@
 				84C5611C2BEB28D800948ECA /* NetworkError.swift in Sources */,
 				FAAF97242BF320BB00A7A44A /* TrackListVM.swift in Sources */,
 				FA75A8892BE94A5A00FEB35F /* TrackViewVM.swift in Sources */,
+				FAAF97262BF45E4200A7A44A /* UIViewController+Ext.swift in Sources */,
 				84C5613D2BEB6FEB00948ECA /* TrackRepositoryImp.swift in Sources */,
 				84C5611E2BEB28E300948ECA /* Networkable.swift in Sources */,
 				841B436C2BE8965B00D1B490 /* TrackViewVC.swift in Sources */,
 				FAAF971B2BF3119A00A7A44A /* TrackListVC.swift in Sources */,
 				FA0CB6BC2BF1ED62001EA4C3 /* SectionRemoteDataSource.swift in Sources */,
+				FAAF97332BF46E6D00A7A44A /* MiniPlaybackView.swift in Sources */,
 				FA0CB6CE2BF21CD9001EA4C3 /* HomeTableHeaderView.swift in Sources */,
 				FA0CB6A82BF1AEB9001EA4C3 /* HomeItemCell.swift in Sources */,
 				84C561272BEB373D00948ECA /* TrackResponseDTO+Mapping.swift in Sources */,
 				84C5612D2BEB484C00948ECA /* LyricsResponseDTO+Mapping.swift in Sources */,
 				84C561372BEB63F300948ECA /* AudioTrack.swift in Sources */,
+				FABE9F892BF4BE8400F22266 /* PlaybackPresenter.swift in Sources */,
 				84C5612F2BEB486400948ECA /* AudioTypeResponseDTO+Mapping.swift in Sources */,
 				FA0CB6C02BF1EE3D001EA4C3 /* SectionContent.swift in Sources */,
 				FA0CB6BE2BF1EDB6001EA4C3 /* Section.swift in Sources */,
+				FABE9F8F2BF59CAE00F22266 /* IconSystem.swift in Sources */,
 				FA0CB6C62BF1FA76001EA4C3 /* SectionRepository.swift in Sources */,
 				FA75A8872BE9491700FEB35F /* Track.swift in Sources */,
+				FABE9F912BF5A2F300F22266 /* PlaybackModule.swift in Sources */,
 				84F771952BE9EA3A006379BB /* Album.swift in Sources */,
 				FA0CB6C42BF1FA57001EA4C3 /* SectionRepositoryImp.swift in Sources */,
 				FA0CB6C22BF1EE6A001EA4C3 /* Image.swift in Sources */,
@@ -1011,6 +1091,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 23UW6YZX8F;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Rikkeify/GlobalDefine/Info.plist;
@@ -1039,6 +1120,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 23UW6YZX8F;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Rikkeify/GlobalDefine/Info.plist;

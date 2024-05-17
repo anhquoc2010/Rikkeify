@@ -11,9 +11,13 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LyricViewVC" customModule="Rikkeify" customModuleProvider="target">
             <connections>
                 <outlet property="artistsLabel" destination="NRA-QM-bM2" id="YkE-tS-QSA"/>
+                <outlet property="lyricErrorLabel" destination="CIV-HG-9v6" id="T9M-7J-MGe"/>
                 <outlet property="lyricsTableView" destination="Snp-u5-6Ke" id="yVn-Xh-Q8k"/>
+                <outlet property="playPauseButton" destination="2oJ-Mh-Bol" id="8v6-or-Ppl"/>
                 <outlet property="trackNameLabel" destination="7ps-k8-sfV" id="SN1-am-ODY"/>
                 <outlet property="trackProgressSlider" destination="gRF-Vc-Jx0" id="AAv-lf-r5i"/>
+                <outlet property="trackTimeNowLabel" destination="TlX-pP-wLI" id="ogE-My-cU4"/>
+                <outlet property="trackTimeSumOrRemainLabel" destination="IpM-3N-Zxs" id="hrT-Tv-FIi"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -28,7 +32,7 @@
                     <state key="normal" title="Button"/>
                     <buttonConfiguration key="configuration" style="gray" image="chevron.down" catalog="system" cornerStyle="capsule"/>
                     <connections>
-                        <action selector="onBackButtonTapped:" destination="-1" eventType="touchUpInside" id="ysZ-SW-u2Y"/>
+                        <action selector="onBackButtonTapped:" destination="-1" eventType="touchUpInside" id="wUK-bN-Kp5"/>
                     </connections>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7ps-k8-sfV">
@@ -47,9 +51,21 @@
                     <rect key="frame" x="20" y="156.33333333333334" width="353" height="499.66666666666663"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </tableView>
-                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.20000000298023224" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="gRF-Vc-Jx0" userLabel="trackProgressSlider">
+                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Couldn't load the lyric." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CIV-HG-9v6">
+                    <rect key="frame" x="92.000000000000014" y="392.66666666666669" width="209.33333333333337" height="27.333333333333314"/>
+                    <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="20"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="gRF-Vc-Jx0" userLabel="trackProgressSlider">
                     <rect key="frame" x="18" y="696" width="357" height="31"/>
                     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <color key="maximumTrackTintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <connections>
+                        <action selector="onTouchDownSlider:" destination="-1" eventType="touchDown" id="r5n-n1-ep3"/>
+                        <action selector="onTouchUpInsideSlider:" destination="-1" eventType="touchUpInside" id="37e-Ze-4jO"/>
+                        <action selector="onTouchUpOutsideSlider:" destination="-1" eventType="touchUpOutside" id="pfv-NX-S8j"/>
+                    </connections>
                 </slider>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TlX-pP-wLI" userLabel="trackTimeNowLabel">
                     <rect key="frame" x="20" y="726" width="20.666666666666671" height="13.666666666666629"/>
@@ -78,16 +94,18 @@
                 </button>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
-            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <color key="backgroundColor" systemColor="systemGrayColor"/>
             <constraints>
                 <constraint firstItem="NRA-QM-bM2" firstAttribute="centerX" secondItem="7ps-k8-sfV" secondAttribute="centerX" id="3Je-IL-Duu"/>
                 <constraint firstItem="Snp-u5-6Ke" firstAttribute="top" secondItem="NRA-QM-bM2" secondAttribute="bottom" constant="40" id="5wm-U2-NQW"/>
                 <constraint firstItem="2oJ-Mh-Bol" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="9fe-6F-qZl"/>
                 <constraint firstItem="Z78-Ht-kXI" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="16" id="CuL-FW-8JH"/>
                 <constraint firstItem="gRF-Vc-Jx0" firstAttribute="top" secondItem="Snp-u5-6Ke" secondAttribute="bottom" constant="40" id="Dmg-8J-pqv"/>
+                <constraint firstItem="CIV-HG-9v6" firstAttribute="centerY" secondItem="Snp-u5-6Ke" secondAttribute="centerY" id="GII-dt-pBk"/>
                 <constraint firstItem="NRA-QM-bM2" firstAttribute="top" secondItem="7ps-k8-sfV" secondAttribute="bottom" id="HsR-g2-SYe"/>
                 <constraint firstItem="Z78-Ht-kXI" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="MG7-LZ-9bx"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="gRF-Vc-Jx0" secondAttribute="trailing" constant="20" id="S51-WR-7ST"/>
+                <constraint firstItem="CIV-HG-9v6" firstAttribute="centerX" secondItem="Snp-u5-6Ke" secondAttribute="centerX" id="W1c-Lp-RKD"/>
                 <constraint firstItem="TlX-pP-wLI" firstAttribute="top" secondItem="gRF-Vc-Jx0" secondAttribute="bottom" id="XKv-09-2Ca"/>
                 <constraint firstItem="2oJ-Mh-Bol" firstAttribute="top" secondItem="gRF-Vc-Jx0" secondAttribute="bottom" constant="24" id="Z3v-11-afU"/>
                 <constraint firstItem="7ps-k8-sfV" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="16" id="aEs-tC-uGZ"/>
@@ -106,8 +124,8 @@
     <resources>
         <image name="chevron.down" catalog="system" width="128" height="70"/>
         <image name="play.circle.fill" catalog="system" width="128" height="123"/>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        <systemColor name="systemGrayColor">
+            <color red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

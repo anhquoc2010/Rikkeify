@@ -17,7 +17,7 @@ class HomeVM {
             guard let self = self else { return }
             switch result {
             case .success(let sections):
-                self.sections = sections
+                self.sections = sections.reversed()
                 completion(.success(()))
             case .failure(let error):
                 completion(.failure(error))

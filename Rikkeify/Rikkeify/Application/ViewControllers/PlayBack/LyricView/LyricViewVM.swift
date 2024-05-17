@@ -8,15 +8,6 @@
 import Foundation
 
 class LyricViewVM {
-    let track: Track
-    
-    var isPlaying = false
-    
-    init(track: Track) {
-        self.track = track
-    }
-    
-    func togglePlayPauseState() {
-        isPlaying.toggle()
-    }
+    @Inject
+    var playback: PlaybackPresenter
 }

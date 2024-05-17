@@ -14,9 +14,13 @@
                 <outlet property="authorNameLabel" destination="Mwc-1O-FoW" id="jRe-hX-b8X"/>
                 <outlet property="backwardButton" destination="C4J-NP-1rs" id="YFj-tB-gEH"/>
                 <outlet property="forwardButton" destination="ULX-LW-OjC" id="MN2-YW-qgK"/>
+                <outlet property="likeButton" destination="Wdu-0Y-LqE" id="UHa-qR-Iko"/>
+                <outlet property="loopButton" destination="pGQ-35-anz" id="PNr-7O-k2Q"/>
+                <outlet property="lyricErrorLabel" destination="f3C-oW-qBE" id="KHL-zH-KdZ"/>
                 <outlet property="lyricsTableView" destination="LD4-Sg-Nvo" id="la4-Lk-y5R"/>
                 <outlet property="lyricsView" destination="wvH-4w-obl" id="qnk-Kz-feJ"/>
                 <outlet property="playPauseButton" destination="LLB-5q-Qjs" id="MfC-qU-Wbj"/>
+                <outlet property="shuffleButton" destination="ry3-fw-pHD" id="zYZ-Ax-21r"/>
                 <outlet property="speakerButtonImageView" destination="cxZ-zp-727" id="5WP-bh-fiX"/>
                 <outlet property="speakerButtonLabel" destination="FOh-Tr-XY8" id="Gfk-E1-FvW"/>
                 <outlet property="thumbnailImageView" destination="5ds-nY-Hqw" id="Oir-NX-3XV"/>
@@ -136,7 +140,9 @@
                                     <rect key="frame" x="18" y="615.33333333333337" width="357" height="31"/>
                                     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <connections>
-                                        <action selector="onSliderSlided:" destination="-1" eventType="valueChanged" id="3fR-EI-GNq"/>
+                                        <action selector="onTouchDownSlider:" destination="-1" eventType="touchDown" id="TuI-zj-cDG"/>
+                                        <action selector="onTouchUpInsideSlider:" destination="-1" eventType="touchUpInside" id="F33-8f-jJD"/>
+                                        <action selector="onTouchUpOutsideSlider:" destination="-1" eventType="touchUpOutside" id="zSS-fj-wsT"/>
                                     </connections>
                                 </slider>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yzr-pT-HKn" userLabel="trackTimeNowLabel">
@@ -282,28 +288,33 @@
                                                 </attributedString>
                                                 <color key="baseBackgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </buttonConfiguration>
-                                            <connections>
-                                                <action selector="onShowMoreLyricsButtonTapped:" destination="-1" eventType="touchUpInside" id="6EY-Sf-U3q"/>
-                                            </connections>
                                         </button>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lyrics" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yRz-Pg-0w7">
                                             <rect key="frame" x="16" y="18.333333333333258" width="41" height="22"/>
                                             <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="16"/>
-                                            <color key="textColor" systemColor="darkTextColor"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <tableView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="LD4-Sg-Nvo">
                                             <rect key="frame" x="16" y="64.666666666666629" width="321" height="264.33333333333331"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </tableView>
+                                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Couldn't load the lyric." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f3C-oW-qBE">
+                                            <rect key="frame" x="72.000000000000014" y="162.99999999999989" width="209.33333333333337" height="27.333333333333343"/>
+                                            <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="20"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="backgroundColor" systemColor="systemGrayColor"/>
                                     <constraints>
+                                        <constraint firstItem="f3C-oW-qBE" firstAttribute="centerY" secondItem="wvH-4w-obl" secondAttribute="centerY" id="33W-g3-8ed"/>
                                         <constraint firstAttribute="trailing" secondItem="LD4-Sg-Nvo" secondAttribute="trailing" constant="16" id="CPZ-zc-8JD"/>
                                         <constraint firstItem="hUN-Er-gNR" firstAttribute="top" secondItem="wvH-4w-obl" secondAttribute="top" constant="14" id="EZ3-bZ-hJb"/>
                                         <constraint firstItem="LD4-Sg-Nvo" firstAttribute="leading" secondItem="wvH-4w-obl" secondAttribute="leading" constant="16" id="ICu-my-VdO"/>
                                         <constraint firstItem="yRz-Pg-0w7" firstAttribute="leading" secondItem="wvH-4w-obl" secondAttribute="leading" constant="16" id="kBI-EA-PNe"/>
                                         <constraint firstAttribute="bottom" secondItem="LD4-Sg-Nvo" secondAttribute="bottom" constant="24" id="kvP-NN-3TU"/>
+                                        <constraint firstItem="f3C-oW-qBE" firstAttribute="centerX" secondItem="wvH-4w-obl" secondAttribute="centerX" id="l83-xa-4uh"/>
                                         <constraint firstItem="yRz-Pg-0w7" firstAttribute="centerY" secondItem="hUN-Er-gNR" secondAttribute="centerY" id="lhV-Il-Deg"/>
                                         <constraint firstAttribute="width" secondItem="wvH-4w-obl" secondAttribute="height" multiplier="1:1" id="pAN-QR-6cg"/>
                                         <constraint firstAttribute="trailing" secondItem="hUN-Er-gNR" secondAttribute="trailing" constant="16" id="vXa-dX-rrB"/>
@@ -424,23 +435,23 @@
         <image name="repeat" catalog="system" width="128" height="98"/>
         <image name="shuffle" catalog="system" width="128" height="95"/>
         <image name="square.and.arrow.up" catalog="system" width="108" height="128"/>
-        <systemColor name="darkTextColor">
-            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="secondaryLabelColor">
-            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
+        <systemColor name="systemGrayColor">
+            <color red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemGreenColor">
-            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="tertiaryLabelColor">
-            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.29803921568627451" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.29803921570000003" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

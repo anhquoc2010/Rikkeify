@@ -8,16 +8,16 @@
 import UIKit
 
 class TrackListTableViewCell: UITableViewCell {
-    @IBOutlet weak var thumbImageView: UIImageView!
-    @IBOutlet weak var artistLabel: UILabel!
-    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet private weak var thumbImageView: UIImageView!
+    @IBOutlet private weak var artistLabel: UILabel!
+    @IBOutlet private weak var nameLabel: UILabel!
     
     func configure(track: Track, thumbImage: String) {
-        let imageUrl = track.album?.cover[0].url ?? ""
+        let imageUrl = track.album?.cover.first?.url ?? ""
         let finalImageUrl = imageUrl == "" ? thumbImage : imageUrl
-        print(finalImageUrl)
+        
         thumbImageView.setNetworkImage(urlString: finalImageUrl)
-        artistLabel.text = track.artists[0].name
+        artistLabel.text = track.artists.first?.name
         nameLabel.text = track.name
     }
 }

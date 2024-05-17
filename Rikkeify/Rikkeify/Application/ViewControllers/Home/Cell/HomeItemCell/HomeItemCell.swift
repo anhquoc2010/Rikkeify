@@ -8,8 +8,8 @@
 import UIKit
 
 class HomeItemCell: UICollectionViewCell {
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet private weak var titleLabel: UILabel!
+    @IBOutlet private weak var imageView: UIImageView!
     
     func configure(title: String, image: String, type: String) {
         titleLabel.text = title

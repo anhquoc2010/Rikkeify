@@ -16,6 +16,7 @@ public class DI {
     
     private init() {
         NetworkModule().register(container: container)
+        PlaybackModule().register(container: container)
         DataSourceModule().register(container: container)
         RepositoryModule().register(container: container)
     }

@@ -15,6 +15,8 @@ public enum NetworkError: Error {
     case unauthorized
     case unexpectedStatusCode
     case unknown
+    case getLyricError
+    case getAudioError
     
     public var customMessage: String {
         switch self {
@@ -30,6 +32,10 @@ public enum NetworkError: Error {
             return "Unauthorized URL"
         case .unexpectedStatusCode:
             return "Status Code Error"
+        case .getLyricError:
+            return "Could not get lyric"
+        case .getAudioError:
+            return "Could not get audio"
         default:
             return "Unknown Error"
         }

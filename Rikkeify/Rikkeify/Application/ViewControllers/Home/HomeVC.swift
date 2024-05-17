@@ -15,7 +15,7 @@ private let kHeightForCollectionViewCell = kWidthForCollectionViewCell + 0.3 * k
 
 final class HomeVC: UIViewController {
     // MARK: Outlets
-    @IBOutlet weak var mainTableView: UITableView!
+    @IBOutlet private weak var mainTableView: UITableView!
     
     // MARK: Properties
     private var viewModel: HomeVM
@@ -32,18 +32,9 @@ final class HomeVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        mainTableView.showsVerticalScrollIndicator = false
-        viewModel.fetchSections { result in
-            switch result {
-            case .success:
-                DispatchQueue.main.async {
-                    self.setupListViews()
-                    self.mainTableView.reloadData()
-                }
-            case .failure(let error):
-                print(error)
-            }
-        }
+        
+        setupViews()
+        bindViewModel()
     }
 }
 
@@ -76,6 +67,7 @@ extension HomeVC: UITableViewDataSource {
     }
 }
 
+// MARK: UITableViewDelegate
 extension HomeVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return kHeightForHeaderInSectionTableView
@@ -91,6 +83,7 @@ extension HomeVC: UITableViewDelegate {
     }
 }
 
+// MARK: UICollectionViewDataSource
 extension HomeVC: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return viewModel.sections[collectionView.tag].contents.count
@@ -117,19 +110,25 @@ extension HomeVC: UICollectionViewDataSource {
     }
 }
 
+// MARK: UICollectionViewDelegateFlowLayout
 extension HomeVC: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return .init(width: kWidthForCollectionViewCell, height: kHeightForCollectionViewCell)
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("prePush: \(TrackListVC(sectionContent: viewModel.sections[collectionView.tag].contents[indexPath.item]))")
-        self.navigationController?.pushViewController(TrackListVC(sectionContent: viewModel.sections[collectionView.tag].contents[indexPath.item]), animated: true)
+        let vc = TrackListVC(sectionContent: viewModel.sections[collectionView.tag].contents[indexPath.item])
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 }
 
 // MARK: Custom Functions
 extension HomeVC {
+    private func setupViews() {
+        showLoading()
+        mainTableView.showsVerticalScrollIndicator = false
+    }
+    
     private func setupListViews() {
         mainTableView.register(UINib(nibName: "HomeTableViewCell", bundle: nil),
                                forCellReuseIdentifier: "HomeTableViewCell")
@@ -137,5 +136,26 @@ extension HomeVC {
                                forHeaderFooterViewReuseIdentifier: "HomeTableHeaderView")
         mainTableView.dataSource = self
         mainTableView.delegate = self
+    }
+    
+    private func bindViewModel() {
+        viewModel.fetchSections { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success:
+                DispatchQueue.main.async {
+                    self.hideLoading(after: 1)
+                    self.setupListViews()
+                    self.mainTableView.reloadData()
+                }
+            case .failure(let error):
+                self.hideLoading()
+                self.showAlert(title: error.customMessage.uppercased(), message: "Please Update API Key!") {
+                    UIApplication.shared.perform(#selector(NSXPCConnection.suspend))
+                    sleep(2)
+                    exit(0)
+                }
+            }
+        }
     }
 }

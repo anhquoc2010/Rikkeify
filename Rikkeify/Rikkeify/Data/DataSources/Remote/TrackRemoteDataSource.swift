@@ -62,7 +62,7 @@ extension TrackRemoteDataSourceImp: TrackRemoteDataSource {
                     defer { group.leave() }
                     switch result {
                     case .failure(let error):
-                        completion(.failure(error))
+                        completion(.failure(.getLyricError))
                     case .success(let lyricsResponseDTO):
                         trackResponseDTO.lyrics = lyricsResponseDTO
                     }
@@ -74,7 +74,7 @@ extension TrackRemoteDataSourceImp: TrackRemoteDataSource {
                         defer { group.leave() }
                         switch result {
                         case .failure(let error):
-                            completion(.failure(error))
+                            completion(.failure(.getAudioError))
                         case .success(let audioResponseDTO):
                             trackResponseDTO.audio = audioResponseDTO
                         }
