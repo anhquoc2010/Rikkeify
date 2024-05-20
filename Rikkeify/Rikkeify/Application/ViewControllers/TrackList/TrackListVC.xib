@@ -26,7 +26,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ocf-xd-oHA">
-                    <rect key="frame" x="0.0" y="101" width="393" height="717"/>
+                    <rect key="frame" x="0.0" y="119.66666666666669" width="393" height="698.33333333333326"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zw2-Xq-jQv" userLabel="Content View">
                             <rect key="frame" x="0.0" y="0.0" width="393" height="623.33333333333337"/>
@@ -44,7 +44,7 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bGS-xy-S6S">
-                                    <rect key="frame" x="319" y="243.66666666666666" width="54" height="52.666666666666714"/>
+                                    <rect key="frame" x="319" y="243.6666666666666" width="54" height="52.666666666666657"/>
                                     <constraints>
                                         <constraint firstAttribute="width" secondItem="bGS-xy-S6S" secondAttribute="height" multiplier="1:1" id="Acv-k6-K4j"/>
                                         <constraint firstAttribute="width" constant="54" id="VPe-Ge-63p"/>
@@ -102,7 +102,11 @@
                     <viewLayoutGuide key="frameLayoutGuide" id="jZd-eK-TPQ"/>
                 </scrollView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WZo-rT-xGe">
-                    <rect key="frame" x="20" y="59" width="13" height="22"/>
+                    <rect key="frame" x="20" y="59" width="24" height="40.666666666666657"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="24" id="RLz-hn-F3Q"/>
+                        <constraint firstAttribute="width" secondItem="WZo-rT-xGe" secondAttribute="height" multiplier="13:22" id="q8B-dZ-hxw"/>
+                    </constraints>
                     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                     <state key="normal" image="chevron.left" catalog="system"/>
@@ -111,7 +115,7 @@
                     </connections>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MdS-9y-hYo">
-                    <rect key="frame" x="176.33333333333334" y="59" width="40.333333333333343" height="22"/>
+                    <rect key="frame" x="176.33333333333334" y="68.333333333333329" width="40.333333333333343" height="22"/>
                     <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="16"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>

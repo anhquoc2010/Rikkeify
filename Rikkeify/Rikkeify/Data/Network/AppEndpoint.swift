@@ -14,12 +14,15 @@ enum AppEndpoint {
     case getRecommendTracks(seedTrackId: String)
     case getSections
     case getSectionContent(type: String, id: String)
+    case getExplore
+    case search(query: String, type: String, numberOfTopResults: Int)
+    case getGenreContents(genreId: String)
 }
 
 extension AppEndpoint: EndPoint {
     var host: String {
         switch self {
-        case .getRecommendTracks:
+        case .getRecommendTracks, .getExplore, .search:
             return "spotify23.p.rapidapi.com"
         default:
             return "spotify-scraper.p.rapidapi.com"
@@ -54,6 +57,12 @@ extension AppEndpoint: EndPoint {
             default:
                 return ""
             }
+        case .getExplore:
+            return "/browse_all/"
+        case .search:
+            return "/search/"
+        case .getGenreContents:
+            return "\(prefix)/genre/contents"
         }
     }
     
@@ -66,14 +75,14 @@ extension AppEndpoint: EndPoint {
     
     var header: [String: String]? {
         switch self {
-        case .getRecommendTracks:
+        case .getRecommendTracks, .getExplore, .search:
             return [
-                "X-RapidAPI-Key": "0e5d740037mshed0caed0971851bp1d95c7jsn0baa1414a7b3",
+                "X-RapidAPI-Key": "a7d34c648dmsh45f134f3221a639p1cb047jsnfaed5a9208ae",
                 "X-RapidAPI-Host": "spotify23.p.rapidapi.com"
             ]
         default:
             return [
-                "X-RapidAPI-Key": "bc88b64601mshc107a8c10935db7p16149bjsn718883352220",
+                "X-RapidAPI-Key": "a7d34c648dmsh45f134f3221a639p1cb047jsnfaed5a9208ae",
                 "X-RapidAPI-Host": "spotify-scraper.p.rapidapi.com"
             ]
         }
@@ -113,6 +122,16 @@ extension AppEndpoint: EndPoint {
             default:
                 return nil
             }
+        case .search(let query, let type, let numberOfTopResults):
+            return [
+                "q": query,
+                "type": type,
+                "numberOfTopResults": String(numberOfTopResults)
+            ]
+        case .getGenreContents(let genreId):
+            return [
+                "genreId": genreId
+            ]
         default:
             return nil
         }

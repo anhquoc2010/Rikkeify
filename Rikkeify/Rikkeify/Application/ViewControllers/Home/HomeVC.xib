@@ -20,19 +20,27 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="insetGrouped" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="wZl-AH-waN">
-                    <rect key="frame" x="0.0" y="59" width="393" height="759"/>
+                    <rect key="frame" x="0.0" y="100" width="393" height="718"/>
                     <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </tableView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Home" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Ge-zm-rDz">
+                    <rect key="frame" x="20" y="59" width="70" height="33"/>
+                    <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="24"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
                 <constraint firstItem="wZl-AH-waN" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="Grw-kn-hAn"/>
-                <constraint firstItem="wZl-AH-waN" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="KBF-HC-Bi4"/>
+                <constraint firstItem="8Ge-zm-rDz" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="i1P-AR-6uS"/>
+                <constraint firstItem="wZl-AH-waN" firstAttribute="top" secondItem="8Ge-zm-rDz" secondAttribute="bottom" constant="8" id="n0s-Qo-R7Z"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="wZl-AH-waN" secondAttribute="trailing" id="txf-Qi-gMY"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="wZl-AH-waN" secondAttribute="bottom" id="vKS-D3-OIf"/>
+                <constraint firstItem="8Ge-zm-rDz" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="y6u-bE-IfO"/>
             </constraints>
-            <point key="canvasLocation" x="37" y="-11"/>
+            <point key="canvasLocation" x="35.877862595419849" y="-11.267605633802818"/>
         </view>
     </objects>
     <resources>

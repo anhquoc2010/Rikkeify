@@ -14,6 +14,10 @@ final class SectionRepositoryImp {
 }
 
 extension SectionRepositoryImp: SectionRepository {
+    func getGenresAndContents(genreId: String, completion: @escaping (Result<[Section], NetworkError>) -> Void) {
+        remoteDataSource.getGenresAndContents(genreId: genreId, completion: completion)
+    }
+    
     func getSectionContents(type: String, id: String, completion: @escaping (Result<SectionContent, NetworkError>) -> Void) {
         remoteDataSource.getSectionContents(type: type, id: id, completion: completion)
     }
@@ -21,5 +25,4 @@ extension SectionRepositoryImp: SectionRepository {
     func getSections(completion: @escaping (Result<[Section], NetworkError>) -> Void) {
         remoteDataSource.getSections(completion: completion)
     }
-    
 }

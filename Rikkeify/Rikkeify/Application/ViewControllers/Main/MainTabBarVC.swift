@@ -79,8 +79,8 @@ extension MainTabBarVC {
     
     private func setupTabBar() {
         let homeVC = HomeVC()
-        let searchVC = UIViewController()
-        let yourLibraryVC = UIViewController()
+        let searchVC = SearchVC()
+        let yourLibraryVC = YourLibraryVC()
 
         let homeNavi = makeNavigationController(rootViewController: homeVC, tabTitle: "Home", tabImage: .icHome, selectedTabImage: .icHomeActivated)
         let searchNavi = makeNavigationController(rootViewController: searchVC, tabTitle: "Search", tabImage: .icSearch, selectedTabImage: .icSearchActivated)
