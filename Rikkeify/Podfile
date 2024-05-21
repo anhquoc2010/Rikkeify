@@ -10,6 +10,9 @@ target 'Rikkeify' do
   # DI
   pod 'Swinject'
   
+  # Local Storage
+  pod 'RealmSwift'
+  
   # UI
   pod 'SkeletonView'
   pod 'JGProgressHUD'

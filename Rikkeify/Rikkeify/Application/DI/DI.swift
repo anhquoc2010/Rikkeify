@@ -15,6 +15,7 @@ public class DI {
     let container = Container()
     
     private init() {
+        LocalModule().register(container: container)
         NetworkModule().register(container: container)
         PlaybackModule().register(container: container)
         DataSourceModule().register(container: container)

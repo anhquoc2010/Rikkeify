@@ -1,24 +1,34 @@
 PODS:
   - JGProgressHUD (2.2)
+  - Realm (10.50.0):
+    - Realm/Headers (= 10.50.0)
+  - Realm/Headers (10.50.0)
+  - RealmSwift (10.50.0):
+    - Realm (= 10.50.0)
   - SkeletonView (1.30.4)
   - Swinject (2.8.6)
 
 DEPENDENCIES:
   - JGProgressHUD
+  - RealmSwift
   - SkeletonView
   - Swinject
 
 SPEC REPOS:
   trunk:
     - JGProgressHUD
+    - Realm
+    - RealmSwift
     - SkeletonView
     - Swinject
 
 SPEC CHECKSUMS:
   JGProgressHUD: d83d7a981b85d11205e19ff8ad5bb9c40571c847
+  Realm: a0a6a99e3dfa8959358a95c3c05845b5e5d6af30
+  RealmSwift: fa111fb98e092a4dff1d0785ad0c3483feda607a
   SkeletonView: 5a050f6411e697abd4cda0a8d767013399dccd69
   Swinject: 64c8eb8b138a8a5988fdf13994e3564feb820217
 
-PODFILE CHECKSUM: 9fc5db70933ed370531f2615e74722a31386ff8a
+PODFILE CHECKSUM: ec31bb866da81f02066be9aed462313da2a38f16
 
 COCOAPODS: 1.15.2

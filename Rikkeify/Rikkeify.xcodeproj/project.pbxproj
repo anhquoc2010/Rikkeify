@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		84112E7E2BFCA150009F3EDF /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84112E7D2BFCA150009F3EDF /* RealmManager.swift */; };
+		84112E822BFCAD4A009F3EDF /* RTrack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84112E812BFCAD4A009F3EDF /* RTrack.swift */; };
+		84112E842BFCADB6009F3EDF /* RArtist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84112E832BFCADB6009F3EDF /* RArtist.swift */; };
+		84112E862BFCADC5009F3EDF /* RAlbum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84112E852BFCADC5009F3EDF /* RAlbum.swift */; };
+		84112E882BFCADCE009F3EDF /* RLyric.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84112E872BFCADCE009F3EDF /* RLyric.swift */; };
+		84112E8A2BFCADD6009F3EDF /* RAudio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84112E892BFCADD6009F3EDF /* RAudio.swift */; };
+		84112E8D2BFCB0AE009F3EDF /* TrackLocalDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84112E8C2BFCB0AE009F3EDF /* TrackLocalDataSource.swift */; };
+		84112E8F2BFCB0C1009F3EDF /* LocalModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84112E8E2BFCB0C1009F3EDF /* LocalModule.swift */; };
 		841B43222BE87AC600D1B490 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841B43212BE87AC600D1B490 /* AppDelegate.swift */; };
 		841B432B2BE87AC800D1B490 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 841B432A2BE87AC800D1B490 /* Assets.xcassets */; };
 		841B432E2BE87AC800D1B490 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 841B432D2BE87AC800D1B490 /* Base */; };
@@ -140,6 +148,14 @@
 /* Begin PBXFileReference section */
 		1BFFF90726AC96CCCA9B9A03 /* Pods-Rikkeify.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rikkeify.debug.xcconfig"; path = "Target Support Files/Pods-Rikkeify/Pods-Rikkeify.debug.xcconfig"; sourceTree = "<group>"; };
 		3C075338B426EBFDD8C672E9 /* Pods_Rikkeify.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Rikkeify.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		84112E7D2BFCA150009F3EDF /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
+		84112E812BFCAD4A009F3EDF /* RTrack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RTrack.swift; sourceTree = "<group>"; };
+		84112E832BFCADB6009F3EDF /* RArtist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RArtist.swift; sourceTree = "<group>"; };
+		84112E852BFCADC5009F3EDF /* RAlbum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RAlbum.swift; sourceTree = "<group>"; };
+		84112E872BFCADCE009F3EDF /* RLyric.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RLyric.swift; sourceTree = "<group>"; };
+		84112E892BFCADD6009F3EDF /* RAudio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RAudio.swift; sourceTree = "<group>"; };
+		84112E8C2BFCB0AE009F3EDF /* TrackLocalDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackLocalDataSource.swift; sourceTree = "<group>"; };
+		84112E8E2BFCB0C1009F3EDF /* LocalModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalModule.swift; sourceTree = "<group>"; };
 		841B431E2BE87AC600D1B490 /* Rikkeify.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Rikkeify.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		841B43212BE87AC600D1B490 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		841B432A2BE87AC800D1B490 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -301,6 +317,43 @@
 				84E383122BFAE57600082342 /* SearchVC.xib */,
 			);
 			path = SearchDefault;
+			sourceTree = "<group>";
+		};
+		84112E7B2BFCA0D2009F3EDF /* Local */ = {
+			isa = PBXGroup;
+			children = (
+				84112E7C2BFCA0EF009F3EDF /* Core */,
+				84112E7F2BFCA180009F3EDF /* Entities */,
+			);
+			path = Local;
+			sourceTree = "<group>";
+		};
+		84112E7C2BFCA0EF009F3EDF /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				84112E7D2BFCA150009F3EDF /* RealmManager.swift */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		84112E7F2BFCA180009F3EDF /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				84112E812BFCAD4A009F3EDF /* RTrack.swift */,
+				84112E832BFCADB6009F3EDF /* RArtist.swift */,
+				84112E852BFCADC5009F3EDF /* RAlbum.swift */,
+				84112E872BFCADCE009F3EDF /* RLyric.swift */,
+				84112E892BFCADD6009F3EDF /* RAudio.swift */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		84112E8B2BFCB067009F3EDF /* Local */ = {
+			isa = PBXGroup;
+			children = (
+				84112E8C2BFCB0AE009F3EDF /* TrackLocalDataSource.swift */,
+			);
+			path = Local;
 			sourceTree = "<group>";
 		};
 		841B43152BE87AC600D1B490 = {
@@ -485,8 +538,8 @@
 			children = (
 				84C5610E2BEB19B900948ECA /* RepositoriesImplementations */,
 				84C561112BEB275600948ECA /* DataSources */,
-				84C561252BEB36A300948ECA /* DTOs */,
 				84C5610F2BEB19D400948ECA /* Network */,
+				84112E7B2BFCA0D2009F3EDF /* Local */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -506,6 +559,7 @@
 			isa = PBXGroup;
 			children = (
 				84C5611F2BEB2C7B00948ECA /* Core */,
+				84C561252BEB36A300948ECA /* DTOs */,
 				84C561212BEB2D7200948ECA /* AppEndpoint.swift */,
 			);
 			path = Network;
@@ -515,6 +569,7 @@
 			isa = PBXGroup;
 			children = (
 				84C561152BEB280A00948ECA /* Remote */,
+				84112E8B2BFCB067009F3EDF /* Local */,
 			);
 			path = DataSources;
 			sourceTree = "<group>";
@@ -559,6 +614,7 @@
 		84C561462BEB8B7F00948ECA /* Module */ = {
 			isa = PBXGroup;
 			children = (
+				84112E8E2BFCB0C1009F3EDF /* LocalModule.swift */,
 				84C561562BEB92D800948ECA /* NetworkModule.swift */,
 				FABE9F902BF5A2F300F22266 /* PlaybackModule.swift */,
 				84C561542BEB92A200948ECA /* DataSourceModule.swift */,
@@ -1022,6 +1078,7 @@
 				84C561352BEB62A300948ECA /* Cover.swift in Sources */,
 				84F771912BE9DD28006379BB /* LyricViewVC.swift in Sources */,
 				84C561332BEB612D00948ECA /* Avatar.swift in Sources */,
+				84112E8D2BFCB0AE009F3EDF /* TrackLocalDataSource.swift in Sources */,
 				FA0CB6BA2BF1CE69001EA4C3 /* SectionResponseDTO+Mapping.swift in Sources */,
 				84C5613B2BEB6EA500948ECA /* TrackRepository.swift in Sources */,
 				84E8F1362BE8E96E00A59879 /* TrackOptionVM.swift in Sources */,
@@ -1029,6 +1086,7 @@
 				841B43222BE87AC600D1B490 /* AppDelegate.swift in Sources */,
 				84C561522BEB8B7F00948ECA /* DI.swift in Sources */,
 				84F771872BE9C27A006379BB /* TrackOption.swift in Sources */,
+				84112E7E2BFCA150009F3EDF /* RealmManager.swift in Sources */,
 				84E8F12E2BE8E02900A59879 /* TrackOptionVC.swift in Sources */,
 				84449B642BFB51BD00B6455D /* SearchActiveTableViewCell.swift in Sources */,
 				84449B4B2BFB2ABD00B6455D /* CategoryRepository.swift in Sources */,
@@ -1038,9 +1096,11 @@
 				84F771A72BEA1115006379BB /* LyricViewVM.swift in Sources */,
 				84C561242BEB363B00948ECA /* TrackRemoteDataSource.swift in Sources */,
 				FA6469562BECF39700F521E0 /* RecommendTrack.swift in Sources */,
+				84112E862BFCADC5009F3EDF /* RAlbum.swift in Sources */,
 				84C5611A2BEB28BB00948ECA /* RequestMethod.swift in Sources */,
 				FA0CB6B12BF1C0EA001EA4C3 /* HomeVM.swift in Sources */,
 				84C561532BEB8B7F00948ECA /* Resolver.swift in Sources */,
+				84112E882BFCADCE009F3EDF /* RLyric.swift in Sources */,
 				84F771932BE9DF09006379BB /* Lyric.swift in Sources */,
 				84F771A52BEA0998006379BB /* TrackViewLyricTableViewCell.swift in Sources */,
 				84C561512BEB8B7F00948ECA /* Inject.swift in Sources */,
@@ -1057,8 +1117,10 @@
 				84C561222BEB2D7200948ECA /* AppEndpoint.swift in Sources */,
 				84F771A02BEA068A006379BB /* UIImage+Ext.swift in Sources */,
 				84C561312BEB611100948ECA /* Visual.swift in Sources */,
+				84112E842BFCADB6009F3EDF /* RArtist.swift in Sources */,
 				84C561182BEB28AA00948ECA /* Endpoint.swift in Sources */,
 				84F7719D2BE9FEA7006379BB /* Audio.swift in Sources */,
+				84112E8F2BFCB0C1009F3EDF /* LocalModule.swift in Sources */,
 				FAAF97202BF3184300A7A44A /* TrackListTableViewCell.swift in Sources */,
 				84C5611C2BEB28D800948ECA /* NetworkError.swift in Sources */,
 				FAAF97242BF320BB00A7A44A /* TrackListVM.swift in Sources */,
@@ -1068,6 +1130,7 @@
 				84A9DD612BFC37580084A336 /* SearchRepositoryImp.swift in Sources */,
 				84C5611E2BEB28E300948ECA /* Networkable.swift in Sources */,
 				841B436C2BE8965B00D1B490 /* TrackViewVC.swift in Sources */,
+				84112E822BFCAD4A009F3EDF /* RTrack.swift in Sources */,
 				FAAF971B2BF3119A00A7A44A /* TrackListVC.swift in Sources */,
 				FA0CB6BC2BF1ED62001EA4C3 /* SectionRemoteDataSource.swift in Sources */,
 				84449B5F2BFB480F00B6455D /* SearchActiveVM.swift in Sources */,
@@ -1101,6 +1164,7 @@
 				FA0CB6C42BF1FA57001EA4C3 /* SectionRepositoryImp.swift in Sources */,
 				FA0CB6C22BF1EE6A001EA4C3 /* Image.swift in Sources */,
 				84449B6A2BFB5D4600B6455D /* SearchRemoteDataSource.swift in Sources */,
+				84112E8A2BFCADD6009F3EDF /* RAudio.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
