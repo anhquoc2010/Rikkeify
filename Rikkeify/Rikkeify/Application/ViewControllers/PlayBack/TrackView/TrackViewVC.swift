@@ -77,8 +77,7 @@ class TrackViewVC: UIViewController {
     }
     
     @IBAction private func onLikeButtonTapped(_ sender: UIButton) {
-        viewModel.playback.toggleLikeState()
-        updateLikeButton(sender)
+        viewModel.saveOrRemoveFavourite()
     }
     
     @IBAction private func onQueueButtonTapped(_ sender: UIButton) {
@@ -297,6 +296,7 @@ extension TrackViewVC {
             if !isFetching {
                 self.updateSliderAndLyric(time: time)
                 self.updatePlayPauseButton(playPauseButton)
+                self.updateLikeButton(likeButton)
                 self.bindToViews()
                 if CMTimeGetSeconds(time) <= 1.5 {
                     self.bindToListView()
@@ -358,10 +358,10 @@ extension TrackViewVC {
     }
     
     private func updateLikeButton(_ button: UIButton) {
-        let imageName = viewModel.playback.isLiked ? IconSystem.liked.systemName() : IconSystem.like.systemName()
+        let imageName = viewModel.isFavorite ? IconSystem.liked.systemName() : IconSystem.like.systemName()
         let image = UIImage(systemName: imageName)
         button.setImage(image, for: .normal)
-        let color: UIColor = viewModel.playback.isLiked ? .systemGreen : .white
+        let color: UIColor = viewModel.isFavorite ? .systemGreen : .white
         button.tintColor = color
     }
     

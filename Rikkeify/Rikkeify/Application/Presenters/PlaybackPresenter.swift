@@ -24,7 +24,6 @@ final class PlaybackPresenter {
     var currentSectionContentId: String = ""
     
     var loopState: LoopState = .none
-    var isLiked = false
     var isShuffled = false
     
     var currentTrack: Track {
@@ -222,9 +221,5 @@ final class PlaybackPresenter {
     
     func toggleShuffleState() {
         isShuffled.toggle()
-    }
-    
-    func toggleLikeState() {
-        isLiked.toggle()
     }
 }

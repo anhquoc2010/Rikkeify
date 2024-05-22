@@ -10,7 +10,7 @@ import RealmSwift
 class RealmManager {
     static let shared = RealmManager()
     
-    private var realm: Realm {
+    var realm: Realm {
         do {
             return try Realm()
         } catch {

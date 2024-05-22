@@ -14,4 +14,5 @@ struct Audio {
     let durationText: String
     let mimeType: String
     let format: String
+    var fileUrl: String?
 }
