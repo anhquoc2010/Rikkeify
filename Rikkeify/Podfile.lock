@@ -1,5 +1,7 @@
 PODS:
+  - DownloadButton (0.1.0)
   - JGProgressHUD (2.2)
+  - Kingfisher (7.11.0)
   - Realm (10.50.0):
     - Realm/Headers (= 10.50.0)
   - Realm/Headers (10.50.0)
@@ -9,26 +11,32 @@ PODS:
   - Swinject (2.8.6)
 
 DEPENDENCIES:
+  - DownloadButton
   - JGProgressHUD
+  - Kingfisher
   - RealmSwift
   - SkeletonView
   - Swinject
 
 SPEC REPOS:
   trunk:
+    - DownloadButton
     - JGProgressHUD
+    - Kingfisher
     - Realm
     - RealmSwift
     - SkeletonView
     - Swinject
 
 SPEC CHECKSUMS:
+  DownloadButton: 49a21a89e0d7d1b42d9134f79aaa40e727cd57c3
   JGProgressHUD: d83d7a981b85d11205e19ff8ad5bb9c40571c847
+  Kingfisher: b9c985d864d43515f404f1ef4a8ce7d802ace3ac
   Realm: a0a6a99e3dfa8959358a95c3c05845b5e5d6af30
   RealmSwift: fa111fb98e092a4dff1d0785ad0c3483feda607a
   SkeletonView: 5a050f6411e697abd4cda0a8d767013399dccd69
   Swinject: 64c8eb8b138a8a5988fdf13994e3564feb820217
 
-PODFILE CHECKSUM: ec31bb866da81f02066be9aed462313da2a38f16
+PODFILE CHECKSUM: 3cf090fa0af29e0f5b9939b0b5346d3f8c861183
 
 COCOAPODS: 1.15.2

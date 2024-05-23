@@ -7,6 +7,7 @@
 
 import UIKit
 import AVFoundation
+import MediaPlayer
 
 private let kDefaultTabBarHeight = 49
 private let kVerticalSpacing = 8
@@ -32,6 +33,12 @@ class MainTabBarVC: UITabBarController {
         observerPlayer()
         hideCustomTabBarFrame()
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        UIApplication.shared.beginReceivingRemoteControlEvents()
+        self.becomeFirstResponder()
+    }
 }
 
 // MARK: Private methods
@@ -42,22 +49,49 @@ extension MainTabBarVC {
         miniPlayBack.hideCustomView()
     }
     
+    private func setupNowPlaying() {
+        
+        let nowPlayingInfo: [String: Any] = [
+            MPMediaItemPropertyArtwork: MPMediaItemArtwork(boundsSize: CGSize(width: 300, height: 300), requestHandler: { (size) -> UIImage in
+                var image: UIImage?
+                if Thread.isMainThread {
+                    image = self.miniPlayBack.thumbImageView.image
+                } else {
+                    DispatchQueue.main.sync {
+                        image = self.miniPlayBack.thumbImageView.image
+                    }
+                }
+                return image ?? .icApp
+            }),
+            MPMediaItemPropertyPlaybackDuration: self.playback.player.currentItem?.duration.seconds ?? 0,
+            MPNowPlayingInfoPropertyElapsedPlaybackTime: self.playback.player.currentTime().seconds,
+            MPMediaItemPropertyTitle: self.playback.currentTrack.name,
+            MPMediaItemPropertyArtist: self.playback.currentTrack.artists.first?.name ?? ""
+        ]
+
+        MPNowPlayingInfoCenter.default().nowPlayingInfo = nowPlayingInfo
+    }
+    
     private func observerPlayer() {
         playback.player.addPeriodicTimeObserver(forInterval: CMTimeMake(value: 1, timescale: 1), queue: .main) { [weak self] time in
             guard let self = self else { return }
             
+            self.setupNowPlaying()
             self.updatePlayPauseButton(miniPlayBack.playPauseButton)
             let duration = CMTimeGetSeconds(playback.player.currentItem?.duration ?? CMTime(seconds: 0, preferredTimescale: 1))
             let currentTime = CMTimeGetSeconds(time)
             
-            if currentTime >= duration - 0.5 {
+            if currentTime >= duration - 0.25 {
                 self.showLoading(text: "Fetching audio")
+                playback.player.pause()
                 playback.playNextTrack { [weak self] result in
                     guard let self = self else { return }
                     switch result {
                     case .success:
-                        self.playback.playTrack(index: self.playback.currentTrackIndex)
-                        self.hideLoading(after: 1)
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                            self.playback.playTrack(index: self.playback.currentTrackIndex)
+                            self.hideLoading(after: 3)
+                        }
                     case .failure(let error):
                         self.showAlert(title: error.customMessage.capitalized, message: "")
                     }
@@ -65,6 +99,55 @@ extension MainTabBarVC {
             }
             
             self.miniPlayBack.trackProgressView.setProgress(Float(currentTime / duration), animated: false)
+        }
+    }
+    
+    override func remoteControlReceived(with event: UIEvent?) {
+        super.remoteControlReceived(with: event)
+        
+        if let event = event {
+            if event.type == .remoteControl {
+                switch event.subtype {
+                case .remoteControlPlay:
+                    playback.togglePlayPauseState()
+                case .remoteControlPause:
+                    playback.togglePlayPauseState()
+                case .remoteControlNextTrack:
+                    self.showLoading(text: "Fetching audio")
+                    playback.player.pause()
+                    playback.playNextTrack(didTapForward: true) { [weak self] result in
+                        guard let self = self else { return }
+                        switch result {
+                        case .success:
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                                self.playback.playTrack(index: self.playback.currentTrackIndex)
+                                self.hideLoading(after: 3)
+                            }
+                        case .failure(let error):
+                            self.showAlert(title: error.customMessage.capitalized, message: "")
+                        }
+                    }
+                case .remoteControlPreviousTrack:
+                    self.showLoading(text: "Fetching Audio")
+                    playback.player.pause()
+                    playback.onPreviousTrack() { [weak self] result in
+                        DispatchQueue.main.async {
+                            guard let self = self else { return }
+                            switch result {
+                            case .success:
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                                    self.playback.playTrack(index: self.playback.currentTrackIndex)
+                                    self.hideLoading(after: 3)
+                                }
+                            case .failure(let error):
+                                self.showAlert(title: error.customMessage.capitalized, message: "")
+                            }
+                        }
+                    }
+                default:
+                    break
+                }
+            }
         }
     }
     

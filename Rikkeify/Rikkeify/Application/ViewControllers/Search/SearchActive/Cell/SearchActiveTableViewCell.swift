@@ -20,6 +20,13 @@ class SearchActiveTableViewCell: UITableViewCell {
         if searchItem.type == ItemType.artist.rawValue {
             self.layoutIfNeeded()
             thumbImageView.layer.cornerRadius = thumbImageView.frame.width / 2
+        } else {
+            thumbImageView.layer.cornerRadius = 0
         }
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        thumbImageView.image = nil
     }
 }

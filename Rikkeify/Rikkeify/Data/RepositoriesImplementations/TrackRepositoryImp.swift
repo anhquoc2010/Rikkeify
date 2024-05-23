@@ -16,6 +16,10 @@ final class TrackRepositoryImp {
 }
 
 extension TrackRepositoryImp: TrackRepository {
+    func getAllDownloadedTracks() -> [Track] {
+        localDataSource.getAllDownloadedTracks()
+    }
+    
     func saveFavoriteTrack(_ track: Track) {
         localDataSource.saveFavoriteTrack(track)
     }
@@ -28,12 +32,21 @@ extension TrackRepositoryImp: TrackRepository {
         localDataSource.checkFavorite(track: track, completion: completion)
     }
     
+    
+    func checkDownload(track: Track, completion: @escaping (Result<Bool, Error>) -> Void) {
+        localDataSource.checkDownload(track: track, completion: completion)
+    }
+    
     func getAllFavoriteTracks() -> [Track] {
         localDataSource.getAllFavoriteTracks()
     }
     
-    func downloadAudio(from link: URL, track: Track, completion: @escaping (Result<Void, any Error>) -> Void) {
-        localDataSource.downloadAudio(from: link, track: track, completion: completion)
+    func downloadAudio(from tracks: [Track], progressHandler: @escaping (Double) -> Void, completion: @escaping (Result<Void, Error>) -> Void) {
+        localDataSource.downloadAudio(from: tracks, progressHandler: progressHandler, completion: completion)
+    }
+    
+    func removeAudio(from track: Track, completion: @escaping (Result<Void, Error>) -> Void) {
+        localDataSource.removeAudio(from: track, completion: completion)
     }
     
     func getTrackMetadata(trackId: String, getAudio: Bool, completion: @escaping (Result<Track, NetworkError>) -> Void) {
@@ -42,5 +55,9 @@ extension TrackRepositoryImp: TrackRepository {
     
     func getRecommendTracks(seedTrackId: String, completion: @escaping (Result<[RecommendTrack], NetworkError>) -> Void) {
         remoteDataSource.getRecommendTracks(seedTrackId: seedTrackId, completion: completion)
+    }
+    
+    func getTracksAudio(trackNames: [String], completion: @escaping ([Audio]) -> Void) {
+        remoteDataSource.getTracksAudio(trackNames: trackNames, completion: completion)
     }
 }

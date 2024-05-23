@@ -116,6 +116,9 @@ extension LyricViewVC {
         self.artistsLabel.text = currentTrack.artists.first?.name
         self.trackProgressSlider.maximumValue = Float(currentTrack.durationMs)
         self.lyricErrorLabel.isHidden = !currentTrack.lyrics.isEmpty
+        
+        self.updateSliderAndLyric(time: viewModel.playback.player.currentTime())
+        self.updatePlayPauseButton(playPauseButton)
     }
     
     private func bindToListView() {
@@ -134,6 +137,7 @@ extension LyricViewVC {
             guard let self = self else { return }
             
             self.updateSliderAndLyric(time: time)
+            self.updateLyric(currentTime: time)
             self.updatePlayPauseButton(playPauseButton)
             self.bindToViews()
             if CMTimeGetSeconds(time) <= 1.5 {
@@ -169,8 +173,6 @@ extension LyricViewVC {
             trackTimeNowLabel.text = millisecondsToMinutesSeconds(Int(trackProgressSlider.value))
             trackTimeSumOrRemainLabel.text = "-\(millisecondsToMinutesSeconds(Int(trackProgressSlider.maximumValue - trackProgressSlider.value)))"
         }
-        
-        updateLyric(currentTime: time)
     }
     
     private func updateLyric(currentTime: CMTime) {

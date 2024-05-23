@@ -7,6 +7,7 @@
 
 import AVFoundation
 import SkeletonView
+import DownloadButton
 
 class TrackViewVC: UIViewController {
     // MARK: Properties
@@ -15,6 +16,7 @@ class TrackViewVC: UIViewController {
     private var isFetching: Bool = false
     
     // MARK: Outlets
+    @IBOutlet private weak var downloadButton: PKDownloadButton!
     @IBOutlet private weak var lyricErrorLabel: UILabel!
     @IBOutlet private weak var likeButton: UIButton!
     @IBOutlet private weak var loopButton: UIButton!
@@ -24,8 +26,6 @@ class TrackViewVC: UIViewController {
     @IBOutlet private weak var playPauseButton: UIButton!
     @IBOutlet private weak var lyricsTableView: UITableView!
     @IBOutlet private weak var lyricsView: UIView!
-    @IBOutlet private weak var speakerButtonLabel: UILabel!
-    @IBOutlet private weak var speakerButtonImageView: UIButton!
     @IBOutlet private weak var trackTimeSumOrRemainLabel: UILabel!
     @IBOutlet private weak var trackTimeNowLabel: UILabel!
     @IBOutlet private weak var trackProgressSlider: UISlider!
@@ -57,6 +57,23 @@ class TrackViewVC: UIViewController {
         self.observerPlayback()
     }
     
+    override func remoteControlReceived(with event: UIEvent?) {
+        super.remoteControlReceived(with: event)
+        
+        if let event = event {
+            if event.type == .remoteControl {
+                switch event.subtype {
+                case .remoteControlNextTrack:
+                    navigationController?.popViewController(animated: true)
+                case .remoteControlPreviousTrack:
+                    navigationController?.popViewController(animated: true)
+                default:
+                    break
+                }
+            }
+        }
+    }
+    
     // MARK: - Actions
     @IBAction private func onHideButtonTapped(_ sender: UIButton) {
         dismiss(animated: true)
@@ -78,36 +95,32 @@ class TrackViewVC: UIViewController {
     
     @IBAction private func onLikeButtonTapped(_ sender: UIButton) {
         viewModel.saveOrRemoveFavourite()
+        updateLikeButton(sender)
     }
     
     @IBAction private func onQueueButtonTapped(_ sender: UIButton) {
         // TODO: Implement
     }
     
-    @IBAction private func onShareButtonTapped(_ sender: UIButton) {
-        // TODO: Implement
-    }
-    
-    @IBAction private func onSpeakerButtonTapped(_ sender: UIButton) {
-        // TODO: Implement
-    }
-    
     @IBAction private func onForwardButtonTapped(_ sender: UIButton) {
         self.isFetching = true
         self.showLoading(text: "Fetching Audio")
+        viewModel.playback.player.pause()
         viewModel.playback.playNextTrack(didTapForward: true) { [weak self] result in
             guard let self = self else { return }
             DispatchQueue.main.async {
                 switch result {
                 case .success:
-                    self.viewModel.playback.playTrack(index: self.viewModel.playback.currentTrackIndex)
-                    self.isFetching = false
-                    self.hideLoading()
-                    self.setBackFordwardStatus()
-                    self.bindViewModel()
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                        self.viewModel.playback.playTrack(index: self.viewModel.playback.currentTrackIndex)
+                        self.isFetching = false
+                        self.hideLoading(after: 3)
+                        self.setBackFordwardStatus()
+                        self.bindViewModel()
+                    }
                 case .failure(let error):
                     self.showAlert(title: error.customMessage.capitalized, message: "") {
-//                        self.dismiss(animated: true)
+                        //                        self.dismiss(animated: true)
                     }
                 }
             }
@@ -117,19 +130,22 @@ class TrackViewVC: UIViewController {
     @IBAction private func onBackwardButtonTapped(_ sender: UIButton) {
         self.isFetching = true
         self.showLoading(text: "Fetching Audio")
+        viewModel.playback.player.pause()
         viewModel.playback.onPreviousTrack() { [weak self] result in
             DispatchQueue.main.async {
                 guard let self = self else { return }
                 switch result {
                 case .success:
-                    self.viewModel.playback.playTrack(index: self.viewModel.playback.currentTrackIndex)
-                    self.isFetching = false
-                    self.hideLoading()
-                    self.setBackFordwardStatus()
-                    self.bindViewModel()
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                        self.viewModel.playback.playTrack(index: self.viewModel.playback.currentTrackIndex)
+                        self.isFetching = false
+                        self.hideLoading(after: 3)
+                        self.setBackFordwardStatus()
+                        self.bindViewModel()
+                    }
                 case .failure(let error):
                     self.showAlert(title: error.customMessage.capitalized, message: "") {
-//                        self.dismiss(animated: true)
+                        //                        self.dismiss(animated: true)
                     }
                 }
             }
@@ -175,15 +191,66 @@ extension TrackViewVC: UITableViewDataSource {
             ) as? TrackViewLyricTableViewCell
         else { return .init() }
         
-        cell.configure(lyric: viewModel.playback.tracks[viewModel.playback.currentTrackIndex].lyrics[indexPath.row].text, color: .black)
+        cell.configure(lyric: viewModel.playback.currentTrack.lyrics[indexPath.row].text, color: .black)
         
         return cell
+    }
+}
+
+extension TrackViewVC: PKDownloadButtonDelegate {
+    func downloadButtonTapped(_ downloadButton: PKDownloadButton!, currentState state: PKDownloadButtonState) {
+        switch state {
+        case .startDownload:
+            // Start the download
+            viewModel.downloadOrRemoveTracks(progressHandler: { [weak self] progress in
+                guard self != nil else { return }
+                // Update UI with download progress
+                DispatchQueue.main.async {
+                    downloadButton.stopDownloadButton.progress = CGFloat(Float(progress))
+                }
+            }) { [weak self] result in
+                // Handle download completion
+                guard self != nil else { return }
+                switch result {
+                case .success:
+                    // Set button state to downloaded when download is complete
+                    DispatchQueue.main.async {
+                        downloadButton.state = .downloaded
+                    }
+                case .failure(let error):
+                    // Handle download failure
+                    print("Download failed with error: \(error.localizedDescription)")
+                }
+            }
+            // Set button state to downloading
+            downloadButton.state = .downloading
+        case .pending, .downloading, .downloaded:
+            // Reset download when tapped in any of these states
+            downloadButton.state = .startDownload
+        @unknown default:
+            assertionFailure("Unsupported state")
+        }
     }
 }
 
 // MARK: - Private Methods
 extension TrackViewVC {
     private func setupViews() {
+        downloadButton.delegate = self
+        
+        downloadButton.downloadedButton.cleanDefaultAppearance()
+        downloadButton.downloadedButton.setImage(.init(systemName: IconSystem.downloaded.systemName()), for: .normal)
+        downloadButton.downloadedButton.tintColor = .systemGreen
+        downloadButton.downloadedButton.setTitle(nil, for: .normal)
+        
+        downloadButton.pendingView.tintColor = .systemGreen
+        downloadButton.stopDownloadButton.tintColor = .systemGreen
+        
+        downloadButton.startDownloadButton.cleanDefaultAppearance()
+        downloadButton.startDownloadButton.setImage(.init(systemName: IconSystem.startDownload.systemName()), for: .normal)
+        downloadButton.startDownloadButton.tintColor = .white
+        downloadButton.startDownloadButton.setTitle(nil, for: .normal)
+        
         showSkeleton(views: titleLabel,
                      thumbnailImageView,
                      trackNameLabel,
@@ -218,12 +285,24 @@ extension TrackViewVC {
     private func bindViewModel() {
         self.bindToViews()
         self.bindToListView()
+        
+        self.updateSliderAndLyric(time: viewModel.playback.player.currentTime())
+        self.updatePlayPauseButton(playPauseButton)
+        self.setBackFordwardStatus()
+        self.viewModel.checkFavorite() { [weak self] _ in
+            guard let self = self else { return }
+            self.updateLikeButton(likeButton)
+        }
+        self.viewModel.checkDownload() { [weak self] _ in
+            guard let self = self else { return }
+            self.downloadButton.state = self.viewModel.isDownload ? .downloaded : .startDownload
+        }
     }
     
     private func updateLyric(currentTime: CMTime) {
         let currentTimeInMs = Int(CMTimeGetSeconds(currentTime) * 1000)
         print("currentTime \(currentTimeInMs)")
-
+        
         DispatchQueue.main.async {
             if let indexPath = self.indexPathForTime(currentTimeInMs) {
                 for row in 0..<self.viewModel.playback.currentTrack.lyrics.count {
@@ -235,7 +314,7 @@ extension TrackViewVC {
             }
         }
     }
-
+    
     private func indexPathForTime(_ timeMs: Int) -> IndexPath? {
         for (index, lyric) in viewModel.playback.currentTrack.lyrics.enumerated() {
             let endTime = lyric.startMs + lyric.durMs
@@ -246,18 +325,25 @@ extension TrackViewVC {
         }
         return nil
     }
-
+    
     private func setBackFordwardStatus() {
         DispatchQueue.main.async {
-            if self.viewModel.playback.isFirstTrack {
+            if self.viewModel.playback.isFirstTrack && self.viewModel.playback.isLastTrack {
+                self.backwardButton.isEnabled = false
+                self.forwardButton.isEnabled = false
+                self.shuffleButton.isEnabled = false
+            } else if self.viewModel.playback.isFirstTrack {
                 self.backwardButton.isEnabled = false
                 self.forwardButton.isEnabled = true
-            } else if self.viewModel.playback.isLastTrack {
+                self.shuffleButton.isEnabled = true
+            }  else if self.viewModel.playback.isLastTrack {
                 self.backwardButton.isEnabled = true
                 self.forwardButton.isEnabled = false
+                self.shuffleButton.isEnabled = true
             } else {
                 self.backwardButton.isEnabled = true
                 self.forwardButton.isEnabled = true
+                self.shuffleButton.isEnabled = true
             }
         }
     }
@@ -295,8 +381,17 @@ extension TrackViewVC {
             guard let self = self else { return }
             if !isFetching {
                 self.updateSliderAndLyric(time: time)
+                self.updateLyric(currentTime: time)
                 self.updatePlayPauseButton(playPauseButton)
-                self.updateLikeButton(likeButton)
+                self.setBackFordwardStatus()
+                self.viewModel.checkFavorite() { [weak self] _ in
+                    guard let self = self else { return }
+                    self.updateLikeButton(likeButton)
+                }
+                self.viewModel.checkDownload() { [weak self] _ in
+                    guard let self = self else { return }
+                    self.downloadButton.state = self.viewModel.isDownload ? .downloaded : .startDownload
+                }
                 self.bindToViews()
                 if CMTimeGetSeconds(time) <= 1.5 {
                     self.bindToListView()
@@ -313,8 +408,6 @@ extension TrackViewVC {
             trackTimeNowLabel.text = millisecondsToMinutesSeconds(Int(trackProgressSlider.value))
             trackTimeSumOrRemainLabel.text = "-\(millisecondsToMinutesSeconds(Int(trackProgressSlider.maximumValue - trackProgressSlider.value)))"
         }
-        
-        updateLyric(currentTime: time)
     }
     
     private func updateLoopButton(_ button: UIButton) {

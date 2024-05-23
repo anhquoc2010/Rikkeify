@@ -15,7 +15,15 @@ class YourLibraryVC: UIViewController {
         // Do any additional setup after loading the view.
     }
 
-
+    @IBAction func onLikedSongsPicked(_ sender: Any) {
+        let vc = TrackListVC(sectionContent: SectionContent(type: "liked", id: "likedlist", name: "Liked Songs", visuals: nil, images: nil))
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    @IBAction func onDownloadedSongsPicked(_ sender: Any) {
+        let vc = TrackListVC(sectionContent: SectionContent(type: "downloaded", id: "downloadedlist", name: "Downloaded Songs", visuals: nil, images: nil))
+        navigationController?.pushViewController(vc, animated: true)
+    }
     /*
     // MARK: - Navigation
 

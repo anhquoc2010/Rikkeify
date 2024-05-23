@@ -8,7 +8,7 @@
 import Foundation
 
 enum IconSystem {
-    case sliderThumb, loop, loopOne, play, pause, like, liked, miniPlay, miniPause
+    case sliderThumb, loop, loopOne, play, pause, like, liked, miniPlay, miniPause, startDownload, downloaded
     
     func systemName() -> String {
         switch self {
@@ -30,6 +30,10 @@ enum IconSystem {
             return "play.fill"
         case .miniPause:
             return "pause.fill"
+        case .startDownload:
+            return "arrow.down.circle"
+        case .downloaded:
+            return "arrow.down.circle.fill"
         }
     }
 }

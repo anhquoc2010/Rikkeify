@@ -2,7 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="dark"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -44,7 +44,7 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bGS-xy-S6S">
-                                    <rect key="frame" x="319" y="243.6666666666666" width="54" height="52.666666666666657"/>
+                                    <rect key="frame" x="319" y="243.6666666666666" width="54" height="52.666666666666714"/>
                                     <constraints>
                                         <constraint firstAttribute="width" secondItem="bGS-xy-S6S" secondAttribute="height" multiplier="1:1" id="Acv-k6-K4j"/>
                                         <constraint firstAttribute="width" constant="54" id="VPe-Ge-63p"/>
@@ -68,12 +68,14 @@
                                     </constraints>
                                     <userDefinedRuntimeAttributes>
                                         <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                            <integer key="value" value="10"/>
+                                        </userDefinedRuntimeAttribute>
                                     </userDefinedRuntimeAttributes>
                                 </view>
                             </subviews>
                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             <constraints>
-                                <constraint firstItem="VqR-bg-KBO" firstAttribute="top" secondItem="9at-8E-RHN" secondAttribute="bottom" constant="20" id="6nY-a1-7Xk"/>
                                 <constraint firstItem="bGS-xy-S6S" firstAttribute="centerY" secondItem="9at-8E-RHN" secondAttribute="centerY" id="7EY-qq-YlG"/>
                                 <constraint firstItem="VqR-bg-KBO" firstAttribute="leading" secondItem="Zw2-Xq-jQv" secondAttribute="leading" constant="20" id="89Z-rJ-6ho"/>
                                 <constraint firstAttribute="trailing" secondItem="VqR-bg-KBO" secondAttribute="trailing" constant="20" id="8Sf-BP-9pX"/>
@@ -86,8 +88,9 @@
                                 <constraint firstItem="9at-8E-RHN" firstAttribute="top" secondItem="Oyj-ed-HA4" secondAttribute="bottom" constant="40" id="mLC-99-94F"/>
                                 <constraint firstItem="Oyj-ed-HA4" firstAttribute="width" secondItem="Zw2-Xq-jQv" secondAttribute="width" multiplier="0.55" id="mdv-be-Dfe"/>
                                 <constraint firstItem="Oyj-ed-HA4" firstAttribute="centerX" secondItem="Zw2-Xq-jQv" secondAttribute="centerX" id="pdk-rd-V6L"/>
-                                <constraint firstItem="DuE-4K-UnF" firstAttribute="top" secondItem="9at-8E-RHN" secondAttribute="bottom" constant="20" id="qlt-rg-1G8"/>
                                 <constraint firstAttribute="trailing" secondItem="bGS-xy-S6S" secondAttribute="trailing" constant="20" id="qvk-OZ-lPg"/>
+                                <constraint firstItem="DuE-4K-UnF" firstAttribute="top" secondItem="9at-8E-RHN" secondAttribute="bottom" constant="20" id="r45-uI-6be"/>
+                                <constraint firstItem="VqR-bg-KBO" firstAttribute="top" secondItem="9at-8E-RHN" secondAttribute="bottom" constant="20" id="uFD-UK-bMR"/>
                             </constraints>
                         </view>
                     </subviews>
@@ -143,7 +146,7 @@
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemGreenColor">
-            <color red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

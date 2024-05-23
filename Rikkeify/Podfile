@@ -14,8 +14,10 @@ target 'Rikkeify' do
   pod 'RealmSwift'
   
   # UI
+  pod 'Kingfisher'
   pod 'SkeletonView'
   pod 'JGProgressHUD'
+  pod 'DownloadButton'
   
   post_install do |pi|
         pi.pods_project.targets.each do |target|

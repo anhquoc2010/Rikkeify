@@ -10,6 +10,7 @@ import Foundation
 protocol TrackRemoteDataSource {
     func getTrackMetadata(trackId: String, getAudio: Bool, completion: @escaping (Result<Track, NetworkError>) -> Void)
     func getRecommendTracks(seedTrackId: String, completion: @escaping (Result<[RecommendTrack], NetworkError>) -> Void)
+    func getTracksAudio(trackNames: [String], completion: @escaping ([Audio]) -> Void)
 }
 
 final class TrackRemoteDataSourceImp {
@@ -47,6 +48,35 @@ extension TrackRemoteDataSourceImp: TrackRemoteDataSource {
             case .failure(let error):
                 completion(.failure(error))
             }
+        }
+    }
+    
+    func getTracksAudio(trackNames: [String], completion: @escaping ([Audio]) -> Void) {
+        let dispatchGroup = DispatchGroup()
+        var allAudio: [Audio] = []
+
+        for trackName in trackNames {
+            dispatchGroup.enter()
+            fetchTrackAudio(trackName: trackName) { result in
+                defer {
+                    dispatchGroup.leave()
+                }
+                switch result {
+                case .failure(let error):
+                    print("Failed to fetch audio for \(trackName): \(error)")
+                    // Handle error as needed
+                case .success(let audioResponseDTO):
+                    if let audio = audioResponseDTO.soundcloudTrack.audio.compactMap({ $0.toDomain() }).first {
+                        allAudio.append(audio)
+                    }
+                }
+            }
+        }
+
+        dispatchGroup.notify(queue: .main) {
+            // Perform task when all audio is fetched
+            // For example, you can sort audio by some criteria
+            completion(allAudio)
         }
     }
     

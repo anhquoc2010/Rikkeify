@@ -12,10 +12,10 @@ class RTrack: Object {
     @Persisted var name: String = ""
     @Persisted var durationMs: Int64 = 0
     @Persisted var durationText: String = ""
-    let artists = List<RArtist>()
+    @Persisted var artists = List<RArtist>()
     @Persisted var album: RAlbum?
-    let lyrics = List<RLyric>()
-    let audio = List<RAudio>()
+    @Persisted var lyrics = List<RLyric>()
+    @Persisted var audio: RAudio?
     @Persisted var isFavourited: Bool = false
     
     static func fromDomain(track: Track) -> RTrack {
@@ -27,7 +27,7 @@ class RTrack: Object {
         rTrack.artists.append(objectsIn: track.artists.map { RArtist.fromDomain(artist: $0) })
         rTrack.album = track.album != nil ? RAlbum.fromDomain(album: track.album!) : nil
         rTrack.lyrics.append(objectsIn: track.lyrics.map { RLyric.fromDomain(lyric: $0) })
-        rTrack.audio.append(objectsIn: track.audio.map { RAudio.fromDomain(audio: $0) })
+        rTrack.audio = track.audio.first != nil ? RAudio.fromDomain(audio: track.audio.first!) : nil
         return rTrack
     }
     
@@ -42,7 +42,7 @@ class RTrack: Object {
                           artists: artists.map { $0.toDomain() },
                           album: album?.toDomain(),
                           lyrics: lyrics.map { $0.toDomain() },
-                          audio: audio.map { $0.toDomain() })
+                          audio: audio == nil ? [] : [audio!.toDomain()])
         return track
     }
 }

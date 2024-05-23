@@ -8,6 +8,7 @@
 import UIKit
 import SkeletonView
 import AVFoundation
+import DownloadButton
 
 class TrackListVC: UIViewController {
     // MARK: Properties
@@ -31,7 +32,7 @@ class TrackListVC: UIViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
@@ -39,7 +40,7 @@ class TrackListVC: UIViewController {
         bindViewModel()
         observerPlayback()
     }
-
+    
     // MARK: Actions
     @IBAction func onBackButtonTapped(_ sender: UIButton) {
         navigationController?.popViewController(animated: true)
@@ -48,17 +49,20 @@ class TrackListVC: UIViewController {
     @IBAction func onPlayButtonTapped(_ sender: UIButton) {
         if !viewModel.isPlayingThisSectionContent {
             self.showLoading(text: "Fetching track")
+            viewModel.playback.player.pause()
         }
         viewModel.onTapPlayPauseButton { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .success:
-                self.viewModel.playback.playTrack(index: self.viewModel.playback.currentTrackIndex)
-                self.hideLoading(after: 1.5)
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    self.viewModel.playback.playTrack(index: self.viewModel.playback.currentTrackIndex)
+                    self.hideLoading(after: 3)
+                }
             case .failure(let error):
                 self.hideLoading(after: 1.5)
                 self.showAlert(title: error.customMessage.capitalized, message: "Fetch Lyric Failed")
-//                    self.navigationController?.popViewController(animated: true)
+                //                    self.navigationController?.popViewController(animated: true)
             }
         }
     }
@@ -88,6 +92,27 @@ extension TrackListVC: UITableViewDataSource {
 extension TrackListVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 68
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        if !viewModel.isPlayingThisSectionContent {
+//            self.showLoading(text: "Fetching track")
+//            viewModel.playback.player.pause()
+//        }
+//        viewModel.onTapPlayPauseButton(index: indexPath.row) { [weak self] result in
+//            guard let self = self else { return }
+//            switch result {
+//            case .success:
+//                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+//                    self.viewModel.playback.playTrack(index: self.viewModel.playback.currentTrackIndex)
+//                    self.hideLoading(after: 3)
+//                }
+//            case .failure(let error):
+//                self.hideLoading(after: 1.5)
+//                self.showAlert(title: error.customMessage.capitalized, message: "Fetch Lyric Failed")
+//                //                    self.navigationController?.popViewController(animated: true)
+//            }
+//        }
     }
 }
 

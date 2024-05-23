@@ -7,11 +7,25 @@
 
 import UIKit
 import AVFoundation
+import Combine
+import Kingfisher
 
 final class PlaybackPresenter {
     static let shared = PlaybackPresenter()
     
-    private init() { }
+    private init() {
+        activateSession()
+        canellable = NotificationCenter.default.publisher(for: .AVPlayerItemDidPlayToEndTime)
+            .sink { [weak self] _ in
+                guard let me = self else { return }
+                
+                me.deactivateSession()
+            }
+    }
+    
+    deinit {
+        canellable?.cancel()
+    }
     
     @Inject
     private var trackRepository: TrackRepository
@@ -20,11 +34,15 @@ final class PlaybackPresenter {
     var currentTrackIndex = 0
     var player = AVPlayer()
     var playerItems = [AVPlayerItem?]()
+    private var session = AVAudioSession.sharedInstance()
+    private var canellable: AnyCancellable?
     var playedIndex = Set<Int>()
     var currentSectionContentId: String = ""
     
     var loopState: LoopState = .none
     var isShuffled = false
+    
+    var loopedOnce = false
     
     var currentTrack: Track {
         tracks[currentTrackIndex]
@@ -40,6 +58,32 @@ final class PlaybackPresenter {
     
     var isLastTrack: Bool {
         currentTrackIndex + 1 >= tracks.count
+    }
+    
+    private func activateSession() {
+        do {
+            try session.setCategory(
+                .playback,
+                mode: .default,
+                options: []
+            )
+        } catch _ {}
+        
+        do {
+            try session.setActive(true, options: .notifyOthersOnDeactivation)
+        } catch _ {}
+        
+        do {
+            try session.overrideOutputAudioPort(.speaker)
+        } catch _ {}
+    }
+    
+    func deactivateSession() {
+        do {
+            try session.setActive(false, options: .notifyOthersOnDeactivation)
+        } catch let error as NSError {
+            print("Failed to deactivate audio session: \(error.localizedDescription)")
+        }
     }
     
     func fetchTrackMetadata(index: Int, completion: @escaping (Result<Void, NetworkError>) -> Void) {
@@ -59,10 +103,13 @@ final class PlaybackPresenter {
     
     func playTrack(index: Int) {
         if playerItems.count > 0 {
+            activateSession()
             player.replaceCurrentItem(with: playerItems[index])
             player.seek(to: .init(seconds: 0, preferredTimescale: 1))
             player.automaticallyWaitsToMinimizeStalling = true
-            player.play()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                self.player.play()
+            }
             playedIndex.insert(index)
         }
     }
@@ -70,7 +117,7 @@ final class PlaybackPresenter {
     func playNextTrack(didTapForward: Bool = false, completion: @escaping (Result<Void, NetworkError>) -> Void) {
         if !didTapForward {
             handleLoop { [weak self] result in
-                guard let self = self else { return }
+                guard let _ = self else { return }
                 switch result {
                 case .success:
                     completion(.success(()))
@@ -81,7 +128,7 @@ final class PlaybackPresenter {
         } else {
             if isShuffled {
                 handleShuffle { [weak self] result in
-                    guard let self = self else { return }
+                    guard let _ = self else { return }
                     switch result {
                     case .success:
                         completion(.success(()))
@@ -91,7 +138,7 @@ final class PlaybackPresenter {
                 }
             } else {
                 handleNextTrack() { [weak self] result in
-                    guard let self = self else { return }
+                    guard let _ = self else { return }
                     switch result {
                     case .success:
                         completion(.success(()))
@@ -113,7 +160,7 @@ final class PlaybackPresenter {
                 completion(.success(()))
             } else {
                 self.fetchTrackMetadata(index: currentTrackIndex) { [weak self] result in
-                    guard let self = self else { return }
+                    guard let _ = self else { return }
                     switch result {
                     case .success:
                         completion(.success(()))
@@ -126,21 +173,29 @@ final class PlaybackPresenter {
     }
     
     private func handleShuffle(completion: @escaping (Result<Void, NetworkError>) -> Void) {
+        let dispatchGroup = DispatchGroup()
+        
+        dispatchGroup.enter()
+        
         repeat {
             let randomInt = Int(arc4random_uniform(UInt32(tracks.count)))
-            currentTrackIndex = randomInt
-        } while playedIndex.contains(currentTrackIndex) && playedIndex.count < tracks.count
-
-        if self.playerItems[self.currentTrackIndex] != nil {
-            completion(.success(()))
-        } else {
-            self.fetchTrackMetadata(index: self.currentTrackIndex) { [weak self] result in
-                guard let self = self else { return }
-                switch result {
-                case .success:
-                    completion(.success(()))
-                case .failure(let error):
-                    completion(.failure(error))
+            self.currentTrackIndex = randomInt
+        } while playedIndex.contains(self.currentTrackIndex) && playedIndex.count < tracks.count
+        
+        dispatchGroup.leave()
+        
+        dispatchGroup.notify(queue: .main) {
+            if self.playerItems[self.currentTrackIndex] != nil {
+                completion(.success(()))
+            } else {
+                self.fetchTrackMetadata(index: self.currentTrackIndex) { [weak self] result in
+                    guard let _ = self else { return }
+                    switch result {
+                    case .success:
+                        completion(.success(()))
+                    case .failure(let error):
+                        completion(.failure(error))
+                    }
                 }
             }
         }
@@ -149,13 +204,16 @@ final class PlaybackPresenter {
     private func handleLoop(completion: @escaping (Result<Void, NetworkError>) -> Void) {
         switch loopState {
         case .loop:
+            loopedOnce = false
             completion(.success(()))
         case .loopOne:
-            if !playedIndex.contains(currentTrackIndex) {
+            if !loopedOnce {
                 completion(.success(()))
+                loopedOnce = true
             } else {
+                loopedOnce = false
                 handleNextTrack { [weak self] result in
-                    guard let self = self else { return }
+                    guard let _ = self else { return }
                     switch result {
                     case .success:
                         completion(.success(()))
@@ -165,8 +223,9 @@ final class PlaybackPresenter {
                 }
             }
         case .none:
+            loopedOnce = false
             handleNextTrack { [weak self] result in
-                guard let self = self else { return }
+                guard let _ = self else { return }
                 switch result {
                 case .success:
                     completion(.success(()))
@@ -188,7 +247,7 @@ final class PlaybackPresenter {
             completion(.success(()))
         } else {
             self.fetchTrackMetadata(index: currentTrackIndex) { [weak self] result in
-                guard let self = self else { return }
+                guard let _ = self else { return }
                 switch result {
                 case .success:
                     completion(.success(()))
@@ -213,7 +272,7 @@ final class PlaybackPresenter {
             loopState = .loop
         case .loop:
             loopState = .loopOne
-            playedIndex.remove(currentTrackIndex)
+            loopedOnce = false
         case .loopOne:
             loopState = .none
         }

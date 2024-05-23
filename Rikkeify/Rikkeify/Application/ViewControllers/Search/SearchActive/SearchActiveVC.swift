@@ -61,6 +61,7 @@ extension SearchActiveVC: UITableViewDelegate {
             playback.playerItems = [nil]
             playback.playedIndex.removeAll()
             playback.currentTrackIndex = 0
+            playback.player.pause()
             playback.fetchTrackMetadata(index: playback.currentTrackIndex) { [weak self] result in
                 guard let self = self else { return }
                 switch result {

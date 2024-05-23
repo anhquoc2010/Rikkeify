@@ -16,7 +16,7 @@ extension UIViewController {
     }()
         
     func showLoading(text: String = "Loading") {
-        UIViewController.sharedHUD.textLabel.text = text
+//        UIViewController.sharedHUD.textLabel.text = text
         UIViewController.sharedHUD.show(in: self.view)
     }
     
