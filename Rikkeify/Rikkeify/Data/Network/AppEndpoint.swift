@@ -82,7 +82,7 @@ extension AppEndpoint: EndPoint {
             ]
         default:
             return [
-                "X-RapidAPI-Key": "4ab51ba4ccmsh438884665e7462fp1ff5ffjsn0e5325498fa1",
+                "X-RapidAPI-Key": "6da5076013mshd795f98f530943fp1bcfacjsn01aba17e1699",
                 "X-RapidAPI-Host": "spotify-scraper.p.rapidapi.com"
             ]
         }
