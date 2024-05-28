@@ -88,12 +88,33 @@ final class PlaybackPresenter {
     
     func fetchTrackMetadata(index: Int, completion: @escaping (Result<Void, NetworkError>) -> Void) {
         trackRepository.getTrackMetadata(trackId: tracks[index].id, getAudio: true) { [weak self] (result: Result<Track, NetworkError>) in
-            guard let self = self else { return }
+            guard let self = self else {
+                completion(.failure(.unknown))
+                return
+            }
             switch result {
             case .success(let track):
                 self.tracks[index] = track
-                guard let url = URL(string: track.audio.first?.url ?? "") else { return }
-                self.playerItems[index] = AVPlayerItem(url: url)
+//                guard let url = URL(string: track.audio.first?.url ?? "") else { return }
+//                self.playerItems[index] = AVPlayerItem(url: url)
+                if let trackAudio = track.audio.first {
+                    let url: URL
+                    if let fileUrlString = trackAudio.fileUrl, !fileUrlString.isEmpty, let fileUrl = URL(string: fileUrlString) {
+                        // Use the file URL directly
+                        url = fileUrl
+                    } else {
+                        // Use the URL
+                        guard let audioUrl = URL(string: trackAudio.url) else {
+                            print("Invalid URL")
+                            completion(.failure(.invalidURL))
+                            return
+                        }
+                        url = audioUrl
+                    }
+                    
+                    // Create the AVPlayerItem and assign it to the playerItems array
+                    self.playerItems[index] = AVPlayerItem(url: url)
+                }
                 completion(.success(()))
             case .failure(let error):
                 completion(.failure(error))
@@ -107,7 +128,9 @@ final class PlaybackPresenter {
             player.replaceCurrentItem(with: playerItems[index])
             player.seek(to: .init(seconds: 0, preferredTimescale: 1))
             player.automaticallyWaitsToMinimizeStalling = true
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
+                guard let self = self else { return }
+                self.player.play()
                 self.player.play()
             }
             playedIndex.insert(index)
@@ -173,32 +196,33 @@ final class PlaybackPresenter {
     }
     
     private func handleShuffle(completion: @escaping (Result<Void, NetworkError>) -> Void) {
-        let dispatchGroup = DispatchGroup()
+//        let dispatchGroup = DispatchGroup()
+//        
+//        dispatchGroup.enter()
+//        repeat {
+//            let randomInt = Int(arc4random_uniform(UInt32(tracks.count)))
+            self.currentTrackIndex = Int(arc4random_uniform(UInt32(tracks.count)))
+//        } while playedIndex.contains(self.currentTrackIndex) && playedIndex.count < tracks.count
+//        dispatchGroup.leave()
         
-        dispatchGroup.enter()
-        
-        repeat {
-            let randomInt = Int(arc4random_uniform(UInt32(tracks.count)))
-            self.currentTrackIndex = randomInt
-        } while playedIndex.contains(self.currentTrackIndex) && playedIndex.count < tracks.count
-        
-        dispatchGroup.leave()
-        
-        dispatchGroup.notify(queue: .main) {
+//        dispatchGroup.notify(queue: .main) {
             if self.playerItems[self.currentTrackIndex] != nil {
                 completion(.success(()))
             } else {
                 self.fetchTrackMetadata(index: self.currentTrackIndex) { [weak self] result in
-                    guard let _ = self else { return }
+                    guard let self = self else { return }
                     switch result {
                     case .success:
+                        if self.playedIndex.contains(self.currentTrackIndex) {
+                            self.playedIndex.remove(self.currentTrackIndex)
+                        }
                         completion(.success(()))
                     case .failure(let error):
                         completion(.failure(error))
                     }
                 }
             }
-        }
+//        }
     }
     
     private func handleLoop(completion: @escaping (Result<Void, NetworkError>) -> Void) {

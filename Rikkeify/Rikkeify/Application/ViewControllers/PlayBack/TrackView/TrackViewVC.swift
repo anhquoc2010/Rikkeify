@@ -100,6 +100,8 @@ class TrackViewVC: UIViewController {
     
     @IBAction private func onQueueButtonTapped(_ sender: UIButton) {
         // TODO: Implement
+        let vc = TrackListVC(sectionContent: SectionContent(type: "", id: viewModel.playback.currentSectionContentId, name: "", visuals: nil, images: nil))
+        present(vc, animated: false)
     }
     
     @IBAction private func onForwardButtonTapped(_ sender: UIButton) {
@@ -108,10 +110,12 @@ class TrackViewVC: UIViewController {
         viewModel.playback.player.pause()
         viewModel.playback.playNextTrack(didTapForward: true) { [weak self] result in
             guard let self = self else { return }
-            DispatchQueue.main.async {
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
                 switch result {
                 case .success:
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
+                        guard let self = self else { return }
                         self.viewModel.playback.playTrack(index: self.viewModel.playback.currentTrackIndex)
                         self.isFetching = false
                         self.hideLoading(after: 3)
@@ -120,7 +124,9 @@ class TrackViewVC: UIViewController {
                     }
                 case .failure(let error):
                     self.showAlert(title: error.customMessage.capitalized, message: "") {
-                        //                        self.dismiss(animated: true)
+                        if error == .getAudioError {
+                            self.dismiss(animated: true)
+                        }
                     }
                 }
             }
@@ -132,11 +138,13 @@ class TrackViewVC: UIViewController {
         self.showLoading(text: "Fetching Audio")
         viewModel.playback.player.pause()
         viewModel.playback.onPreviousTrack() { [weak self] result in
-            DispatchQueue.main.async {
+            guard let self = self else { return }
+            DispatchQueue.main.async { [weak self] in
                 guard let self = self else { return }
                 switch result {
                 case .success:
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
+                        guard let self = self else { return }
                         self.viewModel.playback.playTrack(index: self.viewModel.playback.currentTrackIndex)
                         self.isFetching = false
                         self.hideLoading(after: 3)
@@ -145,7 +153,9 @@ class TrackViewVC: UIViewController {
                     }
                 case .failure(let error):
                     self.showAlert(title: error.customMessage.capitalized, message: "") {
-                        //                        self.dismiss(animated: true)
+                        if error == .getAudioError {
+                            self.dismiss(animated: true)
+                        }
                     }
                 }
             }
@@ -164,14 +174,16 @@ class TrackViewVC: UIViewController {
     
     @IBAction func onTouchUpOutsideSlider(_ sender: UISlider) {
         viewModel.playback.didSlideSlider(toTime: Double(sender.value))
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
+            guard let self = self else { return }
             self.isSliding = false
         }
     }
     
     @IBAction func onTouchUpInsideSlider(_ sender: UISlider) {
         viewModel.playback.didSlideSlider(toTime: Double(sender.value))
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
+            guard let self = self else { return }
             self.isSliding = false
         }
     }
@@ -203,18 +215,20 @@ extension TrackViewVC: PKDownloadButtonDelegate {
         case .startDownload:
             // Start the download
             viewModel.downloadOrRemoveTracks(progressHandler: { [weak self] progress in
-                guard self != nil else { return }
+                guard let self = self else { return }
                 // Update UI with download progress
-                DispatchQueue.main.async {
+                DispatchQueue.main.async { [weak self] in
+                    guard let _ = self else { return }
                     downloadButton.stopDownloadButton.progress = CGFloat(Float(progress))
                 }
             }) { [weak self] result in
                 // Handle download completion
-                guard self != nil else { return }
+                guard let self = self else { return }
                 switch result {
                 case .success:
                     // Set button state to downloaded when download is complete
-                    DispatchQueue.main.async {
+                    DispatchQueue.main.async { [weak self] in
+                        guard let _ = self else { return }
                         downloadButton.state = .downloaded
                     }
                 case .failure(let error):
@@ -224,9 +238,32 @@ extension TrackViewVC: PKDownloadButtonDelegate {
             }
             // Set button state to downloading
             downloadButton.state = .downloading
-        case .pending, .downloading, .downloaded:
+        case .pending, .downloading:
             // Reset download when tapped in any of these states
             downloadButton.state = .startDownload
+        case .downloaded:
+            viewModel.downloadOrRemoveTracks(progressHandler: { [weak self] progress in
+                guard let self = self else { return }
+                // Update UI with download progress
+                DispatchQueue.main.async { [weak self] in
+                    guard let _ = self else { return }
+                    downloadButton.stopDownloadButton.progress = CGFloat(Float(progress))
+                }
+            }) { [weak self] result in
+                // Handle download completion
+                guard let self = self else { return }
+                switch result {
+                case .success:
+                    // Set button state to downloaded when download is complete
+                    DispatchQueue.main.async { [weak self] in
+                        guard let _ = self else { return }
+                        downloadButton.state = .startDownload
+                    }
+                case .failure(let error):
+                    // Handle download failure
+                    print("Download failed with error: \(error.localizedDescription)")
+                }
+            }
         @unknown default:
             assertionFailure("Unsupported state")
         }
@@ -303,8 +340,10 @@ extension TrackViewVC {
         let currentTimeInMs = Int(CMTimeGetSeconds(currentTime) * 1000)
         print("currentTime \(currentTimeInMs)")
         
-        DispatchQueue.main.async {
-            if let indexPath = self.indexPathForTime(currentTimeInMs) {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            if let indexPath = self.indexPathForTime(currentTimeInMs),
+               indexPath.row < self.lyricsTableView.numberOfRows(inSection: 0) {
                 for row in 0..<self.viewModel.playback.currentTrack.lyrics.count {
                     if let cell = self.lyricsTableView.cellForRow(at: IndexPath(row: row, section: 0)) as? TrackViewLyricTableViewCell {
                         cell.lyricLabel.textColor = (row <= indexPath.row) ? .white : .black
@@ -327,7 +366,8 @@ extension TrackViewVC {
     }
     
     private func setBackFordwardStatus() {
-        DispatchQueue.main.async {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
             if self.viewModel.playback.isFirstTrack && self.viewModel.playback.isLastTrack {
                 self.backwardButton.isEnabled = false
                 self.forwardButton.isEnabled = false

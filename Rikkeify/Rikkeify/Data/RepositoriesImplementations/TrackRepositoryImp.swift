@@ -50,7 +50,19 @@ extension TrackRepositoryImp: TrackRepository {
     }
     
     func getTrackMetadata(trackId: String, getAudio: Bool, completion: @escaping (Result<Track, NetworkError>) -> Void) {
-        remoteDataSource.getTrackMetadata(trackId: trackId, getAudio: getAudio, completion: completion)
+        checkDownload(track: Track(id: trackId, name: "", shareUrl: "", durationMs: 0, durationText: "", trackNumber: nil, playCount: nil, artists: [], album: nil, lyrics: [], audio: []), completion: { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let isDownloaded):
+                if isDownloaded, let track = self.getAllDownloadedTracks().first(where: { $0.id == trackId }) {
+                    completion(.success(track))
+                } else {
+                    remoteDataSource.getTrackMetadata(trackId: trackId, getAudio: getAudio, completion: completion)
+                }
+            case .failure:
+                remoteDataSource.getTrackMetadata(trackId: trackId, getAudio: getAudio, completion: completion)
+            }
+        })
     }
     
     func getRecommendTracks(seedTrackId: String, completion: @escaping (Result<[RecommendTrack], NetworkError>) -> Void) {

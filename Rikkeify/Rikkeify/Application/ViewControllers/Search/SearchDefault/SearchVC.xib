@@ -2,7 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="dark"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -72,7 +72,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="zUJ-GB-nnX">
-                    <rect key="frame" x="0.0" y="194.66666666666669" width="393" height="623.33333333333326"/>
+                    <rect key="frame" x="0.0" y="194.66666666666669" width="393" height="551.33333333333326"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="16" minimumInteritemSpacing="16" id="u4s-pc-kuL">
                         <size key="itemSize" width="128" height="128"/>
@@ -95,7 +95,7 @@
                 <constraint firstItem="LsT-5K-B3r" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="Yxh-tF-D6e"/>
                 <constraint firstItem="iUh-jF-w3x" firstAttribute="top" secondItem="LsT-5K-B3r" secondAttribute="bottom" constant="8" id="ewa-a7-ESs"/>
                 <constraint firstItem="Yi1-Y4-mUh" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="fwO-5s-cKo"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="zUJ-GB-nnX" secondAttribute="bottom" id="h6U-e2-JvN"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="zUJ-GB-nnX" secondAttribute="bottom" constant="72" id="h6U-e2-JvN"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="iUh-jF-w3x" secondAttribute="trailing" constant="20" id="hG2-kd-4hU"/>
                 <constraint firstItem="NdF-w1-fGw" firstAttribute="top" secondItem="iUh-jF-w3x" secondAttribute="top" id="jSp-ps-zOY"/>
                 <constraint firstItem="iUh-jF-w3x" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="w4A-HV-Hlq"/>

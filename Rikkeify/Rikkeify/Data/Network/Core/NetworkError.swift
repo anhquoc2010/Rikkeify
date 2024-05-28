@@ -17,6 +17,7 @@ public enum NetworkError: Error {
     case unknown
     case getLyricError
     case getAudioError
+    case expiredKey
     
     public var customMessage: String {
         switch self {
@@ -36,6 +37,8 @@ public enum NetworkError: Error {
             return "Could not get lyric"
         case .getAudioError:
             return "Could not get audio"
+        case .expiredKey:
+            return "Key was expired"
         default:
             return "Unknown Error"
         }

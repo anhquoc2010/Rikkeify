@@ -62,14 +62,16 @@ class LyricViewVC: UIViewController {
     
     @IBAction func onTouchUpOutsideSlider(_ sender: UISlider) {
         viewModel.playback.didSlideSlider(toTime: Double(sender.value))
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
+            guard let self = self else { return }
             self.isSliding = false
         }
     }
     
     @IBAction func onTouchUpInsideSlider(_ sender: UISlider) {
         viewModel.playback.didSlideSlider(toTime: Double(sender.value))
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
+            guard let self = self else { return }
             self.isSliding = false
         }
     }
@@ -179,8 +181,10 @@ extension LyricViewVC {
         let currentTimeInMs = Int(CMTimeGetSeconds(currentTime) * 1000)
         print("currentTime \(currentTimeInMs)")
 
-        DispatchQueue.main.async {
-            if let indexPath = self.indexPathForTime(currentTimeInMs) {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            if let indexPath = self.indexPathForTime(currentTimeInMs),
+               indexPath.row < self.lyricsTableView.numberOfRows(inSection: 0) {
                 for row in 0..<self.viewModel.playback.currentTrack.lyrics.count {
                     if let cell = self.lyricsTableView.cellForRow(at: IndexPath(row: row, section: 0)) as? TrackViewLyricTableViewCell {
                         cell.lyricLabel.textColor = (row <= indexPath.row) ? .white : .black

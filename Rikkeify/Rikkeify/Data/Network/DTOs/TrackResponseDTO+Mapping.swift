@@ -16,8 +16,8 @@ struct TrackResponseDTO: Decodable {
     let durationMs: Int64
     let durationText: String
     let trackNumber: Int?
-    let playCount: Int64
-    let artists: [ArtistDTO]
+    let playCount: Int64?
+    let artists: [ArtistDTO]?
     let album: AlbumDTO?
     var lyrics: [LyricsResponseDTO]?
     var audio: AudioTypeResponseDTO?
@@ -85,7 +85,7 @@ extension TrackResponseDTO {
                      durationText: durationText,
                      trackNumber: trackNumber,
                      playCount: playCount,
-                     artists: artists.map { $0.toDomain() },
+                     artists: artists?.map { $0.toDomain() } ?? [],
                      album: album?.toDomain(),
                      lyrics: lyrics?.map { $0.toDomain() } ?? [],
                      audio: audio?.soundcloudTrack.audio.map { $0.toDomain() } ?? []

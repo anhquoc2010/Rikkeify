@@ -62,12 +62,16 @@ extension SearchActiveVC: UITableViewDelegate {
             playback.playedIndex.removeAll()
             playback.currentTrackIndex = 0
             playback.player.pause()
-            playback.fetchTrackMetadata(index: playback.currentTrackIndex) { [weak self] result in
+            playback.fetchTrackMetadata(index: 0) { [weak self] result in
                 guard let self = self else { return }
                 switch result {
                 case .success:
-                    playback.playTrack(index: playback.currentTrackIndex)
-                    self.hideLoading(after: 1.5)
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
+                        guard let self = self else { return }
+                        playback.currentSectionContentId = ""
+                        playback.playTrack(index: 0)
+                        self.hideLoading(after: 3)
+                    }
                 case .failure(let error):
                     self.hideLoading(after: 1.5)
                     self.showAlert(title: error.customMessage.capitalized, message: "")
@@ -86,7 +90,8 @@ extension SearchActiveVC: UISearchBarDelegate {
             guard let self = self else { return }
             switch result {
             case .success:
-                DispatchQueue.main.async {
+                DispatchQueue.main.async { [weak self] in
+                    guard let self = self else { return }
                     self.resultTableView.reloadData()
                 }
             case .failure(let error):

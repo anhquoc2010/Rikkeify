@@ -92,7 +92,7 @@ extension TrackRemoteDataSourceImp: TrackRemoteDataSource {
                     defer { group.leave() }
                     switch result {
                     case .failure(let error):
-                        completion(.failure(.getLyricError))
+                        trackResponseDTO.lyrics = nil
                     case .success(let lyricsResponseDTO):
                         trackResponseDTO.lyrics = lyricsResponseDTO
                     }

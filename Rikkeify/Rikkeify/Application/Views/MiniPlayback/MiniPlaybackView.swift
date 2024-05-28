@@ -89,12 +89,20 @@ class MiniPlaybackView: UIView {
     func showCustomView() {
         isHiddenCustomView = false
         miniPlaybackView.alpha = 1
+        playPauseButton.isEnabled = true
+        miniPlaybackView.isUserInteractionEnabled = true
         view.backgroundColor = .systemBackground
     }
     
     func hideCustomView() {
         isHiddenCustomView = true
-        miniPlaybackView.alpha = 0
+        miniPlaybackView.alpha = 1
+        view.backgroundColor = .systemBackground
+        thumbImageView.image = .icApp
+        musicNameLabel.text = ""
+        artistLabel.text = ""
+        playPauseButton.isEnabled = false
+        miniPlaybackView.isUserInteractionEnabled = false
         let newY = frame.origin.y - CGFloat(MainTabBarVC.maxHeight) + CGFloat(MainTabBarVC.minHeight)
         frame = CGRect(x: 0, y: newY, width: frame.width, height: CGFloat(MainTabBarVC.maxHeight))
     }

@@ -20,6 +20,7 @@ class MainTabBarVC: UITabBarController {
     @Inject
     private var playback: PlaybackPresenter
     private var miniPlayBack: MiniPlaybackView!
+    private var isFetching: Bool = false
     
     static let maxHeight = kDefaultTabBarHeight + kVerticalSpacing + kMiniPlaybackHeight + kBottomSafeArea
     static let minHeight = kDefaultTabBarHeight
@@ -82,15 +83,18 @@ extension MainTabBarVC {
             let currentTime = CMTimeGetSeconds(time)
             
             if currentTime >= duration - 0.25 {
+                self.isFetching = true
                 self.showLoading(text: "Fetching audio")
                 playback.player.pause()
                 playback.playNextTrack { [weak self] result in
                     guard let self = self else { return }
                     switch result {
                     case .success:
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
+                            guard let self = self else { return }
                             self.playback.playTrack(index: self.playback.currentTrackIndex)
                             self.hideLoading(after: 3)
+                            self.isFetching = false
                         }
                     case .failure(let error):
                         self.showAlert(title: error.customMessage.capitalized, message: "")
@@ -105,47 +109,56 @@ extension MainTabBarVC {
     override func remoteControlReceived(with event: UIEvent?) {
         super.remoteControlReceived(with: event)
         
-        if let event = event {
-            if event.type == .remoteControl {
-                switch event.subtype {
-                case .remoteControlPlay:
-                    playback.togglePlayPauseState()
-                case .remoteControlPause:
-                    playback.togglePlayPauseState()
-                case .remoteControlNextTrack:
-                    self.showLoading(text: "Fetching audio")
-                    playback.player.pause()
-                    playback.playNextTrack(didTapForward: true) { [weak self] result in
-                        guard let self = self else { return }
-                        switch result {
-                        case .success:
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                                self.playback.playTrack(index: self.playback.currentTrackIndex)
-                                self.hideLoading(after: 3)
-                            }
-                        case .failure(let error):
-                            self.showAlert(title: error.customMessage.capitalized, message: "")
-                        }
-                    }
-                case .remoteControlPreviousTrack:
-                    self.showLoading(text: "Fetching Audio")
-                    playback.player.pause()
-                    playback.onPreviousTrack() { [weak self] result in
-                        DispatchQueue.main.async {
+        if !isFetching {
+            if let event = event {
+                if event.type == .remoteControl {
+                    switch event.subtype {
+                    case .remoteControlPlay:
+                        playback.togglePlayPauseState()
+                    case .remoteControlPause:
+                        playback.togglePlayPauseState()
+                    case .remoteControlNextTrack:
+                        self.isFetching = true
+                        self.showLoading(text: "Fetching audio")
+                        playback.player.pause()
+                        playback.playNextTrack(didTapForward: true) { [weak self] result in
                             guard let self = self else { return }
                             switch result {
                             case .success:
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
+                                    guard let self = self else { return }
                                     self.playback.playTrack(index: self.playback.currentTrackIndex)
                                     self.hideLoading(after: 3)
+                                    self.isFetching = false
                                 }
                             case .failure(let error):
                                 self.showAlert(title: error.customMessage.capitalized, message: "")
                             }
                         }
+                    case .remoteControlPreviousTrack:
+                        self.isFetching = true
+                        self.showLoading(text: "Fetching Audio")
+                        playback.player.pause()
+                        playback.onPreviousTrack() { [weak self] result in
+                            guard let self = self else { return }
+                            DispatchQueue.main.async { [weak self] in
+                                guard let self = self else { return }
+                                switch result {
+                                case .success:
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
+                                        guard let self = self else { return }
+                                        self.playback.playTrack(index: self.playback.currentTrackIndex)
+                                        self.hideLoading(after: 3)
+                                        self.isFetching = false
+                                    }
+                                case .failure(let error):
+                                    self.showAlert(title: error.customMessage.capitalized, message: "")
+                                }
+                            }
+                        }
+                    default:
+                        break
                     }
-                default:
-                    break
                 }
             }
         }

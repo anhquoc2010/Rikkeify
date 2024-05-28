@@ -201,7 +201,7 @@ extension TrackLocalDataSourceImp {
             } else {
                 let rTrack = RTrack.fromDomain(track: track)
                 rTrack.audio?.fileUrl = savedURL.absoluteString
-                localService.realm.add(rTrack)
+                localService.realm.add(rTrack, update: .all)
             }
         }
     }

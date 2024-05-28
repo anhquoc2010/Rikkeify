@@ -54,7 +54,8 @@ extension SearchVC {
             guard let self = self else { return }
             switch result {
             case .success:
-                DispatchQueue.main.async {
+                DispatchQueue.main.async { [weak self] in
+                    guard let self = self else { return }
                     self.categoryCollectionView.reloadData()
                 }
             case .failure(let error):

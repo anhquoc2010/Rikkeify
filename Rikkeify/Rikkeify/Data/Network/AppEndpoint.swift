@@ -77,12 +77,12 @@ extension AppEndpoint: EndPoint {
         switch self {
         case .getRecommendTracks, .getExplore, .search:
             return [
-                "X-RapidAPI-Key": "78104f7c39msh80dd944199e6482p1a97e0jsn923e0159ca6e",
+                "X-RapidAPI-Key": "5ae1207dadmsh2b2920065bcf994p1cd1ccjsnfcc846f108ac",
                 "X-RapidAPI-Host": "spotify23.p.rapidapi.com"
             ]
         default:
             return [
-                "X-RapidAPI-Key": "6da5076013mshd795f98f530943fp1bcfacjsn01aba17e1699",
+                "X-RapidAPI-Key": "484f70c8demsh8867c6c588dcc28p1d4a1ajsnb3ca4646d5d1",
                 "X-RapidAPI-Host": "spotify-scraper.p.rapidapi.com"
             ]
         }

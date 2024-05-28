@@ -22,6 +22,7 @@ class TrackListVM {
     private let originalId: String
     
     var isFavorite: Bool = false
+    var isDownload: Bool = false
     
     var isPlayingThisSectionContent: Bool {
         originalId == playback.currentSectionContentId
@@ -54,12 +55,12 @@ class TrackListVM {
         case "downloaded":
             tracks = trackRepository.getAllDownloadedTracks()
         default:
-            tracks = sectionContent.tracks ?? []
+            tracks = sectionContent.tracks ?? playback.tracks
         }
     }
     
     func fetchSectionContent(completion: @escaping (Result<Void, NetworkError>) -> Void) {
-        if sectionContent.id != "likedlist" && sectionContent.id != "downloadedlist" {
+        if sectionContent.id != "likedlist" && sectionContent.id != "downloadedlist" && !sectionContent.type.isEmpty && !sectionContent.id.isEmpty {
             sectionRepository.getSectionContents(type: sectionContent.type, id: sectionContent.id) { [weak self] (result: Result<SectionContent, NetworkError>) in
                 guard let self = self else { return }
                 switch result {
@@ -76,16 +77,33 @@ class TrackListVM {
         }
     }
     
-    func onTapPlayPauseButton(index: Int = 0, completion: @escaping (Result<Void, NetworkError>) -> Void) {
+    func onTapPlayPauseButton(isSelectRow: Bool = false, index: Int = 0, completion: @escaping (Result<Void, NetworkError>) -> Void) {
         if isPlayingThisSectionContent {
-            playback.togglePlayPauseState()
-//            completion(.success(()))
+            if isSelectRow {
+                playback.currentTrackIndex = index
+                if self.playback.playerItems[index] != nil {
+                    completion(.success(()))
+                } else {
+                    playback.fetchTrackMetadata(index: index) { [weak self] result in
+                        guard let _ = self else { return }
+                        switch result {
+                        case .success:
+                            completion(.success(()))
+                        case .failure(let error):
+                            completion(.failure(error))
+                        }
+                    }
+                }
+            } else {
+                playback.togglePlayPauseState()
+            }
+            //            completion(.success(()))
         } else {
             playback.tracks = tracks
             playback.playerItems = Array(repeating: nil, count: tracks.count)
             playback.playedIndex.removeAll()
             playback.currentTrackIndex = index
-            playback.fetchTrackMetadata(index: playback.currentTrackIndex) { [weak self] result in
+            playback.fetchTrackMetadata(index: index) { [weak self] result in
                 guard let self = self else { return }
                 switch result {
                 case .success:
@@ -98,34 +116,65 @@ class TrackListVM {
         }
     }
     
-    //    func saveOrRemoveFavourite() {
-    //        checkFavorite() { [weak self] result in
-    //            guard let self = self else { return }
-    //            switch result {
-    //            case .success():
-    //                if self.isFavorite {
-    //                    self.isFavorite = false
-    //                    self.trackRepository.removeFavoriteTrack(playback.currentTrack)
-    //                } else {
-    //                    self.isFavorite = true
-    //                    self.trackRepository.saveFavoriteTrack(playback.currentTrack)
-    //                }
-    //            case .failure:
-    //                break
-    //            }
-    //        }
-    //    }
+    func saveOrRemoveFavourite(track: Track) {
+        checkFavorite(track: track) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success():
+                if self.isFavorite {
+                    self.isFavorite = false
+                    self.trackRepository.removeFavoriteTrack(track)
+                } else {
+                    self.isFavorite = true
+                    self.trackRepository.saveFavoriteTrack(track)
+                }
+            case .failure:
+                break
+            }
+        }
+    }
     
-    //    func checkFavorite(completion: @escaping (Result<Void, Error>) -> Void) {
-    //        trackRepository.checkFavorite(track: playback.currentTrack) { [weak self] result in
-    //            guard let self = self else { return }
-    //            switch result {
-    //            case .success(let isFavorite):
-    //                self.isFavorite = isFavorite
-    //                completion(.success(()))
-    //            case .failure(let error):
-    //                completion(.failure(error))
-    //            }
-    //        }
-    //    }
+    func checkFavorite(track: Track, completion: @escaping (Result<Void, Error>) -> Void) {
+        trackRepository.checkFavorite(track: track) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let isFavorite):
+                self.isFavorite = isFavorite
+                completion(.success(()))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    func checkDownload(track: Track, completion: @escaping (Result<Void, Error>) -> Void) {
+        trackRepository.checkDownload(track: track) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let isDownload):
+                self.isDownload = isDownload
+                completion(.success(()))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    func downloadOrRemoveTracks(track: Track, progressHandler: @escaping (Double) -> Void, completion: @escaping (Result<Void, Error>) -> Void) {
+        trackRepository.checkDownload(track: track) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let isDownload):
+                if isDownload {
+                    self.isDownload = false
+                    self.trackRepository.removeAudio(from: track, completion: completion)
+                } else {
+                    self.isDownload = true
+                    self.trackRepository.downloadAudio(from: [track], progressHandler: progressHandler, completion: completion)
+                }
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
 }

@@ -53,16 +53,26 @@ public final class NetworkService: Networkable {
             throw NetworkError.invalidURL
         }
         let (data, response) = try await URLSession.shared.data(from: url)
-        guard let response = response as? HTTPURLResponse, 200...299 ~= response.statusCode else {
+//        guard let response = response as? HTTPURLResponse, 200...299 ~= response.statusCode else {
+//            throw NetworkError.unexpectedStatusCode
+//        }
+        guard let response = response as? HTTPURLResponse else {
+            throw NetworkError.noResponse
+        }
+
+        if 200...299 ~= response.statusCode {
+            guard let data = data as Data? else {
+                throw NetworkError.unknown
+            }
+            guard let decodedResponse = try? JSONDecoder().decode(T.self, from: data) else {
+                throw NetworkError.decode
+            }
+            return decodedResponse
+        } else if response.statusCode == 429 {
+            throw NetworkError.expiredKey
+        } else {
             throw NetworkError.unexpectedStatusCode
         }
-        guard let data = data as Data? else {
-            throw NetworkError.unknown
-        }
-        guard let decodedResponse = try? JSONDecoder().decode(T.self, from: data) else {
-            throw NetworkError.decode
-        }
-        return decodedResponse
     }
     
     public func sendRequest<T: Decodable>(endpoint: EndPoint,
@@ -71,24 +81,35 @@ public final class NetworkService: Networkable {
             return
         }
         let urlTask = URLSession.shared.dataTask(with: urlRequest) { data, response, error in
+            print("\n~~~~~~~~~~~~~~~~~~~Network Logs: StatusCode: \((response as? HTTPURLResponse)?.statusCode)")
+            print("\n~~~~~~~~~~~~~~~~~~~Network Logs: Error: \(error)")
             guard error == nil else {
                 resultHandler(.failure(.invalidURL))
                 return
             }
-            guard let response = response as? HTTPURLResponse, 200...299 ~= response.statusCode else {
-                resultHandler(.failure(.unexpectedStatusCode))
+            
+            guard let response = response as? HTTPURLResponse else {
+                resultHandler(.failure(.noResponse))
                 return
             }
-            guard let data = data else {
-                resultHandler(.failure(.unknown))
-                return
-            }
-            do {
-                let decodedResponse = try JSONDecoder().decode(T.self, from: data)
-                resultHandler(.success(decodedResponse))
-            } catch {
-                print(error)
-                resultHandler(.failure(.decode))
+
+            if 200...299 ~= response.statusCode {
+                guard let data = data else {
+                    resultHandler(.failure(.unknown))
+                    return
+                }
+                do {
+                    let decodedResponse = try JSONDecoder().decode(T.self, from: data)
+                    resultHandler(.success(decodedResponse))
+                    print("\n~~~~~~~~~~~~~~~~~~~Network Logs: Data: \(decodedResponse)")
+                } catch {
+                    print(error)
+                    resultHandler(.failure(.decode))
+                }
+            } else if response.statusCode == 429 {
+                resultHandler(.failure(.expiredKey))
+            } else {
+                    resultHandler(.failure(.unexpectedStatusCode))
             }
 //            guard let decodedResponse = try? JSONDecoder().decode(T.self, from: data) else {
 //                resultHandler(.failure(.decode))

@@ -2,7 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="dark"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -26,13 +26,13 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NiX-FC-zcx" userLabel="Mini PlayBack View">
                     <rect key="frame" x="4" y="0.0" width="395" height="60"/>
                     <subviews>
-                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="cYn-Fn-cUr">
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_app" translatesAutoresizingMaskIntoConstraints="NO" id="cYn-Fn-cUr">
                             <rect key="frame" x="8" y="12" width="36" height="36"/>
                             <constraints>
                                 <constraint firstAttribute="width" secondItem="cYn-Fn-cUr" secondAttribute="height" multiplier="1:1" id="51Z-yE-Q5c"/>
                             </constraints>
                         </imageView>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HHc-Y7-yFw">
+                        <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HHc-Y7-yFw">
                             <rect key="frame" x="351" y="18" width="24" height="24"/>
                             <constraints>
                                 <constraint firstAttribute="width" secondItem="HHc-Y7-yFw" secondAttribute="height" multiplier="1:1" id="mk4-Vn-vpH"/>
@@ -124,6 +124,7 @@
         </view>
     </objects>
     <resources>
+        <image name="ic_app" width="709" height="709"/>
         <image name="play.fill" catalog="system" width="117" height="128"/>
     </resources>
 </document>

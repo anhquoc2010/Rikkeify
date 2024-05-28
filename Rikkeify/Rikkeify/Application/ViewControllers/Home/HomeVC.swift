@@ -143,17 +143,20 @@ extension HomeVC {
             guard let self = self else { return }
             switch result {
             case .success:
-                DispatchQueue.main.async {
+                DispatchQueue.main.async { [weak self] in
+                    guard let self = self else { return }
                     self.hideLoading(after: 1)
                     self.setupListViews()
                     self.mainTableView.reloadData()
                 }
             case .failure(let error):
                 self.hideLoading()
-                self.showAlert(title: error.customMessage.uppercased(), message: "Please Update API Key!") {
-                    UIApplication.shared.perform(#selector(NSXPCConnection.suspend))
-                    sleep(2)
-                    exit(0)
+                if error == .expiredKey {
+                    self.showAlert(title: error.customMessage.uppercased(), message: "Please Update API Key!") {
+                        UIApplication.shared.perform(#selector(NSXPCConnection.suspend))
+                        sleep(2)
+                        exit(0)
+                    }
                 }
             }
         }

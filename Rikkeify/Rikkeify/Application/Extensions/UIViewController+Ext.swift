@@ -33,7 +33,8 @@ extension UIViewController {
         if showCancel {
             alert.addAction(.init(title: "Cancel", style: .cancel, handler: nil))
         }
-        DispatchQueue.main.async {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
             self.present(alert, animated: true, completion: nil)
         }
     }

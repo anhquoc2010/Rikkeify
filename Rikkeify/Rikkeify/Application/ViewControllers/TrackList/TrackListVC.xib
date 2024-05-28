@@ -29,7 +29,7 @@
                     <rect key="frame" x="0.0" y="119.66666666666669" width="393" height="698.33333333333326"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zw2-Xq-jQv" userLabel="Content View">
-                            <rect key="frame" x="0.0" y="0.0" width="393" height="623.33333333333337"/>
+                            <rect key="frame" x="0.0" y="0.0" width="393" height="675.33333333333337"/>
                             <subviews>
                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Oyj-ed-HA4">
                                     <rect key="frame" x="88.333333333333329" y="0.0" width="216.33333333333337" height="216"/>
@@ -57,7 +57,7 @@
                                     </connections>
                                 </button>
                                 <tableView clipsSubviews="YES" contentMode="scaleToFill" placeholderIntrinsicWidth="353" placeholderIntrinsicHeight="300" alwaysBounceVertical="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="DuE-4K-UnF" customClass="IntrinsicTableView" customModule="Rikkeify" customModuleProvider="target">
-                                    <rect key="frame" x="20" y="303.33333333333331" width="353" height="299.99999999999994"/>
+                                    <rect key="frame" x="0.0" y="303.33333333333331" width="393" height="299.99999999999994"/>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 </tableView>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VqR-bg-KBO">
@@ -81,9 +81,9 @@
                                 <constraint firstAttribute="trailing" secondItem="VqR-bg-KBO" secondAttribute="trailing" constant="20" id="8Sf-BP-9pX"/>
                                 <constraint firstItem="9at-8E-RHN" firstAttribute="leading" secondItem="Zw2-Xq-jQv" secondAttribute="leading" constant="20" id="ECs-R8-7ki"/>
                                 <constraint firstItem="Oyj-ed-HA4" firstAttribute="top" secondItem="Zw2-Xq-jQv" secondAttribute="top" id="L1y-wq-9uR"/>
-                                <constraint firstAttribute="bottom" secondItem="DuE-4K-UnF" secondAttribute="bottom" constant="20" id="Z9A-ep-eeU"/>
-                                <constraint firstItem="DuE-4K-UnF" firstAttribute="leading" secondItem="Zw2-Xq-jQv" secondAttribute="leading" constant="20" id="ZSg-ID-aYz"/>
-                                <constraint firstAttribute="trailing" secondItem="DuE-4K-UnF" secondAttribute="trailing" constant="20" id="hqp-YG-5wB"/>
+                                <constraint firstAttribute="bottom" secondItem="DuE-4K-UnF" secondAttribute="bottom" constant="72" id="Z9A-ep-eeU"/>
+                                <constraint firstItem="DuE-4K-UnF" firstAttribute="leading" secondItem="Zw2-Xq-jQv" secondAttribute="leading" id="ZSg-ID-aYz"/>
+                                <constraint firstAttribute="trailing" secondItem="DuE-4K-UnF" secondAttribute="trailing" id="hqp-YG-5wB"/>
                                 <constraint firstItem="bGS-xy-S6S" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="9at-8E-RHN" secondAttribute="trailing" constant="20" id="im9-SU-43K"/>
                                 <constraint firstItem="9at-8E-RHN" firstAttribute="top" secondItem="Oyj-ed-HA4" secondAttribute="bottom" constant="40" id="mLC-99-94F"/>
                                 <constraint firstItem="Oyj-ed-HA4" firstAttribute="width" secondItem="Zw2-Xq-jQv" secondAttribute="width" multiplier="0.55" id="mdv-be-Dfe"/>
@@ -146,7 +146,7 @@
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemGreenColor">
-            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

@@ -14,6 +14,8 @@ class TrackListVC: UIViewController {
     // MARK: Properties
     private var viewModel: TrackListVM
     
+    private var selectedIndex = IndexPath(row: -1, section: 0)
+    
     // MARK: Outlets
     @IBOutlet private weak var typeLabel: UILabel!
     @IBOutlet private weak var loadingViewHC: NSLayoutConstraint!
@@ -55,13 +57,14 @@ class TrackListVC: UIViewController {
             guard let self = self else { return }
             switch result {
             case .success:
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
+                    guard let self = self else { return }
                     self.viewModel.playback.playTrack(index: self.viewModel.playback.currentTrackIndex)
                     self.hideLoading(after: 3)
                 }
             case .failure(let error):
                 self.hideLoading(after: 1.5)
-                self.showAlert(title: error.customMessage.capitalized, message: "Fetch Lyric Failed")
+                self.showAlert(title: error.customMessage.capitalized, message: "Please try again later or play other track")
                 //                    self.navigationController?.popViewController(animated: true)
             }
         }
@@ -82,10 +85,25 @@ extension TrackListVC: UITableViewDataSource {
             ) as? TrackListTableViewCell
         else { return .init() }
         
-        cell.configure(track: viewModel.tracks[indexPath.row], thumbImage: viewModel.thumbImage)
+        cell.configure(isSelected: selectedIndex == indexPath, track: viewModel.tracks[indexPath.row], thumbImage: viewModel.thumbImage)
         
         return cell
     }
+    
+//    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+//        if editingStyle == .delete {
+//            tableView.beginUpdates()
+//            if viewModel.sectionContent.type == "liked" {
+//                viewModel.saveOrRemoveFavourite(track: viewModel.tracks[indexPath.row])
+//            }
+//            if viewModel.sectionContent.type == "downloaded" {
+//                viewModel.downloadOrRemoveTracks(track: viewModel.tracks[indexPath.row], progressHandler: { _ in }, completion: { _ in
+//                    
+//                    tableView.deleteRows(at: [indexPath], with: .fade)})
+//            }
+//            tableView.endUpdates()
+//        }
+//    }
 }
 
 // MARK: UITableViewDelegate
@@ -95,25 +113,38 @@ extension TrackListVC: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        selectedIndex = indexPath
+        
 //        if !viewModel.isPlayingThisSectionContent {
-//            self.showLoading(text: "Fetching track")
-//            viewModel.playback.player.pause()
+            self.showLoading(text: "Fetching track")
+            viewModel.playback.player.pause()
 //        }
-//        viewModel.onTapPlayPauseButton(index: indexPath.row) { [weak self] result in
-//            guard let self = self else { return }
-//            switch result {
-//            case .success:
-//                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-//                    self.viewModel.playback.playTrack(index: self.viewModel.playback.currentTrackIndex)
-//                    self.hideLoading(after: 3)
-//                }
-//            case .failure(let error):
-//                self.hideLoading(after: 1.5)
-//                self.showAlert(title: error.customMessage.capitalized, message: "Fetch Lyric Failed")
-//                //                    self.navigationController?.popViewController(animated: true)
-//            }
-//        }
+        viewModel.onTapPlayPauseButton(isSelectRow: true, index: indexPath.row) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success:
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
+                    guard let self = self else { return }
+                    self.viewModel.playback.playTrack(index: indexPath.row)
+                    self.hideLoading(after: 3)
+                }
+            case .failure(let error):
+                self.hideLoading(after: 1.5)
+                self.showAlert(title: error.customMessage.capitalized, message: "")
+                //                    self.navigationController?.popViewController(animated: true)
+            }
+        }
+        
+        tracksTableView.reloadData()
     }
+    
+//    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+//        if viewModel.sectionContent.type == "liked" || viewModel.sectionContent.type == "downloaded" {
+//            return .delete
+//        } else {
+//            return .none
+//        }
+//    }
 }
 
 // MARK: Custom Functions
@@ -125,6 +156,8 @@ extension TrackListVC {
             
             if viewModel.isPlayingThisSectionContent {
                 self.updatePlayPauseButton(playButton)
+                self.selectedIndex = IndexPath(row: self.viewModel.playback.currentTrackIndex, section: 0)
+                self.tracksTableView.reloadData()
             }
         }
     }
@@ -166,7 +199,8 @@ extension TrackListVC {
             guard let self = self else { return }
             switch result {
             case .success:
-                DispatchQueue.main.async {
+                DispatchQueue.main.async { [weak self] in
+                    guard let self = self else { return }
                     self.tracksTableView.reloadData()
                     self.loadingView.hideSkeleton()
                     self.loadingView.isHidden = true
