@@ -1,0 +1,12 @@
+{
+    "applinks": {
+        "apps": [],
+        "details" : [
+            {
+                "appID": "47F26D25PZ.com.gdsc",
+                "paths": ["*"]
+            }
+        ]
+    }
+}
+

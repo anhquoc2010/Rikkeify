@@ -2,7 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="dark"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -133,6 +133,28 @@
                                     </state>
                                     <connections>
                                         <action selector="onLikeButtonTapped:" destination="-1" eventType="touchUpInside" id="Ve3-Zz-VkF"/>
+                                    </connections>
+                                </button>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gQV-pJ-OUM" customClass="PKDownloadButton">
+                                    <rect key="frame" x="297" y="578.33333333333337" width="28" height="28"/>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" secondItem="gQV-pJ-OUM" secondAttribute="height" multiplier="1:1" id="TIO-ho-LSz"/>
+                                    </constraints>
+                                </view>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xys-uG-Xol" userLabel="shareButton">
+                                    <rect key="frame" x="249" y="578.33333333333337" width="28" height="28"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="28" id="cbp-KH-NZz"/>
+                                        <constraint firstAttribute="width" secondItem="xys-uG-Xol" secondAttribute="height" multiplier="1:1" id="tb8-0o-Sav"/>
+                                    </constraints>
+                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                    <state key="normal">
+                                        <imageReference key="image" image="square.and.arrow.up" catalog="system" symbolScale="medium"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="onShareButtonTapped:" destination="-1" eventType="touchUpInside" id="mrJ-Bk-ZW3"/>
                                     </connections>
                                 </button>
                                 <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="Pao-Ye-aJO" userLabel="trackProgressSlider">
@@ -309,13 +331,6 @@
                                         <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
                                     </userDefinedRuntimeAttributes>
                                 </view>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gQV-pJ-OUM" customClass="PKDownloadButton">
-                                    <rect key="frame" x="297" y="578.33333333333337" width="28" height="28"/>
-                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                    <constraints>
-                                        <constraint firstAttribute="width" secondItem="gQV-pJ-OUM" secondAttribute="height" multiplier="1:1" id="TIO-ho-LSz"/>
-                                    </constraints>
-                                </view>
                             </subviews>
                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             <constraints>
@@ -323,10 +338,12 @@
                                 <constraint firstItem="Yzr-pT-HKn" firstAttribute="top" secondItem="Pao-Ye-aJO" secondAttribute="bottom" id="1SO-cc-dpr"/>
                                 <constraint firstItem="t61-bZ-59b" firstAttribute="centerX" secondItem="94V-rN-Gyc" secondAttribute="centerX" id="2F7-vb-Q4O"/>
                                 <constraint firstItem="Lrz-pm-5bY" firstAttribute="centerY" secondItem="LLB-5q-Qjs" secondAttribute="centerY" id="2rC-NO-4f9"/>
+                                <constraint firstItem="xys-uG-Xol" firstAttribute="bottom" secondItem="Wdu-0Y-LqE" secondAttribute="bottom" id="5H7-h8-MHN"/>
                                 <constraint firstItem="bQA-JQ-Fc2" firstAttribute="centerY" secondItem="t61-bZ-59b" secondAttribute="centerY" id="5Mh-zD-Rat"/>
                                 <constraint firstItem="Wdu-0Y-LqE" firstAttribute="leading" secondItem="gQV-pJ-OUM" secondAttribute="trailing" constant="20" id="67h-cH-Xpp"/>
                                 <constraint firstItem="aVv-ZO-Sac" firstAttribute="top" secondItem="Pao-Ye-aJO" secondAttribute="bottom" id="6NX-oA-9ja"/>
                                 <constraint firstAttribute="trailing" secondItem="Wdu-0Y-LqE" secondAttribute="trailing" constant="20" id="6xd-ea-rhU"/>
+                                <constraint firstItem="xys-uG-Xol" firstAttribute="top" secondItem="Wdu-0Y-LqE" secondAttribute="top" id="78o-ZA-V6A"/>
                                 <constraint firstItem="LLB-5q-Qjs" firstAttribute="leading" secondItem="EFa-Na-krm" secondAttribute="trailing" id="8AA-6i-94c"/>
                                 <constraint firstItem="Pao-Ye-aJO" firstAttribute="top" secondItem="Mwc-1O-FoW" secondAttribute="bottom" constant="16" id="9ec-Dg-ymx"/>
                                 <constraint firstAttribute="trailing" secondItem="pGQ-35-anz" secondAttribute="trailing" constant="20" id="9jG-EL-1WL"/>
@@ -358,6 +375,7 @@
                                 <constraint firstItem="C4J-NP-1rs" firstAttribute="centerY" secondItem="LLB-5q-Qjs" secondAttribute="centerY" id="hLn-mN-xrx"/>
                                 <constraint firstItem="gvo-YM-Nay" firstAttribute="top" secondItem="LLB-5q-Qjs" secondAttribute="bottom" constant="24" id="hhl-Bw-oBq"/>
                                 <constraint firstItem="vXe-vc-4ui" firstAttribute="centerY" secondItem="t61-bZ-59b" secondAttribute="centerY" id="nWT-c7-Z1M"/>
+                                <constraint firstItem="gQV-pJ-OUM" firstAttribute="leading" secondItem="xys-uG-Xol" secondAttribute="trailing" constant="20" id="o3n-Zt-Pro"/>
                                 <constraint firstItem="C4J-NP-1rs" firstAttribute="centerX" secondItem="EFa-Na-krm" secondAttribute="centerX" id="pVB-Zf-Fta"/>
                                 <constraint firstItem="Pao-Ye-aJO" firstAttribute="leading" secondItem="94V-rN-Gyc" secondAttribute="leading" constant="20" id="pbJ-Kv-z3e"/>
                                 <constraint firstItem="LLB-5q-Qjs" firstAttribute="top" secondItem="Pao-Ye-aJO" secondAttribute="bottom" constant="24" id="qJU-mN-5mP"/>
@@ -405,6 +423,7 @@
         <image name="play.circle.fill" catalog="system" width="128" height="123"/>
         <image name="repeat" catalog="system" width="128" height="98"/>
         <image name="shuffle" catalog="system" width="128" height="95"/>
+        <image name="square.and.arrow.up" catalog="system" width="108" height="128"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

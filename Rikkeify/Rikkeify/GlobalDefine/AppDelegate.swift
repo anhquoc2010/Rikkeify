@@ -21,6 +21,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         setupWindow()
         return true
     }
+    
+    func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([any UIUserActivityRestoring]?) -> Void) -> Bool {
+        guard userActivity.activityType == NSUserActivityTypeBrowsingWeb,
+              let incomingURL = userActivity.webpageURL,
+              let components = NSURLComponents(url: incomingURL, resolvingAgainstBaseURL: true) else {
+            return false
+        }
+        
+        guard let path = components.path else {
+            return false
+        }
+        
+        let trackId = path.replacingOccurrences(of: "/", with: "")
+        
+        let tabbarController = MainTabBarVC()
+        window?.rootViewController = tabbarController
+        
+        let vc = TrackViewVC(trackId: trackId)
+        vc.modalPresentationStyle = .overFullScreen
+        tabbarController.present(vc, animated: true)
+        
+        window?.makeKeyAndVisible()
+        
+        return false
+    }
 }
 
 extension AppDelegate {
@@ -28,10 +53,10 @@ extension AppDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
         
         let tabbarController = MainTabBarVC()
-                
+        
         window?.rootViewController = tabbarController
         window?.makeKeyAndVisible()
-//        navigationController.setNavigationBarHidden(true, animated: false)
+        //        navigationController.setNavigationBarHidden(true, animated: false)
     }
     
     private func setupBottomNavigation() -> UITabBarController {

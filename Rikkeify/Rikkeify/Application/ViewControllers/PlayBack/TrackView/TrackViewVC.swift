@@ -35,8 +35,8 @@ class TrackViewVC: UIViewController {
     @IBOutlet private weak var titleLabel: UILabel!
     
     // MARK: Lifecycle
-    init() {
-        viewModel = TrackViewVM()
+    init(trackId: String = "") {
+        viewModel = TrackViewVM(trackId: trackId)
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -47,10 +47,38 @@ class TrackViewVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.setupViews()
-        self.setupEvents()
-        self.bindViewModel()
-        self.setupListViews()
+        if viewModel.trackId.isEmpty {
+            self.setupViews()
+            self.setupEvents()
+            self.bindViewModel()
+            self.setupListViews()
+        } else {
+            self.showLoading()
+            self.viewModel.playback.tracks = [Track(id: viewModel.trackId, name: "", shareUrl: "", durationMs: 0, durationText: "", trackNumber: nil, playCount: 0, artists: [], album: nil, lyrics: [], audio: [])]
+            self.viewModel.playback.playerItems = [nil]
+            self.viewModel.playback.playedIndex.removeAll()
+            self.viewModel.playback.currentTrackIndex = 0
+            self.viewModel.playback.player.pause()
+            self.viewModel.playback.fetchTrackMetadata(index: 0) { [weak self] result in
+                guard let self = self else { return }
+                switch result {
+                case .success:
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
+                        guard let self = self else { return }
+                        self.viewModel.playback.currentSectionContentId = ""
+                        self.viewModel.playback.playTrack(index: 0)
+                        self.setupViews()
+                        self.setupEvents()
+                        self.bindViewModel()
+                        self.setupListViews()
+                        self.hideLoading(after: 3)
+                    }
+                case .failure(let error):
+                    self.hideLoading(after: 1.5)
+                    self.showAlert(title: error.customMessage.capitalized, message: "")
+                }
+            }
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -77,6 +105,27 @@ class TrackViewVC: UIViewController {
     // MARK: - Actions
     @IBAction private func onHideButtonTapped(_ sender: UIButton) {
         dismiss(animated: true)
+    }
+    
+    @IBAction func onShareButtonTapped(_ sender: Any) {
+        let title: String = viewModel.playback.currentTrack.name
+        guard let url: URL = URL(string: "https://0sfvs9d4-8100.asse.devtunnels.ms/\(viewModel.playback.currentTrack.id)") else { return }
+        let sharedObjects: [AnyObject] = [url as AnyObject, title as AnyObject]
+        let activityViewController = UIActivityViewController(activityItems : sharedObjects, applicationActivities: nil)
+        activityViewController.popoverPresentationController?.sourceView = self.view
+
+        activityViewController.excludedActivityTypes = [
+            UIActivity.ActivityType.airDrop,
+            UIActivity.ActivityType.postToFacebook,
+            UIActivity.ActivityType.postToTwitter,
+            UIActivity.ActivityType.mail,
+            UIActivity.ActivityType.copyToPasteboard,
+            UIActivity.ActivityType.collaborationCopyLink,
+            UIActivity.ActivityType.collaborationInviteWithLink,
+            UIActivity.ActivityType.message,
+        ]
+
+        self.present(activityViewController, animated: true, completion: nil)
     }
     
     @IBAction private func onLoopButtonTapped(_ sender: UIButton) {

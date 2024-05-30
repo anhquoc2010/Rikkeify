@@ -16,6 +16,12 @@ class TrackViewVM {
     var isFavorite: Bool = false
     var isDownload: Bool = false
     
+    var trackId: String
+    
+    init(trackId: String) {
+        self.trackId = trackId
+    }
+    
     func saveOrRemoveFavourite() {
         checkFavorite() { [weak self] result in
             guard let self = self else { return }
