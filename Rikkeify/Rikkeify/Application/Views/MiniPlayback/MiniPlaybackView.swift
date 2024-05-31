@@ -102,7 +102,7 @@ class MiniPlaybackView: UIView {
         musicNameLabel.text = ""
         artistLabel.text = ""
         playPauseButton.isEnabled = false
-        miniPlaybackView.isUserInteractionEnabled = false
+        miniPlaybackView.isUserInteractionEnabled = true
         let newY = frame.origin.y - CGFloat(MainTabBarVC.maxHeight) + CGFloat(MainTabBarVC.minHeight)
         frame = CGRect(x: 0, y: newY, width: frame.width, height: CGFloat(MainTabBarVC.maxHeight))
     }

@@ -457,6 +457,27 @@ extension TrackViewVC {
         self.updateShuffleButton(shuffleButton)
         self.updateLikeButton(likeButton)
         self.setBackFordwardStatus()
+        
+        DispatchQueue.global(qos: .userInitiated).async {
+            guard let smallImage = self.thumbnailImageView.image?.resized(to: CGSize(width: 100, height: 100)) else { return }
+            let kMeans = KMeansClusterer()
+            let points = smallImage.getPixels().map({ KMeansClusterer.Point(from: $0) })
+            let clusters = kMeans.cluster(points: points, into: 3).sorted(by: {$0.points.count > $1.points.count})
+            let colors = clusters.map(({ $0.center.toUIColor() }))
+            guard let mainColor = colors.first else {
+                return
+            }
+
+            DispatchQueue.main.async {  [weak self] in
+                guard let self = self else {
+                    return
+                }
+                lyricsView.backgroundColor = UIColor.black
+                UIView.animate(withDuration: 0.3, animations: {
+                    self.lyricsView.backgroundColor = mainColor
+                })
+            }
+        }
     }
     
     private func bindToListView() {

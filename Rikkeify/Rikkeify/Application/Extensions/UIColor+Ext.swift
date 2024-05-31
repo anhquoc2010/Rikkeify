@@ -7,6 +7,18 @@
 
 import UIKit
 
+// MARK: Support Select Color From Image
+extension UIColor {
+    convenience init(from hsl : HSLColor) {
+        self.init(hue: hsl.hue, saturation: hsl.saturation, brightness: hsl.brightness, alpha: hsl.alpha)
+    }
+    var hslColor: HSLColor {
+        get {
+            return HSLColor(from: self)
+        }
+    }
+}
+
 extension UIColor {
     convenience init(hex: String, alpha: CGFloat = 1.0) {
         var hexSanitized = hex.trimmingCharacters(in: .whitespacesAndNewlines)
