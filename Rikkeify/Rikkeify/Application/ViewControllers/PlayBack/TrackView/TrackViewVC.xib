@@ -18,6 +18,7 @@
                 <outlet property="likeButton" destination="Wdu-0Y-LqE" id="UHa-qR-Iko"/>
                 <outlet property="loopButton" destination="pGQ-35-anz" id="PNr-7O-k2Q"/>
                 <outlet property="lyricErrorLabel" destination="f3C-oW-qBE" id="KHL-zH-KdZ"/>
+                <outlet property="lyricTitleLabel" destination="yRz-Pg-0w7" id="3Rx-8M-EQE"/>
                 <outlet property="lyricsTableView" destination="LD4-Sg-Nvo" id="la4-Lk-y5R"/>
                 <outlet property="lyricsView" destination="wvH-4w-obl" id="qnk-Kz-feJ"/>
                 <outlet property="playPauseButton" destination="LLB-5q-Qjs" id="MfC-qU-Wbj"/>

@@ -14,8 +14,10 @@ class TrackViewVC: UIViewController {
     private var viewModel: TrackViewVM
     private var isSliding: Bool = false
     private var isFetching: Bool = false
+    private var mainColor: UIColor = .black
     
     // MARK: Outlets
+    @IBOutlet private weak var lyricTitleLabel: UILabel!
     @IBOutlet private weak var downloadButton: PKDownloadButton!
     @IBOutlet private weak var lyricErrorLabel: UILabel!
     @IBOutlet private weak var likeButton: UIButton!
@@ -69,9 +71,11 @@ class TrackViewVC: UIViewController {
                         self.viewModel.playback.playTrack(index: 0)
                         self.setupViews()
                         self.setupEvents()
-                        self.bindViewModel()
-                        self.setupListViews()
-                        self.hideLoading(after: 3)
+                        DispatchQueue.main.async {
+                            self.bindViewModel()
+                            self.setupListViews()
+                            self.hideLoading(after: 3)
+                        }
                     }
                 case .failure(let error):
                     self.hideLoading(after: 1.5)
@@ -372,7 +376,7 @@ extension TrackViewVC {
         self.bindToViews()
         self.bindToListView()
         
-        self.updateSliderAndLyric(time: viewModel.playback.player.currentTime())
+        self.updateSlider(time: viewModel.playback.player.currentTime())
         self.updatePlayPauseButton(playPauseButton)
         self.setBackFordwardStatus()
         self.viewModel.checkFavorite() { [weak self] _ in
@@ -395,7 +399,7 @@ extension TrackViewVC {
                indexPath.row < self.lyricsTableView.numberOfRows(inSection: 0) {
                 for row in 0..<self.viewModel.playback.currentTrack.lyrics.count {
                     if let cell = self.lyricsTableView.cellForRow(at: IndexPath(row: row, section: 0)) as? TrackViewLyricTableViewCell {
-                        cell.lyricLabel.textColor = (row <= indexPath.row) ? .white : .black
+                        cell.lyricLabel.textColor = (row <= indexPath.row) ? self.makeTextColor(from: self.mainColor) : .darkGray
                     }
                 }
                 self.lyricsTableView.scrollToRow(at: indexPath, at: .middle, animated: true)
@@ -448,7 +452,9 @@ extension TrackViewVC {
         
         let currentTrack = viewModel.playback.currentTrack
         self.titleLabel.text = currentTrack.album?.name ?? ""
-        self.thumbnailImageView.setNetworkImage(urlString: currentTrack.album?.cover.first?.url ?? "")
+        self.thumbnailImageView.setNetworkImage(urlString: currentTrack.album?.cover.first?.url ?? "") {
+            self.setLyricColors()
+        }
         self.trackNameLabel.text = currentTrack.name
         self.authorNameLabel.text = currentTrack.artists.first?.name
         self.trackProgressSlider.maximumValue = Float(currentTrack.durationMs)
@@ -457,27 +463,30 @@ extension TrackViewVC {
         self.updateShuffleButton(shuffleButton)
         self.updateLikeButton(likeButton)
         self.setBackFordwardStatus()
-        
+    }
+    
+    private func setLyricColors() {
         DispatchQueue.global(qos: .userInitiated).async {
-            guard let smallImage = self.thumbnailImageView.image?.resized(to: CGSize(width: 100, height: 100)) else { return }
-            let kMeans = KMeansClusterer()
-            let points = smallImage.getPixels().map({ KMeansClusterer.Point(from: $0) })
-            let clusters = kMeans.cluster(points: points, into: 3).sorted(by: {$0.points.count > $1.points.count})
-            let colors = clusters.map(({ $0.center.toUIColor() }))
-            guard let mainColor = colors.first else {
-                return
-            }
+            DispatchQueue.main.async {
+                guard let smallImage = self.thumbnailImageView.image?.resized(to: CGSize(width: 100, height: 100)) else { return }
+                let kMeans = KMeansClusterer()
+                let points = smallImage.getPixels().map({ KMeansClusterer.Point(from: $0) })
+                let clusters = kMeans.cluster(points: points, into: 3).sorted(by: {$0.points.count > $1.points.count})
+                guard let mainColorFromColors = clusters.map({ $0.center.toUIColor() }).first else { return }
+                self.mainColor = mainColorFromColors
 
-            DispatchQueue.main.async {  [weak self] in
-                guard let self = self else {
-                    return
-                }
-                lyricsView.backgroundColor = UIColor.black
+                self.lyricsView.backgroundColor = UIColor.black
                 UIView.animate(withDuration: 0.3, animations: {
-                    self.lyricsView.backgroundColor = mainColor
+                    self.lyricsView.backgroundColor = self.mainColor
+                    self.lyricErrorLabel.textColor = self.makeTextColor(from: self.mainColor)
+                    self.lyricTitleLabel.textColor = self.makeTextColor(from: self.mainColor)
                 })
             }
         }
+    }
+    
+    func makeTextColor(from color : UIColor) -> UIColor {
+        return color.hslColor.shiftHue(by: 0.5).shiftSaturation(by: -0.5).shiftBrightness(by: 0.5).uiColor
     }
     
     private func bindToListView() {
@@ -490,7 +499,7 @@ extension TrackViewVC {
         player.addPeriodicTimeObserver(forInterval: CMTimeMake(value: 1, timescale: 1), queue: .main) { [weak self] time in
             guard let self = self else { return }
             if !isFetching {
-                self.updateSliderAndLyric(time: time)
+                self.updateSlider(time: time)
                 self.updateLyric(currentTime: time)
                 self.updatePlayPauseButton(playPauseButton)
                 self.setBackFordwardStatus()
@@ -510,7 +519,7 @@ extension TrackViewVC {
         }
     }
     
-    private func updateSliderAndLyric(time: CMTime) {
+    private func updateSlider(time: CMTime) {
         
         if !self.isSliding {
             trackProgressSlider.setValue(Float(CMTimeGetSeconds(time) * 1000), animated: true)

@@ -81,8 +81,8 @@ public final class NetworkService: Networkable {
             return
         }
         let urlTask = URLSession.shared.dataTask(with: urlRequest) { data, response, error in
-            print("\n~~~~~~~~~~~~~~~~~~~Network Logs: StatusCode: \((response as? HTTPURLResponse)?.statusCode)")
-            print("\n~~~~~~~~~~~~~~~~~~~Network Logs: Error: \(error)")
+//            print("\n~~~~~~~~~~~~~~~~~~~Network Logs: StatusCode: \((response as? HTTPURLResponse)?.statusCode)")
+//            print("\n~~~~~~~~~~~~~~~~~~~Network Logs: Error: \(error)")
             guard error == nil else {
                 resultHandler(.failure(.invalidURL))
                 return
@@ -101,7 +101,7 @@ public final class NetworkService: Networkable {
                 do {
                     let decodedResponse = try JSONDecoder().decode(T.self, from: data)
                     resultHandler(.success(decodedResponse))
-                    print("\n~~~~~~~~~~~~~~~~~~~Network Logs: Data: \(decodedResponse)")
+//                    print("\n~~~~~~~~~~~~~~~~~~~Network Logs: Data: \(decodedResponse)")
                 } catch {
                     print(error)
                     resultHandler(.failure(.decode))

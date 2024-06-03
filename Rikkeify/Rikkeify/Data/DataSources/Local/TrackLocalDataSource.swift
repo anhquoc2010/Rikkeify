@@ -184,20 +184,16 @@ extension TrackLocalDataSourceImp {
     private func updateTrack(_ track: Track, isFavourited: Bool) {
         guard let rTrack = localService.queryObjects(RTrack.self).filter("id == %@", track.id).first else { return }
         
-        let hasNilFileUrl = rTrack.audio?.fileUrl.isEmpty
-        if let hasNilFileUrl {
-            localService.deleteObject(rTrack)
-        } else {
-            try? localService.realm.write {
-                rTrack.isFavourited = isFavourited
-            }
+        try? localService.realm.write {
+            rTrack.isFavourited = isFavourited
         }
     }
     
     private func saveOrUpdateAudio(for track: Track, savedURL: URL) {
         try? localService.realm.write {
             if let rTrack = localService.queryObjects(RTrack.self).filter("id == %@", track.id).first {
-                rTrack.audio?.fileUrl = savedURL.absoluteString
+                guard let audio = rTrack.audio else { return }
+                rTrack.audio?.fileUrl = audio.fileUrl.isEmpty ? savedURL.absoluteString : ""
             } else {
                 let rTrack = RTrack.fromDomain(track: track)
                 rTrack.audio?.fileUrl = savedURL.absoluteString

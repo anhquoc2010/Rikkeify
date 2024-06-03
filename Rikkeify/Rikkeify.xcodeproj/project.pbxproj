@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		635FE61BD63A925F3BB724FE /* Pods_Rikkeify.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 762FC54006E327620AC051AB /* Pods_Rikkeify.framework */; };
 		84112E7E2BFCA150009F3EDF /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84112E7D2BFCA150009F3EDF /* RealmManager.swift */; };
 		84112E822BFCAD4A009F3EDF /* RTrack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84112E812BFCAD4A009F3EDF /* RTrack.swift */; };
 		84112E842BFCADB6009F3EDF /* RArtist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84112E832BFCADB6009F3EDF /* RArtist.swift */; };
@@ -46,6 +47,7 @@
 		84449B662BFB590700B6455D /* SearchResponseDTO+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84449B652BFB590700B6455D /* SearchResponseDTO+Mapping.swift */; };
 		84449B682BFB5BF600B6455D /* SearchItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84449B672BFB5BF600B6455D /* SearchItem.swift */; };
 		84449B6A2BFB5D4600B6455D /* SearchRemoteDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84449B692BFB5D4600B6455D /* SearchRemoteDataSource.swift */; };
+		8450323A2C0D9DF5001EBB84 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 845032392C0D9DF5001EBB84 /* GoogleService-Info.plist */; };
 		84A9DD612BFC37580084A336 /* SearchRepositoryImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A9DD602BFC37580084A336 /* SearchRepositoryImp.swift */; };
 		84A9DD632BFC37660084A336 /* SearchRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A9DD622BFC37660084A336 /* SearchRepository.swift */; };
 		84A9DD672BFC4BDC0084A336 /* GenreVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A9DD652BFC4BDC0084A336 /* GenreVC.swift */; };
@@ -127,7 +129,6 @@
 		FABE9F8F2BF59CAE00F22266 /* IconSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABE9F8E2BF59CAE00F22266 /* IconSystem.swift */; };
 		FABE9F912BF5A2F300F22266 /* PlaybackModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABE9F902BF5A2F300F22266 /* PlaybackModule.swift */; };
 		FABE9F952BF6F41300F22266 /* LoopState.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABE9F942BF6F41300F22266 /* LoopState.swift */; };
-		FE7FFE763D25E9A763827863 /* Pods_Rikkeify.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C075338B426EBFDD8C672E9 /* Pods_Rikkeify.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -148,8 +149,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		1BFFF90726AC96CCCA9B9A03 /* Pods-Rikkeify.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rikkeify.debug.xcconfig"; path = "Target Support Files/Pods-Rikkeify/Pods-Rikkeify.debug.xcconfig"; sourceTree = "<group>"; };
-		3C075338B426EBFDD8C672E9 /* Pods_Rikkeify.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Rikkeify.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		22F4E1640379BD3C82D1CE02 /* Pods-Rikkeify.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rikkeify.debug.xcconfig"; path = "Target Support Files/Pods-Rikkeify/Pods-Rikkeify.debug.xcconfig"; sourceTree = "<group>"; };
+		762FC54006E327620AC051AB /* Pods_Rikkeify.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Rikkeify.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		84112E7D2BFCA150009F3EDF /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
 		84112E812BFCAD4A009F3EDF /* RTrack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RTrack.swift; sourceTree = "<group>"; };
 		84112E832BFCADB6009F3EDF /* RArtist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RArtist.swift; sourceTree = "<group>"; };
@@ -193,7 +194,7 @@
 		84449B652BFB590700B6455D /* SearchResponseDTO+Mapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchResponseDTO+Mapping.swift"; sourceTree = "<group>"; };
 		84449B672BFB5BF600B6455D /* SearchItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchItem.swift; sourceTree = "<group>"; };
 		84449B692BFB5D4600B6455D /* SearchRemoteDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRemoteDataSource.swift; sourceTree = "<group>"; };
-		844C7DCD57FF50DD78492C48 /* Pods-Rikkeify.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rikkeify.release.xcconfig"; path = "Target Support Files/Pods-Rikkeify/Pods-Rikkeify.release.xcconfig"; sourceTree = "<group>"; };
+		845032392C0D9DF5001EBB84 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		846B87772C08713800324A8C /* Rikkeify.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Rikkeify.entitlements; sourceTree = "<group>"; };
 		84A9DD602BFC37580084A336 /* SearchRepositoryImp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRepositoryImp.swift; sourceTree = "<group>"; };
 		84A9DD622BFC37660084A336 /* SearchRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRepository.swift; sourceTree = "<group>"; };
@@ -243,6 +244,7 @@
 		84F771A22BEA0998006379BB /* TrackViewLyricTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackViewLyricTableViewCell.swift; sourceTree = "<group>"; };
 		84F771A32BEA0998006379BB /* TrackViewLyricTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TrackViewLyricTableViewCell.xib; sourceTree = "<group>"; };
 		84F771A62BEA1115006379BB /* LyricViewVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LyricViewVM.swift; sourceTree = "<group>"; };
+		A28A60E7DBE9989CF6458B1B /* Pods-Rikkeify.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rikkeify.release.xcconfig"; path = "Target Support Files/Pods-Rikkeify/Pods-Rikkeify.release.xcconfig"; sourceTree = "<group>"; };
 		FA0CB69B2BF1AEB9001EA4C3 /* HomeItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeItemCell.swift; sourceTree = "<group>"; };
 		FA0CB69C2BF1AEB9001EA4C3 /* HomeItemCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeItemCell.xib; sourceTree = "<group>"; };
 		FA0CB6A52BF1AEB9001EA4C3 /* HomeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
@@ -283,7 +285,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FE7FFE763D25E9A763827863 /* Pods_Rikkeify.framework in Frameworks */,
+				635FE61BD63A925F3BB724FE /* Pods_Rikkeify.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -307,10 +309,18 @@
 		2EA104E8F265459316E51678 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				1BFFF90726AC96CCCA9B9A03 /* Pods-Rikkeify.debug.xcconfig */,
-				844C7DCD57FF50DD78492C48 /* Pods-Rikkeify.release.xcconfig */,
+				22F4E1640379BD3C82D1CE02 /* Pods-Rikkeify.debug.xcconfig */,
+				A28A60E7DBE9989CF6458B1B /* Pods-Rikkeify.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		6DC9D9561E27876B7B1AA8DB /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				762FC54006E327620AC051AB /* Pods_Rikkeify.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		84112E7A2BFC8A85009F3EDF /* SearchDefault */ = {
@@ -378,7 +388,7 @@
 				841B43412BE87AC900D1B490 /* RikkeifyUITests */,
 				841B431F2BE87AC600D1B490 /* Products */,
 				2EA104E8F265459316E51678 /* Pods */,
-				9F829766C221301B3E422DAD /* Frameworks */,
+				6DC9D9561E27876B7B1AA8DB /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -426,6 +436,7 @@
 			children = (
 				846B87772C08713800324A8C /* Rikkeify.entitlements */,
 				841B432F2BE87AC800D1B490 /* Info.plist */,
+				845032392C0D9DF5001EBB84 /* GoogleService-Info.plist */,
 				841B43212BE87AC600D1B490 /* AppDelegate.swift */,
 			);
 			path = GlobalDefine;
@@ -734,14 +745,6 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
-		9F829766C221301B3E422DAD /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				3C075338B426EBFDD8C672E9 /* Pods_Rikkeify.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		FA0CB69D2BF1AEB9001EA4C3 /* HomeItemCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -901,11 +904,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 841B43482BE87AC900D1B490 /* Build configuration list for PBXNativeTarget "Rikkeify" */;
 			buildPhases = (
-				0D65300A7B284061DEA43BC7 /* [CP] Check Pods Manifest.lock */,
+				9B54E4F1EE6B71D195743B18 /* [CP] Check Pods Manifest.lock */,
 				841B431A2BE87AC600D1B490 /* Sources */,
 				841B431B2BE87AC600D1B490 /* Frameworks */,
 				841B431C2BE87AC600D1B490 /* Resources */,
-				422C583671FD004AEBACF67B /* [CP] Embed Pods Frameworks */,
+				60736D106D6484AD0C93A017 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1019,6 +1022,7 @@
 				841B432E2BE87AC800D1B490 /* Base in Resources */,
 				84449B5D2BFB480000B6455D /* SearchActiveVC.xib in Resources */,
 				84449B522BFB41D300B6455D /* YourLibraryVC.xib in Resources */,
+				8450323A2C0D9DF5001EBB84 /* GoogleService-Info.plist in Resources */,
 				FA0CB6A92BF1AEB9001EA4C3 /* HomeItemCell.xib in Resources */,
 				FA0CB6CC2BF21C80001EA4C3 /* HomeTableHeaderView.xib in Resources */,
 			);
@@ -1041,7 +1045,24 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		0D65300A7B284061DEA43BC7 /* [CP] Check Pods Manifest.lock */ = {
+		60736D106D6484AD0C93A017 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Rikkeify/Pods-Rikkeify-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Rikkeify/Pods-Rikkeify-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Rikkeify/Pods-Rikkeify-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9B54E4F1EE6B71D195743B18 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1061,23 +1082,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		422C583671FD004AEBACF67B /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Rikkeify/Pods-Rikkeify-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Rikkeify/Pods-Rikkeify-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Rikkeify/Pods-Rikkeify-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1351,7 +1355,7 @@
 		};
 		841B43492BE87AC900D1B490 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1BFFF90726AC96CCCA9B9A03 /* Pods-Rikkeify.debug.xcconfig */;
+			baseConfigurationReference = 22F4E1640379BD3C82D1CE02 /* Pods-Rikkeify.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1384,7 +1388,7 @@
 		};
 		841B434A2BE87AC900D1B490 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 844C7DCD57FF50DD78492C48 /* Pods-Rikkeify.release.xcconfig */;
+			baseConfigurationReference = A28A60E7DBE9989CF6458B1B /* Pods-Rikkeify.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

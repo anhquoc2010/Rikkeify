@@ -13,6 +13,11 @@ target 'Rikkeify' do
   # Local Storage
   pod 'RealmSwift'
   
+  #Firebase
+  
+  pod 'FirebaseAnalytics/WithoutAdIdSupport'
+  pod 'FirebaseAuth'
+  
   # UI
   pod 'Kingfisher'
   pod 'SkeletonView'

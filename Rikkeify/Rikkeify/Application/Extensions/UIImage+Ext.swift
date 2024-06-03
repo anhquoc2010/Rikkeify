@@ -57,12 +57,14 @@ extension UIImage {
 }
 
 extension UIImageView {
-    func setNetworkImage(urlString: String) {
+    func setNetworkImage(urlString: String, completion: (() -> ())? = nil) {
         self.kf.setImage(with: URL(string: urlString), placeholder: UIImage.icApp) { result in
             switch result {
-            case .success(let value):
-                print("Image downloaded successfully: \(value.source.url?.absoluteString ?? "")")
+            case .success(_):
+                completion?()
+//                print("Image downloaded successfully: \(value.source.url?.absoluteString ?? "")")
             case .failure(let error):
+                completion?()
                 print("Error downloading image: \(error)")
             }
         }

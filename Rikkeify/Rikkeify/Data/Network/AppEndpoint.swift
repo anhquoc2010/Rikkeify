@@ -78,11 +78,13 @@ extension AppEndpoint: EndPoint {
         case .getRecommendTracks, .getExplore, .search:
             return [
                 "X-RapidAPI-Key": "5ae1207dadmsh2b2920065bcf994p1cd1ccjsnfcc846f108ac",
+                "X-Rapidapi-Mock-Response": "200",
                 "X-RapidAPI-Host": "spotify23.p.rapidapi.com"
             ]
         default:
             return [
-                "X-RapidAPI-Key": "484f70c8demsh8867c6c588dcc28p1d4a1ajsnb3ca4646d5d1",
+                "X-RapidAPI-Key": "aa0a7f38c8mshff03ebd3e6ae484p1ada56jsn364d47ed4e37",
+                "X-Rapidapi-Mock-Response": "200",
                 "X-RapidAPI-Host": "spotify-scraper.p.rapidapi.com"
             ]
         }

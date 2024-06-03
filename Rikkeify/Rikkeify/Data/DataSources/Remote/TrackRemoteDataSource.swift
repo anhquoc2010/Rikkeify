@@ -91,7 +91,7 @@ extension TrackRemoteDataSourceImp: TrackRemoteDataSource {
                 self.fetchTrackLyrics(trackId: trackResponseDTO.id) { result in
                     defer { group.leave() }
                     switch result {
-                    case .failure(let error):
+                    case .failure:
                         trackResponseDTO.lyrics = nil
                     case .success(let lyricsResponseDTO):
                         trackResponseDTO.lyrics = lyricsResponseDTO
@@ -103,7 +103,7 @@ extension TrackRemoteDataSourceImp: TrackRemoteDataSource {
                     self.fetchTrackAudio(trackName: trackResponseDTO.name) { result in
                         defer { group.leave() }
                         switch result {
-                        case .failure(let error):
+                        case .failure:
                             completion(.failure(.getAudioError))
                         case .success(let audioResponseDTO):
                             trackResponseDTO.audio = audioResponseDTO
